@@ -43,6 +43,39 @@ agent stack across different languages, scientific domains, and problem types,
 demonstrating generalizability. Phase II will scale the framework to full-scale
 DOE simulation codes and integrate with the American Science Cloud.
 
+## Working Prototype
+
+We have built a working prototype that demonstrates the core pipeline
+end-to-end. The prototype, code, notebooks, and documentation are at:
+
+- **Repository**: https://github.com/cmungall/trusty-neurocoder
+- **Documentation**: https://cmungall.github.io/trusty-neurocoder/
+- **Agent Workflow**: https://cmungall.github.io/trusty-neurocoder/agent-workflow/
+
+The prototype was built in a single session by an LLM coding agent
+(Claude Code), demonstrating the Layer 1 agent workflow. The agent
+read the RFA, researched the Cajal papers, vendored the Cajal source,
+and produced seven working examples across DOE science domains:
+
+| Example | DOE Domain | What's Learned | Key Result |
+|---------|-----------|----------------|------------|
+| Exponential Decay | Foundation | Scalar rate k | k=0.3000 recovered exactly |
+| Coupled Decay | Earth Science | Transfer coefficient α | α=0.4000 recovered exactly |
+| Unknown Function | Earth Science | MLP → Hill equation | m^0.7/(0.3+m^0.7) recovered |
+| CENTURY-Lite | Earth Science | 2 response functions | Q10 + Hill forms recovered simultaneously |
+| Decay Chain | Nuclear Science | 2 branching ratios | 0.70, 0.85 recovered exactly |
+| Battery Degradation | Energy Storage | SEI growth + capacity fade | Parabolic growth law recovered |
+| Chemical Kinetics | Combustion | Arrhenius rate | A=2.006, E=4.987 (true: 2.0, 5.0) |
+
+All examples verify physical invariants (mass/energy conservation,
+non-negativity, monotonicity) by architectural design, not post-hoc
+checking.
+
+**Cajal type system extension**: We extended the Cajal type system with
+`TyReal(n)` for n-dimensional real-valued state vectors, beyond the
+original boolean + natural number types. This enables proper typing of
+scientific ODE state vectors (dimensions 1–5 in current examples).
+
 ## Technical Approach
 
 ### Architecture
@@ -293,16 +326,16 @@ Programs with iteration compile to linear recurrent neural networks.
 When unfolded to a finite timestep, these become ordinary differentiable
 linear maps -- enabling gradient-based learning.
 
-**NOTE ON CAJAL FIDELITY:** The examples below use an extended,
-aspirational version of the Cajal language for clarity. The current
-Cajal(⊸, 2, N) as published supports only booleans (𝟚), natural numbers
-(ℕ), and linear maps (⊸) -- it does not yet have real-valued vectors,
-matrices, or domain-specific types like `MolFeatures` or `GridParams`.
-Extending Cajal to richer base types (ℝ, ℝⁿ, sparse structures) is itself
-a research contribution of this proposal. The examples illustrate the
-*target* expressiveness, not the current state. Validating which extensions
-are sound while preserving the compilation-to-neurons guarantees is a core
-task for the Harvard team.
+**NOTE ON CAJAL FIDELITY:** The published Cajal(⊸, 2, N) supports
+booleans (𝟚), natural numbers (ℕ), and linear maps (⊸). Our prototype
+extends this with `TyReal(n)` for real-valued state vectors, enabling
+the scientific ODE examples. The Appendix examples below additionally
+use aspirational types like `MolFeatures` and `GridParams` for clarity;
+extending Cajal to these richer domain-specific types while preserving
+compilation-to-neurons guarantees is a core research task for the
+Harvard team. The seven working prototype examples (see Working
+Prototype above) demonstrate that the `TyReal(n)` extension is
+already sufficient for a broad class of scientific ODE surrogates.
 
 ### Example 1: EcoSIM Soil Decomposition (Use Case 1)
 
