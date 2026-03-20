@@ -34,7 +34,7 @@ This demonstrates:
 
 import torch
 import torch.nn as nn
-from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyBool
+from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyReal, TyBool
 from cajal.compiling import compile, TypedTensor
 
 if torch.backends.mps.is_available():
@@ -127,7 +127,7 @@ def train():
     optimizer = torch.optim.Adam(update_fn.parameters(), lr=0.05)
 
     c0 = TypedTensor(
-        torch.tensor([C0_LABILE, C0_STABLE], device=device), TyBool()
+        torch.tensor([C0_LABILE, C0_STABLE], device=device), TyReal(2)
     )
 
     print("=" * 60)

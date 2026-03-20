@@ -36,7 +36,7 @@ After training we:
 
 import torch
 import torch.nn as nn
-from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyBool
+from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyReal, TyBool
 from cajal.compiling import compile, TypedTensor
 
 device = torch.device("cpu")
@@ -165,7 +165,7 @@ def train():
             T = TEMPERATURES[traj_idx]
             s0 = TypedTensor(
                 torch.tensor([1.0, 0.0, T.item()], device=device),
-                TyBool(),
+                TyReal(3),
             )
 
             for step in range(N_STEPS):
@@ -324,7 +324,7 @@ def train():
             T = TEMPERATURES[traj_idx]
             s0 = TypedTensor(
                 torch.tensor([1.0, 0.0, T.item()], device=device),
-                TyBool(),
+                TyReal(3),
             )
             for step in range(N_STEPS):
                 n_onehot = torch.zeros(N_STEPS, device=device)
@@ -364,7 +364,7 @@ def train():
             # Run many steps to approach equilibrium
             s = TypedTensor(
                 torch.tensor([1.0, 0.0, T.item()], device=device),
-                TyBool(),
+                TyReal(3),
             )
             for _ in range(200):
                 s = update_fn(s)

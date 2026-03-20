@@ -26,7 +26,7 @@ is fixed by the Cajal program. Only the *rate* is learned. This is the
 
 import torch
 import torch.nn as nn
-from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyBool, TmTrue
+from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyReal, TyBool, TmTrue
 from cajal.compiling import compile, TypedTensor
 
 if torch.backends.mps.is_available():
@@ -103,7 +103,7 @@ def train():
     optimizer = torch.optim.Adam(decay_fn.parameters(), lr=0.01)
 
     # Initial concentration as a 1-element tensor
-    c0 = TypedTensor(torch.tensor([C0], device=device), TyBool())
+    c0 = TypedTensor(torch.tensor([C0], device=device), TyReal(1))
 
     print("=" * 60)
     print("TRAINING: Learning decay rate from data")

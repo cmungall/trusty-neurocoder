@@ -6,6 +6,7 @@ from typing import Optional
 
 type Ty = (  TyBool
            | TyNat
+           | TyReal
            | TyFun
            )
 
@@ -16,7 +17,12 @@ class TyBool: ...
 class TyNat: ...
 
 @dataclass
-class TyFun: 
+class TyReal:
+    """Real-valued vector type. TyReal(n) is an n-dimensional real vector."""
+    n: int = 1
+
+@dataclass
+class TyFun:
     ty1 : Ty
     ty2 : Ty
 

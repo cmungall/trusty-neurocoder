@@ -188,7 +188,12 @@ def bases(ty: Ty):
             basis_mat = torch.eye(10, device=device)
             basis_i = [basis_mat[:,i] for i in range(10)]
             return [TypedTensor(basis, TyNat()) for basis in basis_i]
-        
+
+        case TyReal(n):
+            basis_mat = torch.eye(n, device=device)
+            basis_i = [basis_mat[:,i] for i in range(n)]
+            return [TypedTensor(basis, TyReal(n)) for basis in basis_i]
+
         case TyFun(_, _):
             dim_ty = dim(ty)
             basis_mat = torch.eye(dim_ty, device=device)
@@ -215,6 +220,8 @@ def dim(ty: Ty):
             return 2
         case TyNat():
             return 10
+        case TyReal(n):
+            return n
         case TyFun(ty1, ty2):
             return dim(ty1) * dim(ty2)
 

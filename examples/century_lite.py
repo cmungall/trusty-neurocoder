@@ -43,7 +43,7 @@ This demonstrates:
 
 import torch
 import torch.nn as nn
-from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyBool
+from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyReal, TyBool
 from cajal.compiling import compile, TypedTensor
 
 # CPU is faster than MPS for small-tensor serial workloads (low kernel-launch overhead).
@@ -321,7 +321,7 @@ def train():
                     T_t,
                     M_t,
                 ]),
-                TyBool(),
+                TyReal(5),
             )
 
             for step in range(N_STEPS):
@@ -548,7 +548,7 @@ def train():
                     torch.tensor(C0_PASSIVE, device=device),
                     T_t, M_t,
                 ]),
-                TyBool(),
+                TyReal(5),
             )
 
             total_prev = C0_FAST + C0_SLOW + C0_PASSIVE
@@ -605,7 +605,7 @@ def train():
                 torch.tensor(C0_PASSIVE, device=device),
                 T_t, M_t,
             ]),
-            TyBool(),
+            TyReal(5),
         )
 
         with torch.no_grad():

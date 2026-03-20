@@ -37,7 +37,7 @@ This demonstrates:
 
 import torch
 import torch.nn as nn
-from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyBool
+from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyReal, TyBool
 from cajal.compiling import compile, TypedTensor
 
 if torch.backends.mps.is_available():
@@ -170,7 +170,7 @@ def train():
             m = moistures[traj_idx]
             s0 = TypedTensor(
                 torch.stack([torch.tensor(C0, device=device), m]),
-                TyBool(),
+                TyReal(2),
             )
 
             for step in range(N_STEPS):
@@ -304,7 +304,7 @@ def train():
             m = moistures[traj_idx]
             s0 = TypedTensor(
                 torch.stack([torch.tensor(C0, device=device), m]),
-                TyBool(),
+                TyReal(2),
             )
             prev_c = C0 + 1
             for step in range(N_STEPS):

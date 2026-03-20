@@ -34,7 +34,7 @@ This demonstrates:
 
 import torch
 import torch.nn as nn
-from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyBool
+from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyReal, TyBool
 from cajal.compiling import compile, TypedTensor
 
 # CPU is faster than MPS for small-tensor serial workloads (low kernel-launch overhead).
@@ -154,7 +154,7 @@ def train():
     optimizer = torch.optim.Adam(update_fn.parameters(), lr=0.05)
 
     s0 = TypedTensor(
-        torch.tensor([A0, B0, C0, D0], device=device), TyBool()
+        torch.tensor([A0, B0, C0, D0], device=device), TyReal(4)
     )
 
     f_init = torch.sigmoid(update_fn.f_branch_raw).item()

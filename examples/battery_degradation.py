@@ -44,7 +44,7 @@ This demonstrates:
 
 import torch
 import torch.nn as nn
-from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyBool
+from cajal.syntax import TmIter, TmVar, TmApp, TyNat, TyReal, TyBool
 from cajal.compiling import compile, TypedTensor
 
 device = torch.device("cpu")
@@ -255,7 +255,7 @@ def train():
                     sei0,
                     sei0,  # carry initial SEI as trajectory identifier
                 ]),
-                TyBool(),
+                TyReal(3),
             )
 
             for step in range(N_STEPS):
@@ -460,7 +460,7 @@ def train():
                     sei0,
                     sei0,
                 ]),
-                TyBool(),
+                TyReal(3),
             )
 
             prev_q = Q0 + 1.0
@@ -505,7 +505,7 @@ def train():
                 sei0,
                 sei0,
             ]),
-            TyBool(),
+            TyReal(3),
         )
         for step in range(N_STEPS):
             n_onehot = torch.zeros(N_STEPS, device=device)
