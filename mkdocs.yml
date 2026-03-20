@@ -37,7 +37,13 @@ nav:
   - Home: index.md
   - Proposal: proposal.md
   - Notebooks:
-    - "01 - Cajal: Programs as Neural Networks": notebooks/01_cajal_intro.ipynb
-    - "02 - Learning Exponential Decay": notebooks/02_exponential_decay.ipynb
-    - "03 - Learning Unknown Functions": notebooks/03_learn_unknown_function.ipynb
-    - "04 - CENTURY-Lite: Multi-Pool Model": notebooks/04_century_lite.ipynb
+    - Foundations:
+      - "01 - Cajal: Programs as Neural Networks": notebooks/01_cajal_intro.ipynb
+      - "02 - Learning Exponential Decay": notebooks/02_exponential_decay.ipynb
+    - Earth & Environment:
+      - "03 - Learning Unknown Functions": notebooks/03_learn_unknown_function.ipynb
+      - "04 - CENTURY-Lite: Multi-Pool Model": notebooks/04_century_lite.ipynb
+    - DOE Science Domains:
+      - "05 - Radioactive Decay Chain": notebooks/05_decay_chain.ipynb
+      - "06 - Battery Degradation": notebooks/06_battery_degradation.ipynb
+      - "07 - Chemical Kinetics": notebooks/07_chemical_kinetics.ipynb

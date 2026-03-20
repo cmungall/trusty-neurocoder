@@ -17,15 +17,24 @@ declarative representations NSAMs require.
 
 ## Notebooks
 
-The notebooks demonstrate a progression from basic Cajal compilation to
-learning unknown functions in a multi-pool soil carbon model:
-
+### Foundations
 | Notebook | Description |
 |----------|-------------|
 | [01 - Cajal Intro](notebooks/01_cajal_intro.ipynb) | Boolean functions compile to matrices; iteration as recurrent neuron |
 | [02 - Exponential Decay](notebooks/02_exponential_decay.ipynb) | Learn scalar ODE rate constant from data |
+
+### Earth & Environment
+| Notebook | Description |
+|----------|-------------|
 | [03 - Unknown Function](notebooks/03_learn_unknown_function.ipynb) | MLP learns unknown moisture response; symbolic regression recovers Hill equation |
 | [04 - CENTURY-Lite](notebooks/04_century_lite.ipynb) | 3-pool model, 2 unknown functions learned simultaneously, mass conservation verified |
+
+### DOE Science Domains
+| Notebook | Description |
+|----------|-------------|
+| [05 - Decay Chain](notebooks/05_decay_chain.ipynb) | 4-isotope radioactive decay chain; learns unknown branching ratios exactly |
+| [06 - Battery Degradation](notebooks/06_battery_degradation.ipynb) | SEI growth + capacity fade; recovers parabolic growth law via symbolic regression |
+| [07 - Chemical Kinetics](notebooks/07_chemical_kinetics.ipynb) | Reversible reaction A⇌B; recovers Arrhenius rate k=2.0·exp(-5.0/T) from equilibrium data |
 
 ## Quick Start
 
