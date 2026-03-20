@@ -1,0 +1,43 @@
+site_name: Trusty Neurocoder
+site_description: Neuro-Symbolic Agents for Verified Scientific Code Generation
+repo_url: https://github.com/cmungall/trusty-neurocoder
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: amber
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocs-jupyter:
+      include: ["*.ipynb"]
+      execute: false  # notebooks are pre-executed with output embedded
+      allow_errors: false
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Proposal: proposal.md
+  - Notebooks:
+    - "01 - Cajal: Programs as Neural Networks": notebooks/01_cajal_intro.ipynb
+    - "02 - Learning Exponential Decay": notebooks/02_exponential_decay.ipynb
+    - "03 - Learning Unknown Functions": notebooks/03_learn_unknown_function.ipynb
+    - "04 - CENTURY-Lite: Multi-Pool Model": notebooks/04_century_lite.ipynb

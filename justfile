@@ -1,8 +1,8 @@
 # trusty-neurocoder justfile
 
-# Install all dependencies including notebooks extras
+# Install all dependencies
 install:
-    uv pip install -e ".[dev,notebooks]"
+    uv pip install -e ".[dev,notebooks,docs]"
 
 # Run all example scripts
 examples:
@@ -38,3 +38,15 @@ html:
 # Launch Jupyter Lab
 lab:
     uv run jupyter lab notebooks/
+
+# Serve mkdocs locally
+docs:
+    uv run mkdocs serve
+
+# Build mkdocs site
+docs-build:
+    uv run mkdocs build
+
+# Deploy to GitHub Pages
+docs-deploy:
+    uv run mkdocs gh-deploy

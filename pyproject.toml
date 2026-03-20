@@ -21,6 +21,11 @@ notebooks = [
     "papermill",
     "matplotlib",
 ]
+docs = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocs-jupyter",
+]
 
 [build-system]
 requires = ["setuptools>=68"]
