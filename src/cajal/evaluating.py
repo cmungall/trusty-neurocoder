@@ -15,7 +15,8 @@ def evaluate(tm: Tm, env: Env) -> Val:
             v = evaluate(tm, env)
             return VSucc(v)
         case TmFun(x, ty, tm):
-            return VClosure(x, ty, tm, env)
+            # Copy env so closure captures are immutable
+            return VClosure(x, ty, tm, dict(env))
         case TmIter(tm1, name2, tm2, tm3):
             v3 = evaluate(tm3, env)
             match v3:
@@ -41,8 +42,8 @@ def evaluate(tm: Tm, env: Env) -> Val:
             v2 = evaluate(tm2, env)
             match v1:
                 case VClosure(x, ty, tm, c_env):
-                    c_env |= {x: v2}
-                    return evaluate(tm, c_env)
+                    # Use | (not |=) to avoid mutating the captured env
+                    return evaluate(tm, c_env | {x: v2})
                 case _:
                     raise TypeError(f"TmApp: {tm1=} doesn't evaluate to a closure, {v1=}.")
         case _:

@@ -103,7 +103,17 @@ class TypedTensor(NamedTuple):
     ty: Ty
     
     def __eq__(self, y):
-        return all(self.data == y.data)
+        if not isinstance(y, TypedTensor):
+            return NotImplemented
+        return self.ty == y.ty and torch.equal(self.data, y.data)
+
+    def __ne__(self, y):
+        if not isinstance(y, TypedTensor):
+            return NotImplemented
+        return not self.__eq__(y)
+
+    def __hash__(self):
+        return id(self)
 
     def __call__(self, x):
         return self @ x

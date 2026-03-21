@@ -37,8 +37,16 @@ def _check(tm: Tm, ctx: Ctx) -> tuple[Ty, Ctx]:
                     raise TypeError(f"TmSucc: Successor not applied to a Nat, {tm=} is a {ty=}.")
 
         case TmFun(x, ty1, tm_body):
+            # Save any outer binding for x so shadowing doesn't lose it
+            outer_binding = ctx.get(x)
             ctx_extend = ctx | {x: ty1}
             ty2, ctx_remain = _check(tm_body, ctx_extend)
+            # The parameter x should have been consumed by the body
+            # Remove it from remaining context if still present
+            ctx_remain = {k: v for k, v in ctx_remain.items() if k != x}
+            # Restore the outer binding if one existed
+            if outer_binding is not None:
+                ctx_remain[x] = outer_binding
             tm.ty_checked = TyFun(ty1, ty2)
             return tm.ty_checked, ctx_remain
 
@@ -48,6 +56,11 @@ def _check(tm: Tm, ctx: Ctx) -> tuple[Ty, Ctx]:
                 case TyNat():
                     ty1, ctx_remain1 = _check(tm1, ctx_remain3)
                     ty2, ctx_remain2 = _check(tm2, ctx_remain1 | {y: ty1})
+                    if ty1 != ty2:
+                        raise TypeError(
+                            f"TmIter: Base case has type {ty1} but "
+                            f"recursive step has type {ty2}. "
+                            f"These must match.")
                     tm.ty_checked = ty2
                     return tm.ty_checked, ctx_remain2
                 case _:
