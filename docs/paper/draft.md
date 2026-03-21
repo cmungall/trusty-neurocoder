@@ -413,6 +413,37 @@ Symbolic regression via grid search over candidate functional forms
 is limited to forms the user anticipates. Integration with libraries
 like PySR would enable open-ended symbolic search.
 
+### Synthetic Data as Validation Strategy
+
+All training data in this work is synthetic — generated from known
+ground truth equations, not from running the actual EcoSIM simulation
+or from observational measurements. This is deliberate. For a methods
+paper, synthetic data is the strongest validation: because we know the
+true functional forms, we can measure recovery accuracy and confirm
+that the pipeline works correctly. With real simulation output, we
+could verify trajectory fit but not whether the decompiled expressions
+are scientifically correct.
+
+The EcoSIM surrogate (Model 8) uses equations extracted from the
+Fortran source and reimplemented in Python, not output from running
+the actual Fortran code. The reimplementation faithfully reproduces
+the mathematical formulas (temperature sensitivity, water stress,
+Monod kinetics, product inhibition) but does not capture numerical
+discretization artifacts, compiler-specific floating-point behavior,
+or interactions with other EcoSIM modules. Training against actual
+EcoSIM simulation output is straightforward future work that would
+validate the surrogate against the full simulation, including effects
+our reimplementation omits.
+
+A natural next step beyond simulation output is training on
+observational data (e.g., FLUXNET eddy covariance measurements or
+the Soil Respiration Database). In that setting, the decompiled
+expressions would represent empirical response functions inferred
+from field data — a scientifically novel finding rather than recovery
+of a known equation. The Cajal structural constraints (mass
+conservation, positivity) would remain guaranteed regardless of the
+data source.
+
 ### Identifiability
 
 Models 4 and 8 (CENTURY-Lite and EcoSIM) exhibit a fundamental
