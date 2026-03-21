@@ -1,143 +1,98 @@
 # Trusty Neurocoder
 
-Neuro-Symbolic Agents for Verified Scientific Code Generation.
+Verified scientific surrogates via neuro-symbolic compilation and LLM agents.
 
-## Overview
+**Documentation**: [cmungall.github.io/trusty-neurocoder](https://cmungall.github.io/trusty-neurocoder/)
 
-Trusty Neurocoder combines LLM-based agentic workflows with
-[Neuro-Symbolic Abstract Machines (NSAMs)](https://metareflection.seas.harvard.edu/research/neuro/)
-to enable verified scientific code generation, optimization, and surrogate
-construction.
+## What This Does
 
-**NSAMs** are neural networks structurally equivalent to programming language
-interpreters. They enable principled compilation of symbolic programs into
-neural architectures and decompilation back to interpretable code.
-**LLM agents** bridge the gap between real-world scientific codebases and the
-declarative representations NSAMs require.
-
-The key insight is that agents and NSAMs compensate for each other's weaknesses:
-
-- LLM agents handle messy real-world code comprehension that NSAMs cannot
-- NSAMs provide formal correctness guarantees that LLM agents cannot
-
-## Architecture
+Takes a scientific simulation kernel (e.g., a Fortran soil decomposition
+subroutine), preserves the known physics as fixed program structure, makes
+uncertain parts learnable via neural networks, trains against data, and
+decompiles the learned weights back to interpretable math. Physical
+invariants (mass conservation, positivity) hold by construction.
 
 ```
-┌─────────────────────────────────────────────────────┐
-│  Layer 1: LLM Agent                                 │
-│  - Parses real scientific code (Fortran, C++, etc.) │
-│  - Extracts algorithmic kernels and intent          │
-│  - Translates to declarative representation         │
-│  - Orchestrates the pipeline                        │
-│  - Uses domain ontologies for semantic grounding    │
-├─────────────────────────────────────────────────────┤
-│  Layer 2: NSAM Compilation/Decompilation            │
-│  - Compiles declarative programs → neural networks  │
-│  - Fixed structure for known physics                │
-│  - Learnable weights for unknown sub-expressions    │
-│  - Decompiles trained networks → symbolic programs  │
-│  - Based on collapsing towers / staged interpreters │
-├─────────────────────────────────────────────────────┤
-│  Layer 3: Formal Verification                       │
-│  - Checks invariants (conservation, symmetry, etc.) │
-│  - Verifies equivalence pre/post optimization       │
-│  - Validates against reference outputs              │
-│  - Coq/Dafny proof generation via LLM guidance      │
-└─────────────────────────────────────────────────────┘
+Scientific source code (Fortran, C++, Python)
+    ↓  LLM agent extracts kernel
+Cajal program (typed functional language)
+    ↓  compiler
+PyTorch computation graph (differentiable)
+    ↓  train against data
+Learned neural weights
+    ↓  symbolic regression
+Interpretable mathematical expression + verified invariants
 ```
 
-## The Cajal Language
+## Results
 
-The NSAM layer is built on [Cajal](https://arxiv.org/abs/2511.14953), a minimal
-typed, higher-order, linear programming language whose programs compile
-correctly to linear (recurrent) neurons.
+Eight working demonstrations across DOE science domains:
 
-```
-Expressions:
-  e ::= x                          -- variable
-      | tt | ff                    -- booleans
-      | 0 | succ(e)               -- natural numbers
-      | iter{e₁ | y ↪ e₂}(e₃)    -- iterator
-      | λx.e                      -- linear map
-      | e₁ e₂                     -- application
+| Model | Domain | Learned | Result |
+|-------|--------|---------|--------|
+| Exponential decay | Foundation | rate k | k=0.3000 exact |
+| Coupled pools | Earth science | transfer α | α=0.4000 exact |
+| Unknown function | Earth science | moisture response | Hill equation recovered |
+| CENTURY-Lite | Earth science | temp + moisture | both forms recovered |
+| Decay chain | Nuclear | branching ratios | 0.70, 0.85 exact |
+| Battery fade | Energy storage | SEI growth law | parabolic law recovered |
+| Chemical kinetics | Combustion | Arrhenius rate | A=2.01, E=4.99 |
+| EcoSIM decomp | Earth science | T + water stress | extracted from Fortran |
 
-Types:
-  τ ::= 𝟚              -- boolean
-      | ℕ              -- natural number
-      | τ₁ ⊸ τ₂        -- linear map
-```
+### Comparison: Cajal vs PINN vs Black-Box
 
-Programs compile to weight matrices. For example:
+On identical data (reversible reaction A⇌B):
 
-| Cajal program | Compiles to |
-|---------------|-------------|
-| `λx. x` (identity) | `[[1,0],[0,1]]` |
-| `λx. if x then ff else tt` (NOT) | `[[0,1],[1,0]]` |
-| `λx. if x then tt else tt` (const-true) | `[[1,1],[0,0]]` |
-| `iter{tt \| y → not(y)}(n)` | n-th power of the NOT matrix |
+| | Black-box | PINN | **Cajal** |
+|---|---|---|---|
+| Trajectory MSE | 6.2×10⁻³ | 7.7×10⁻³ | **9.3×10⁻⁷** |
+| Conservation error | 5.4×10⁻³ | 6.5×10⁻³ | **1.6×10⁻⁷** |
+| Extrapolation | 3.1×10⁻² | 5.0×10⁻² | **1.3×10⁻²** |
+| Sample efficiency (2 traj) | 8.6×10⁻² | — | **1.2×10⁻³** |
+| Interpretable | No | No | k=1.97·exp(-4.86/T) |
 
-The linear type system ensures each variable is used exactly once, which maps
-directly to linear algebra: compilation preserves semantics by construction.
-
-## Demonstration Use Cases
-
-### 1. Verified Surrogate Models (EcoSIM, Fortran)
-
-Extract a soil carbon decomposition kernel from the
-[EcoSIM](https://github.com/jinyun1tang/EcoSIM) biogeochemistry model. Known
-physics (mass balance, Arrhenius temperature response) becomes fixed neural
-structure; uncertain process terms (moisture response function) become
-learnable weights. After training, decompile the learned sub-expression back
-to an interpretable symbolic formula and verify conservation invariants.
-
-### 2. Algorithm Selection (ECP Proxy App, C/C++)
-
-Analyze [XSBench](https://github.com/ANL-CESAR/XSBench) or
-[CoMD](https://github.com/ECP-copa/CoMD) to extract algorithm dispatch logic.
-Compile the discrete algorithm choice (unionized grid vs. hash vs. nuclide
-lookup) into a continuous, differentiable selection via NSAM. Optimize via
-gradients, decompile to an interpretable decision rule, verify correctness
-against built-in reference outputs.
-
-### 3. Program Synthesis (NAS Parallel Benchmarks, Fortran)
-
-Given a mathematical specification (e.g., Conjugate Gradient for Ax=b),
-synthesize a correct implementation using NSAM-guided relational search via
-staged miniKanren. Verify the synthesized code against
-[NPB](https://www.nas.nasa.gov/software/npb.html) reference outputs at
-multiple problem sizes.
-
-## Running the Examples
+## Quick Start
 
 ```bash
-# Clone and set up
 git clone https://github.com/cmungall/trusty-neurocoder.git
 cd trusty-neurocoder
-uv venv .venv
-source .venv/bin/activate
-uv pip install -e ".[dev]"
+uv pip install -e ".[dev,notebooks,docs]"
 
-# Run the Cajal demo
-python examples/cajal_demo.py
+# Run examples
+just examples
+
+# Run notebooks
+just notebooks
+
+# Serve docs
+just docs
 ```
 
-## Prior Work
+## Notebooks
 
-This project builds on:
+Interactive Jupyter notebooks with embedded output and plots:
 
-- [C3PO](https://github.com/chemkg/c3p) (Mungall et al., J. Cheminformatics
-  2025) -- LLM-based synthesis of deterministic, verifiable chemical classifier
-  programs from ontology definitions. Demonstrates the neuro→symbolic code
-  generation pattern that Trusty Neurocoder formalizes with NSAM guarantees.
+- [01 - Cajal Intro](https://cmungall.github.io/trusty-neurocoder/notebooks/01_cajal_intro/)
+- [02 - Exponential Decay](https://cmungall.github.io/trusty-neurocoder/notebooks/02_exponential_decay/)
+- [03 - Learning Unknown Functions](https://cmungall.github.io/trusty-neurocoder/notebooks/03_learn_unknown_function/)
+- [04 - CENTURY-Lite](https://cmungall.github.io/trusty-neurocoder/notebooks/04_century_lite/)
+- [05 - Decay Chain](https://cmungall.github.io/trusty-neurocoder/notebooks/05_decay_chain/)
+- [06 - Battery Degradation](https://cmungall.github.io/trusty-neurocoder/notebooks/06_battery_degradation/)
+- [07 - Chemical Kinetics](https://cmungall.github.io/trusty-neurocoder/notebooks/07_chemical_kinetics/)
+
+## Cajal Type System
+
+Built on [Cajal](https://arxiv.org/abs/2511.14953) (Velez-Ginorio, Amin,
+Kording, Zdancewic), a typed linear programming language whose programs
+compile exactly to recurrent neural networks. We extend the type system
+with `TyReal(n)` for real-valued state vectors and fix four soundness
+bugs in the vendored implementation.
 
 ## References
 
-- Velez-Ginorio, Amin, Kording, Zdancewic. "Compiling to Linear Neurons" (POPL 2026)
-- Velez-Ginorio, Amin, Kording, Zdancewic. "Compiling to Recurrent Neurons" (arXiv:2511.14953, 2025)
+- Velez-Ginorio et al. "Compiling to Recurrent Neurons" (arXiv:2511.14953, 2025)
+- Velez-Ginorio et al. "Compiling to Linear Neurons" (POPL 2026)
 - Amin & Rompf. "Collapsing Towers of Interpreters" (POPL 2018)
-- Ballantyne, Sanna, Hemann, Byrd, Amin. "Multi-stage Relational Programming" (PLDI 2025)
-- Prasad & Amin. "Guided Proof Search Using LLMs and Lemma Extraction in Coq" (ICLR VerifAI 2025)
-- Mungall et al. "Chemical classification program synthesis using generative artificial intelligence" (J. Cheminformatics 2025)
 
 ## License
 
