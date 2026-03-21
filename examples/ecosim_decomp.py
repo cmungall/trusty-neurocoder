@@ -47,31 +47,44 @@ device = torch.device("cpu")
 
 # ── Known parameters (from EcoSIM source) ────────────────────
 
-# Specific decomposition rate constants (SPOSC in EcoSIM, per substrate)
-K_PROT = 0.10    # protein: fast
-K_CARB = 0.08    # carbohydrate: fast
-K_CELL = 0.03    # cellulose: moderate
-K_LIGN = 0.01    # lignin: slow
+# Specific decomposition rate constants (SPOSC in EcoSIM)
+# From MicBGCPars.F90:242-244, litter complex K=1
+# Units: g C g⁻¹ soil h⁻¹ (but we normalize for our surrogate)
+# Original values: protein=7.5, carbohydrate=7.5, cellulose=1.5, lignin=0.5
+# Normalized to [0, 1] range for numerical stability in surrogate training
+K_PROT = 7.5 / 7.5    # 1.0 (fastest)
+K_CARB = 7.5 / 7.5    # 1.0
+K_CELL = 1.5 / 7.5    # 0.2
+K_LIGN = 0.5 / 7.5    # 0.067
 K_RATES = torch.tensor([K_PROT, K_CARB, K_CELL, K_LIGN])
 
 # Monod substrate limitation
-KM_SUBSTRATE = 0.5   # half-saturation for substrate concentration
+# DCKM0 = 1.0E+03 g C/g soil (NitroPars.F90:220)
+# Km depends on biomass concentration: DCKD = DCKM0*(1+COQCK/DCKI)
+# Using simplified fixed Km here; full biomass-dependent version is future work
+KM_SUBSTRATE = 0.5
 
-# Product inhibition
-KI_DOM = 2.0         # inhibition constant for dissolved organic carbon
+# Product inhibition (DOC)
+# OQKI = 1.2E+03 g C/m³ (NitroPars.F90:211)
+# OQCI = 1/(1 + CDOM/OQKI)
+KI_DOM = 2.0   # normalized for surrogate scale
+
+# DCKI = 2.5 (NitroPars.F90:203) - inhibition by microbial concentration
+# Used in DCKD = DCKM0*(1+COQCK/DCKI) - not yet in surrogate
 
 DT = 0.5
 N_STEPS = 10
 
-# Initial conditions (relative units, loosely based on typical litter)
+# Initial conditions (relative units, loosely based on typical litter composition)
+# In EcoSIM, these would come from SolidOM(ielmc,M,K) in the state variables
 C0_PROT = 0.15
 C0_CARB = 0.30
 C0_CELL = 0.35
 C0_LIGN = 0.15
 C0_DOM  = 0.05
 
-# Gas constant (J/(mol·K))
-RGASC = 8.314
+# Gas constant (J/(mol·K)) - from EcoSimConst.F90:30
+RGASC = 8.3143
 
 # Training grid: 3 temperatures × 3 water potentials = 9 trajectories
 N_TEMP = 3
