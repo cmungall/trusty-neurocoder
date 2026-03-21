@@ -15,17 +15,20 @@ kinetic structure) becomes fixed program structure; unknown or uncertain
 process functions become learnable PyTorch sub-expressions. After
 training against simulation output, symbolic regression decompiles the
 learned neural weights back to interpretable mathematical expressions.
-We extend the Cajal type system with real-valued vector types (`TyReal(n)`)
-and demonstrate the full pipeline on eight scientific models spanning
-soil biogeochemistry, nuclear decay, battery degradation, and chemical
+We extend the Cajal type system with real-valued vector types (`TyReal(n)`),
+fix four soundness bugs in the vendored implementation, and demonstrate
+the full pipeline on eight scientific models spanning soil
+biogeochemistry, nuclear decay, battery degradation, and chemical
 kinetics — including an end-to-end case extracting a decomposition
-kernel from the EcoSIM land model's Fortran source. All surrogates
-preserve physical invariants (mass conservation, positivity, monotonicity)
-by construction, not by post-hoc checking. The entire codebase,
-including the type system extension, eight demonstration models,
-and documentation site, was produced by the LLM agent in a single
-interactive session, demonstrating the agent workflow itself as a
-proof of concept.
+kernel from the EcoSIM land model's Fortran source. A controlled
+comparison against physics-informed neural networks (PINNs) and
+black-box MLPs shows the Cajal surrogate achieves 6,700× lower
+interpolation error, exact conservation (10⁻⁸ vs. 10⁻²), 72×
+better sample efficiency, and produces interpretable decompiled
+expressions — while PINNs' soft conservation penalties actually
+degrade extrapolation performance. The entire codebase was produced
+by the LLM agent in a single interactive session, demonstrating the
+agent workflow itself as a proof of concept.
 
 ## Introduction
 
@@ -100,6 +103,40 @@ which maps directly to linear algebra. A Cajal program of type
 permutation matrix `[[0,1],[1,0]]`; iterating NOT `n` times produces
 `NOT^n`, which alternates between identity and NOT — exactly as the
 symbolic evaluator predicts.
+
+### Soundness Fixes to the Cajal Implementation
+
+The vendored Cajal implementation contained four soundness and
+runtime-semantics bugs not covered by the original test suite. We
+identified and fixed all four as part of this work:
+
+1. **Lambda shadowing** (`typing.py`). The linear type checker allowed
+   a lambda parameter to shadow an outer linear binding, silently
+   discarding it. This is a direct violation of the linear type
+   discipline — a resource disappears without being consumed. Fix:
+   scope the parameter binding, restore any shadowed outer binding
+   after checking the body.
+
+2. **Iterator type preservation** (`typing.py`). `TmIter` did not
+   check that the base case and recursive step produce the same type,
+   allowing a term to type-check as `TyNat()` but evaluate to `VTrue` —
+   a preservation failure. Fix: require `ty_base == ty_step`.
+
+3. **Closure environment mutation** (`evaluating.py`). Closure
+   application used `|=` (mutating merge) on the captured environment
+   dict. Reusing an outer closure could retroactively change earlier
+   returned inner closures, breaking referential transparency.
+   Fix: copy environments at closure creation; use `|` (non-mutating)
+   at application.
+
+4. **Matrix equality** (`compiling.py`). `TypedTensor.__eq__` called
+   `all(self.data == y.data)`, which raises `RuntimeError` for
+   matrix-valued tensors. Fix: use `torch.equal()` and compare type
+   tags.
+
+These fixes are covered by 10 regression tests. Bugs 1 and 2 affect
+the core claim that Cajal's linear type system guarantees
+structure preservation; they are not merely cosmetic.
 
 ### Learnable Sub-Expressions
 
@@ -413,7 +450,12 @@ scientist to focus on scientific judgment.
 **Physics-informed neural networks** (Raissi et al., 2019) encode
 physical laws as soft penalty terms in the loss function. Our approach
 encodes them as hard program structure, providing guarantees rather
-than incentives.
+than incentives. Our controlled comparison (Section "Comparison")
+demonstrates a concrete failure mode of the PINN approach: the
+conservation penalty, calibrated for the training distribution,
+actively degrades extrapolation to unseen conditions. This is not a
+tuning issue — it is inherent to soft constraints that trade off
+against data fit.
 
 **Neural ODEs** (Chen et al., 2018) parameterize the entire ODE
 right-hand side as a neural network. We parameterize only the
@@ -443,12 +485,18 @@ neuro-symbolic abstract machines can work together to produce
 verified scientific surrogates from real simulation source code.
 The agent handles code comprehension and generation; the NSAM
 provides structural correctness; symbolic regression closes the loop
-back to interpretable science. Eight working demonstrations across
-DOE science domains, including an end-to-end extraction from the
-EcoSIM land model's Fortran source, show the approach is practical
-today. The `TyReal(n)` type system extension enables Cajal to handle
-real-valued ODE state vectors, broadening the class of scientific
-models amenable to neuro-symbolic compilation.
+back to interpretable science. A controlled comparison against PINNs
+confirms that hard structural constraints outperform soft penalties
+on conservation, extrapolation, sample efficiency, and
+interpretability — and that the gap widens, not narrows, as
+conditions move away from the training distribution.
+
+Eight working demonstrations across DOE science domains, including
+an end-to-end extraction from the EcoSIM land model's Fortran source,
+show the approach is practical today. Our contributions to the Cajal
+implementation — the `TyReal(n)` type extension and four soundness
+fixes — strengthen the theoretical foundation on which the pipeline
+rests.
 
 Code, notebooks, and documentation: https://github.com/cmungall/trusty-neurocoder
 
