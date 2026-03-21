@@ -47,6 +47,13 @@ docs:
 docs-build:
     uv run mkdocs build
 
+# Generate presentation slides in all formats
+gen-slides:
+    cd docs/slides && marp trusty-neurocoder-value-prop.md --allow-local-files -o trusty-neurocoder-value-prop.html
+    cd docs/slides && marp trusty-neurocoder-value-prop.md --allow-local-files --pdf -o trusty-neurocoder-value-prop.pdf
+    cd docs/slides && marp trusty-neurocoder-value-prop.md --allow-local-files --pptx -o trusty-neurocoder-value-prop.pptx
+    @echo "Slides generated in docs/slides/"
+
 # Deploy to GitHub Pages
 docs-deploy:
     uv run mkdocs gh-deploy
