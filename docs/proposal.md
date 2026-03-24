@@ -52,10 +52,11 @@ end-to-end. The prototype, code, notebooks, and documentation are at:
 - **Documentation**: https://cmungall.github.io/trusty-neurocoder/
 - **Agent Workflow**: https://cmungall.github.io/trusty-neurocoder/agent-workflow/
 
-The prototype was built in a single session by an LLM coding agent
-(Claude Code), demonstrating the Layer 1 agent workflow. The agent
-read the RFA, researched the Cajal papers, vendored the Cajal source,
-and produced seven working examples across DOE science domains:
+The prototype was built with substantial assistance from an LLM coding
+agent (Claude Code), exercising the Layer 1 agent workflow in a real
+development setting. The agent read the RFA, researched the Cajal
+papers, vendored the Cajal source, and produced seven working examples
+across DOE science domains:
 
 | Example | DOE Domain | What's Learned | Key Result |
 |---------|-----------|----------------|------------|

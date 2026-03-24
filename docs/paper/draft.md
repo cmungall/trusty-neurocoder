@@ -26,9 +26,9 @@ black-box MLPs shows the Cajal surrogate achieves 6,700× lower
 interpolation error, exact conservation (10⁻⁸ vs. 10⁻²), 72×
 better sample efficiency, and produces interpretable decompiled
 expressions — while PINNs' soft conservation penalties actually
-degrade extrapolation performance. The entire codebase was produced
-by the LLM agent in a single interactive session, demonstrating the
-agent workflow itself as a proof of concept.
+degrade extrapolation performance. LLM agent assistance accelerated
+kernel extraction, Cajal programming, and experiment generation,
+providing a concrete demonstration of the agent-assisted workflow.
 
 ## Introduction
 
@@ -456,25 +456,25 @@ but offset *scales*. Additional constraints — such as normalization
 resolve this. This is a property of the scientific problem, not a
 limitation of the method.
 
-### The Agent as Proof of Concept
+### Agent-Assisted Prototype Development
 
-The entire codebase — type system extension, eight working models,
-test suite, Jupyter notebooks, documentation site, CI/CD — was
-produced by an LLM coding agent (Claude Code) in a single interactive
-session, starting from a DOE RFA and a pointer to the Cajal papers.
-The session transcript serves as a demonstration of the Layer 1
-agent workflow. The agent read Fortran source code, identified
-decomposition kernels, generated Cajal programs, debugged runtime
-errors (tensor shape mismatches, device placement issues), and
-iterated on performance (discovering that CPU is ~10× faster than
-Apple MPS for these small sequential workloads).
+An LLM coding agent (Claude Code) was used throughout development of
+the prototype — type system extension, eight working models, test
+suite, Jupyter notebooks, documentation site, and CI/CD. This serves
+as a concrete demonstration of the Layer 1 workflow. The agent read
+Fortran source code, identified decomposition kernels, generated
+Cajal programs, debugged runtime errors (tensor shape mismatches,
+device placement issues), and iterated on performance (discovering
+that CPU is ~10× faster than Apple MPS for these small sequential
+workloads).
 
 This is not a claim that the agent replaces scientific expertise.
 The user guided every major decision: which models to build, which
 DOE domains to target, how to decompose known vs. unknown components.
 The agent handled the mechanical work — reading Fortran, writing
-PyTorch, managing git, deploying documentation — freeing the
-scientist to focus on scientific judgment.
+PyTorch, managing git, deploying documentation — while the scientific
+contribution remains the architecture, experiments, and resulting
+surrogates rather than the speed of implementation.
 
 ## Related Work
 

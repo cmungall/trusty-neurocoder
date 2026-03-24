@@ -4,9 +4,9 @@ This document demonstrates the full Trusty Neurocoder pipeline, where an
 LLM coding agent (Claude Code) takes a natural language description of a
 scientific model and produces a working, verified neuro-symbolic surrogate.
 
-**This is not a hypothetical workflow.** Everything in this repository was
-produced by the agent in a single interactive session, starting from a DOE
-RFA and a pointer to the Cajal papers.
+**This is not a hypothetical workflow.** The repository documents a real
+agent-assisted build, starting from a DOE RFA and a pointer to the Cajal
+papers.
 
 ## The Three-Layer Architecture in Practice
 
