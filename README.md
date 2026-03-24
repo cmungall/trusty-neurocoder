@@ -2,7 +2,7 @@
 
 Verified scientific surrogates via neuro-symbolic compilation and LLM agents.
 
-**Documentation**: [cmungall.github.io/trusty-neurocoder](https://cmungall.github.io/trusty-neurocoder/)
+**Documentation**: [cmungall.github.io/nsam4hpc](https://cmungall.github.io/nsam4hpc/)
 
 ## What This Does
 
