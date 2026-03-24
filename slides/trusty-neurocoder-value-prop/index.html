@@ -1,0 +1,1568 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Neuro-Symbolic Agents for Verified Scientific Code Generation">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Trusty neurocoder value prop - Trusty Neurocoder</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#trusty-neurocoder" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Trusty Neurocoder" class="md-header__button md-logo" aria-label="Trusty Neurocoder" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Trusty Neurocoder
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Trusty neurocoder value prop
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cmungall/trusty-neurocoder" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Trusty Neurocoder" class="md-nav__button md-logo" aria-label="Trusty Neurocoder" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Trusty Neurocoder
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cmungall/trusty-neurocoder" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paper/draft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paper Draft
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agent-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proposal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proposal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Notebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/01_cajal_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cajal: Programs as Recurrent Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/02_exponential_decay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning a Scalar ODE Parameter via Cajal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Earth & Environment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Earth & Environment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/03_learn_unknown_function/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning an Unknown Nonlinear Function via Neural Sub-expression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/04_century_lite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CENTURY-Lite: Learning Two Unknown Response Functions Simultaneously
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DOE Science Domains
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DOE Science Domains
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/05_decay_chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Radioactive Decay Chain: Learning Branching Ratios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/06_battery_degradation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Battery Degradation: Learning SEI Growth and Capacity Fade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/07_chemical_kinetics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chemical Kinetics: Learning Arrhenius Rate from Equilibrium Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#structured-surrogates-for-scientific-simulation-kernels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structured Surrogates for Scientific Simulation Kernels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-core-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Core Problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-kernel-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is a "Kernel" Here?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-simulator-vs-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full Simulator vs Kernel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Kernel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-not-learn-the-whole-simulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Not Learn the Whole Simulator?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-project-tries-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What This Project Tries to Do
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-from-simulator-to-structured-surrogate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture: From Simulator to Structured Surrogate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-gets-learned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Gets Learned?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-ecosim-style-soil-carbon-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example: EcoSIM-Style Soil Carbon Kernel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-does-the-training-signal-come-from" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where Does the Training Signal Come From?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-not-just-use-pinns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Not Just Use PINNs?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-value-proposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Value Proposition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-semantics-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why "Semantics" Matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-fits-doe-style-simulation-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Fits DOE-Style Simulation Work
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-repo-demonstrates-today" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Repo Demonstrates Today
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controlled-comparison-cajal-vs-pinn-vs-black-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controlled Comparison: Cajal vs PINN vs Black-Box
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-paragraph-pitch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-Paragraph Pitch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-slide-executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One-Slide Executive Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Insight
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<!-- _class: lead -->
+<h1 id="trusty-neurocoder">Trusty Neurocoder<a class="headerlink" href="#trusty-neurocoder" title="Permanent link">&para;</a></h1>
+<h2 id="structured-surrogates-for-scientific-simulation-kernels">Structured Surrogates for Scientific Simulation Kernels<a class="headerlink" href="#structured-surrogates-for-scientific-simulation-kernels" title="Permanent link">&para;</a></h2>
+<p><strong>Christopher J. Mungall</strong>
+Lawrence Berkeley National Laboratory</p>
+<hr />
+<h2 id="the-core-problem">The Core Problem<a class="headerlink" href="#the-core-problem" title="Permanent link">&para;</a></h2>
+<p>Many DOE science programs depend on large simulation codes that are:</p>
+<ul>
+<li>scientifically valuable</li>
+<li>expensive to run</li>
+<li>hard to calibrate against real data</li>
+<li>full of local submodels that are partly known and partly uncertain</li>
+</ul>
+<p>Common fallback:
+- fit a black-box neural surrogate</p>
+<p>Common failure:
+- it may reproduce outputs, but loses scientific structure and meaning</p>
+<hr />
+<h2 id="what-is-a-kernel-here">What Is a "Kernel" Here?<a class="headerlink" href="#what-is-a-kernel-here" title="Permanent link">&para;</a></h2>
+<p>A kernel here is a <strong>small, repeated scientific computation</strong>, not the whole simulator.</p>
+<p>Typical shape:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">state_next</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">forcing</span><span class="p">)</span>
+</code></pre></div>
+<p>or:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">dstate_dt</span> <span class="o">=</span> <span class="n">rhs</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">forcing</span><span class="p">)</span>
+</code></pre></div>
+<p>It is the local rule that says:</p>
+<blockquote>
+<p>given the current scientific state, how does it change?</p>
+</blockquote>
+<hr />
+<h2 id="full-simulator-vs-kernel">Full Simulator vs Kernel<a class="headerlink" href="#full-simulator-vs-kernel" title="Permanent link">&para;</a></h2>
+<p>The full code usually looks like:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">state</span> <span class="o">=</span> <span class="n">s0</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">state</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">forcing</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+</code></pre></div>
+<p>The <strong>simulator</strong> includes:
+- timestepping
+- I/O
+- parallelization
+- diagnostics
+- checkpointing</p>
+<p>The <strong>kernel</strong> is the <code>step(...)</code> or <code>rhs(...)</code> update rule.</p>
+<hr />
+<h2 id="example-kernel">Example Kernel<a class="headerlink" href="#example-kernel" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">update_pools</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">moisture</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">decay_fast</span> <span class="o">=</span> <span class="n">k_fast</span> <span class="o">*</span> <span class="n">moisture_response</span><span class="p">(</span><span class="n">moisture</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">fast</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">decay_slow</span> <span class="o">=</span> <span class="n">k_slow</span> <span class="o">*</span> <span class="n">temp_response</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">slow</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">return</span> <span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="s2">&quot;fast&quot;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">fast</span> <span class="o">-</span> <span class="n">decay_fast</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="s2">&quot;slow&quot;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">slow</span> <span class="o">+</span> <span class="n">decay_fast</span> <span class="o">-</span> <span class="n">decay_slow</span><span class="p">,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="s2">&quot;atm&quot;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">atm</span> <span class="o">+</span> <span class="n">decay_slow</span><span class="p">,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="p">}</span>
+</code></pre></div>
+<p>This is a good kernel because it is:</p>
+<ul>
+<li>scientifically meaningful</li>
+<li>called repeatedly</li>
+<li>small enough to isolate</li>
+<li>a plausible place to learn uncertain pieces</li>
+</ul>
+<hr />
+<h2 id="why-not-learn-the-whole-simulator">Why Not Learn the Whole Simulator?<a class="headerlink" href="#why-not-learn-the-whole-simulator" title="Permanent link">&para;</a></h2>
+<p>Replacing the entire simulation with one neural net is usually a bad abstraction.</p>
+<p>You lose:</p>
+<ul>
+<li>variable roles</li>
+<li>conservation structure</li>
+<li>module boundaries</li>
+<li>known physics vs unknown physics</li>
+<li>interpretability</li>
+</ul>
+<p>For large models such as ecosystem simulators with many interacting variables, that loss of structure becomes a real scientific risk, not just an aesthetic problem.</p>
+<hr />
+<h2 id="what-this-project-tries-to-do">What This Project Tries to Do<a class="headerlink" href="#what-this-project-tries-to-do" title="Permanent link">&para;</a></h2>
+<p>Extract a small scientific kernel from a larger codebase, then:</p>
+<ol>
+<li>represent the known structure symbolically</li>
+<li>compile that structure into a differentiable neural module</li>
+<li>keep trusted physics fixed</li>
+<li>make only uncertain parts learnable</li>
+<li>fit those parts from data</li>
+</ol>
+<p>Goal:</p>
+<p><strong>structured surrogate modeling</strong>, not unrestricted black-box replacement</p>
+<hr />
+<h2 id="the-pipeline">The Pipeline<a class="headerlink" href="#the-pipeline" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Scientific code
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    ↓
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Extract kernel / mini-module
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    ↓
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Encode known program structure
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    ↓
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>Compile to NSAM / differentiable module
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    ↓
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>Learn unknown parameters or subfunctions
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    ↓
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>Use as calibrated module or fast surrogate
+</code></pre></div>
+<p>This repo is currently a proof of concept for that pipeline.</p>
+<hr />
+<h2 id="architecture-from-simulator-to-structured-surrogate">Architecture: From Simulator to Structured Surrogate<a class="headerlink" href="#architecture-from-simulator-to-structured-surrogate" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Large scientific codebase
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    ↓
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Extract one kernel / mini-module
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    ↓
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>step(state, params, forcing)
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    ↓
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Represent the known scaffold symbolically
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    ├─ variable roles stay explicit
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    ├─ known physics stays fixed
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    └─ unknown pieces become learnable &quot;holes&quot;
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    ↓
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>Compile to NSAM / differentiable module
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    ↓
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>Train on simulator traces, observations, or both
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    ↓
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>Fast, calibrated, more interpretable local module
+</code></pre></div>
+<p>This is the intended architecture boundary:</p>
+<p><strong>learn the uncertain part inside a known scientific scaffold</strong></p>
+<hr />
+<h2 id="what-gets-learned">What Gets Learned?<a class="headerlink" href="#what-gets-learned" title="Permanent link">&para;</a></h2>
+<p>Three realistic modes:</p>
+<ol>
+<li><strong>Parameter fitting</strong></li>
+<li>known equation form</li>
+<li>
+<p>unknown constants</p>
+</li>
+<li>
+<p><strong>Small unknown function fitting</strong></p>
+</li>
+<li>known scaffold</li>
+<li>
+<p>unknown response curve or sub-expression</p>
+</li>
+<li>
+<p><strong>Local surrogate fitting</strong></p>
+</li>
+<li>preserve module boundary</li>
+<li>replace an expensive local update with a cheaper learned approximation</li>
+</ol>
+<p>The key constraint is that learning happens <strong>inside</strong> a known scientific scaffold.</p>
+<hr />
+<h2 id="worked-example-ecosim-style-soil-carbon-kernel">Worked Example: EcoSIM-Style Soil Carbon Kernel<a class="headerlink" href="#worked-example-ecosim-style-soil-carbon-kernel" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">decay_fast</span> <span class="o">=</span> <span class="n">k_fast</span> <span class="o">*</span> <span class="n">f_theta</span><span class="p">(</span><span class="n">moisture</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">fast</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">decay_slow</span> <span class="o">=</span> <span class="n">k_slow</span> <span class="o">*</span> <span class="n">temp_response</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">slow</span>
+</code></pre></div>
+<p>Interpretation:</p>
+<ul>
+<li><code>state.fast</code>, <code>state.slow</code>, <code>state.atm</code> are carbon pools</li>
+<li><code>temp_response(temp)</code> is known or trusted</li>
+<li><code>f_theta(moisture)</code> is uncertain and learnable</li>
+<li>pool-to-pool transfers and mass balance stay fixed</li>
+</ul>
+<p>Training options:</p>
+<ul>
+<li>fit <code>f_theta</code> from expensive simulator traces</li>
+<li>fit <code>f_theta</code> or <code>k_fast</code> from field observations</li>
+<li>do both: simulator as prior, observations as correction</li>
+</ul>
+<p>What is preserved:</p>
+<ul>
+<li>variable meanings</li>
+<li>conservation structure</li>
+<li>the module boundary</li>
+</ul>
+<p>Today the repo demonstrates the mechanics on toy update loops; this is the kind of real kernel it is aiming at.</p>
+<hr />
+<h2 id="where-does-the-training-signal-come-from">Where Does the Training Signal Come From?<a class="headerlink" href="#where-does-the-training-signal-come-from" title="Permanent link">&para;</a></h2>
+<p>Potential sources:</p>
+<ul>
+<li><strong>simulation outputs</strong></li>
+<li>emulate an expensive code path</li>
+<li><strong>real observations</strong></li>
+<li>calibrate model components to the world</li>
+<li><strong>hybrid workflows</strong></li>
+<li>use both simulation traces and experimental or field data</li>
+</ul>
+<p>So this can support:</p>
+<ul>
+<li>surrogate modeling</li>
+<li>parameter calibration</li>
+<li>partial system identification</li>
+</ul>
+<hr />
+<h2 id="why-not-just-use-pinns">Why Not Just Use PINNs?<a class="headerlink" href="#why-not-just-use-pinns" title="Permanent link">&para;</a></h2>
+<p>PINNs are useful, but they solve a different problem.</p>
+<p>Roughly:</p>
+<ul>
+<li><strong>PINNs</strong></li>
+<li>learn solutions or latent functions while enforcing physics in training</li>
+<li><strong>This approach</strong></li>
+<li>keeps an explicit program/module structure and learns only selected unknown parts</li>
+</ul>
+<p>The point is not "better than PINNs at everything."</p>
+<p>The point is:</p>
+<p><strong>more modular, more interpretable, and closer to the original scientific code structure</strong></p>
+<hr />
+<h2 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>What it learns</th>
+<th>What it keeps</th>
+<th>Strength</th>
+<th>Weakness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Black-box surrogate</td>
+<td>whole input-output map</td>
+<td>very little</td>
+<td>flexible, fast inference</td>
+<td>hard to interpret or verify</td>
+</tr>
+<tr>
+<td>PINN</td>
+<td>solution or latent function under physics constraints</td>
+<td>some physics in loss</td>
+<td>physics-aware training</td>
+<td>hard training, often not modular</td>
+</tr>
+<tr>
+<td>NSAM kernel approach</td>
+<td>parameters or subfunctions inside a known scaffold</td>
+<td>program structure, variable roles, invariants</td>
+<td>structured, interpretable, learnable</td>
+<td>requires kernel extraction; still early-stage</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-value-proposition">The Value Proposition<a class="headerlink" href="#the-value-proposition" title="Permanent link">&para;</a></h2>
+<p><strong>Take a small scientific kernel from a simulation.</strong></p>
+<p>Then:</p>
+<ul>
+<li>preserve the known scientific structure</li>
+<li>compile it into a differentiable module</li>
+<li>learn only the uncertain pieces</li>
+<li>keep more semantics than a black-box surrogate</li>
+<li>potentially get a cheaper module for repeated use</li>
+</ul>
+<p>Short version:</p>
+<blockquote>
+<p>Faster and learnable local scientific modules without throwing away the scientific story.</p>
+</blockquote>
+<hr />
+<h2 id="why-semantics-matters">Why "Semantics" Matters<a class="headerlink" href="#why-semantics-matters" title="Permanent link">&para;</a></h2>
+<p>Semantics here means more than names.</p>
+<p>It includes facts like:</p>
+<ul>
+<li>this variable is carbon in pool A</li>
+<li>this term is a branching ratio and should stay in <code>[0, 1]</code></li>
+<li>this update should conserve total mass</li>
+<li>this sub-expression is known physics</li>
+<li>only this response function is uncertain</li>
+</ul>
+<p>A black-box vector-to-vector model can hide all of that.</p>
+<p>This approach tries to preserve it.</p>
+<hr />
+<h2 id="why-this-fits-doe-style-simulation-work">Why This Fits DOE-Style Simulation Work<a class="headerlink" href="#why-this-fits-doe-style-simulation-work" title="Permanent link">&para;</a></h2>
+<p>DOE simulations often contain:</p>
+<ul>
+<li>expensive local update rules</li>
+<li>partial knowledge, not complete ignorance</li>
+<li>strong scientific constraints</li>
+<li>a need for calibration and surrogate modeling</li>
+</ul>
+<p>That makes them a good match for:</p>
+<ul>
+<li>extracting a kernel</li>
+<li>preserving the scaffold</li>
+<li>learning the uncertain part</li>
+</ul>
+<p>This is especially attractive where full black-box replacement would be scientifically or operationally unacceptable.</p>
+<hr />
+<h2 id="what-the-repo-demonstrates-today">What the Repo Demonstrates Today<a class="headerlink" href="#what-the-repo-demonstrates-today" title="Permanent link">&para;</a></h2>
+<p>Eight working examples across DOE science domains:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Domain</th>
+<th>What's learned</th>
+<th>Key result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exponential decay</td>
+<td>Foundation</td>
+<td>rate k</td>
+<td>recovered exactly</td>
+</tr>
+<tr>
+<td>Coupled pools</td>
+<td>Earth science</td>
+<td>transfer α</td>
+<td>recovered exactly</td>
+</tr>
+<tr>
+<td>Unknown function</td>
+<td>Earth science</td>
+<td>Hill equation</td>
+<td>decompiled from MLP</td>
+</tr>
+<tr>
+<td>CENTURY-Lite</td>
+<td>Earth science</td>
+<td>Q10 + Hill</td>
+<td>both forms recovered</td>
+</tr>
+<tr>
+<td>Decay chain</td>
+<td>Nuclear</td>
+<td>branching ratios</td>
+<td>exact (10⁻⁶)</td>
+</tr>
+<tr>
+<td>Battery fade</td>
+<td>Energy storage</td>
+<td>SEI growth law</td>
+<td>parabolic law recovered</td>
+</tr>
+<tr>
+<td>Chemical kinetics</td>
+<td>Combustion</td>
+<td>Arrhenius rate</td>
+<td>A=2.01, E=4.99</td>
+</tr>
+<tr>
+<td>EcoSIM decomp</td>
+<td>Earth science</td>
+<td>T + water response</td>
+<td>extracted from Fortran</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="controlled-comparison-cajal-vs-pinn-vs-black-box">Controlled Comparison: Cajal vs PINN vs Black-Box<a class="headerlink" href="#controlled-comparison-cajal-vs-pinn-vs-black-box" title="Permanent link">&para;</a></h2>
+<p>Identical data, identical task (reversible reaction A⇌B):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Black-box</th>
+<th>PINN (λ=10)</th>
+<th><strong>Cajal</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interpolation MSE</td>
+<td>6.2×10⁻³</td>
+<td>7.7×10⁻³</td>
+<td><strong>9.3×10⁻⁷</strong></td>
+</tr>
+<tr>
+<td>Conservation error</td>
+<td>5.4×10⁻³</td>
+<td>6.5×10⁻³</td>
+<td><strong>1.6×10⁻⁷</strong></td>
+</tr>
+<tr>
+<td>Extrapolation MSE</td>
+<td>3.1×10⁻²</td>
+<td>5.0×10⁻²</td>
+<td><strong>1.3×10⁻²</strong></td>
+</tr>
+<tr>
+<td>Sample efficiency (2 traj)</td>
+<td>8.6×10⁻²</td>
+<td>—</td>
+<td><strong>1.2×10⁻³</strong></td>
+</tr>
+<tr>
+<td>Interpretable?</td>
+<td>No</td>
+<td>No</td>
+<td><strong>k=1.97·exp(-4.86/T)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>PINN conservation penalty <em>hurts</em> extrapolation (worse than black-box).</p>
+<hr />
+<h2 id="2-paragraph-pitch">2-Paragraph Pitch<a class="headerlink" href="#2-paragraph-pitch" title="Permanent link">&para;</a></h2>
+<p>DOE science depends on large simulation codes that are expensive to run and difficult to calibrate, while many important submodels are only partially known. Black-box neural surrogates can reduce cost, but they often discard the scientific structure that tells us what variables mean, what should be conserved, and which parts of the model are trusted versus uncertain.</p>
+<p>Trusty Neurocoder targets that gap by extracting small scientific kernels, preserving their known symbolic structure, and compiling them into differentiable neural modules. This makes it possible to learn parameters or unknown subfunctions from simulation traces, observations, or both, while keeping more semantics, interpretability, and verifiability than a generic neural surrogate. The current repo is a proof of concept, but the long-term goal is clear: structured, learnable surrogates for scientific kernels.</p>
+<hr />
+<h2 id="one-slide-executive-summary">One-Slide Executive Summary<a class="headerlink" href="#one-slide-executive-summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Problem:</strong> DOE simulations are expensive, and their uncertain submodels are hard to calibrate.</li>
+<li><strong>Risk with black-box surrogates:</strong> they lose scientific meaning and constraints.</li>
+<li><strong>Approach:</strong> extract a kernel, keep known structure, compile to differentiable module, learn only uncertain parts.</li>
+<li><strong>Results:</strong> 8 working models, 6,700× better than black-box, exact conservation, decompiles to interpretable math.</li>
+<li><strong>End-to-end:</strong> agent reads EcoSIM Fortran → builds Cajal surrogate → trains → decompiles → verifies.</li>
+<li><strong>Status:</strong> working prototype with PINN comparison; scaling to full EcoSIM output next.</li>
+</ul>
+<hr />
+<!-- _class: lead -->
+<h2 id="key-insight">Key Insight<a class="headerlink" href="#key-insight" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Do not replace the whole simulator.</p>
+</blockquote>
+<p>Replace or calibrate the <strong>right small kernel</strong>.</p>
+<p>Keep the scientific scaffold.
+Learn the uncertain parts.</p>
+<p><strong>Trusty Neurocoder</strong> aims at structured surrogate modeling for scientific code.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

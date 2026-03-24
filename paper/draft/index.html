@@ -1,0 +1,2452 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Neuro-Symbolic Agents for Verified Scientific Code Generation">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../../slides/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Paper Draft - Trusty Neurocoder</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#trusty-neurocoder-verified-scientific-surrogates-via-neuro-symbolic-compilation-and-llm-agents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Trusty Neurocoder" class="md-header__button md-logo" aria-label="Trusty Neurocoder" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Trusty Neurocoder
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Paper Draft
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cmungall/trusty-neurocoder" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Trusty Neurocoder" class="md-nav__button md-logo" aria-label="Trusty Neurocoder" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Trusty Neurocoder
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cmungall/trusty-neurocoder" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paper Draft
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paper Draft
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cajal-programs-as-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cajal: Programs as Neural Networks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soundness-fixes-to-the-cajal-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soundness Fixes to the Cajal Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learnable-sub-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learnable Sub-Expressions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-coding-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LLM Coding Agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-system-extension-tyrealn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type System Extension: TyReal(n)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-guarantees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Guarantees
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#progressive-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Progressive Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#doe-science-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DOE Science Domains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-to-end-ecosim-decomposition-surrogate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-End: EcoSIM Decomposition Surrogate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-cajal-vs-pinn-vs-black-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison: Cajal vs. PINN vs. Black-Box
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparison: Cajal vs. PINN vs. Black-Box">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpolation-training-temperatures-t-3-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpolation (training temperatures, T ∈ [3, 15])
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extrapolation-unseen-temperatures-t-15-20-180-250" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extrapolation (unseen temperatures, T ∈ {1.5, 2.0, 18.0, 25.0})
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample efficiency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretability
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discussion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discussion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-pipeline-preserves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Pipeline Preserves
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-pipeline-cannot-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Pipeline Cannot Do
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synthetic-data-as-validation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synthetic Data as Validation Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identifiability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identifiability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-assisted-prototype-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent-Assisted Prototype Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Work
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a-code-listings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Appendix A: Code Listings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendix A: Code Listings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-the-cajal-program-shared-by-all-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 The Cajal Program (shared by all models)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-ecosim-fortran-source-extracted-by-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 EcoSIM Fortran Source (extracted by the agent)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-cajal-surrogate-generated-by-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 Cajal Surrogate (generated by the agent)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-architectural-constraint-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4 Architectural Constraint Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agent-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proposal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proposal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Notebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/01_cajal_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cajal: Programs as Recurrent Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/02_exponential_decay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning a Scalar ODE Parameter via Cajal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Earth & Environment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Earth & Environment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/03_learn_unknown_function/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning an Unknown Nonlinear Function via Neural Sub-expression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/04_century_lite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CENTURY-Lite: Learning Two Unknown Response Functions Simultaneously
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DOE Science Domains
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DOE Science Domains
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/05_decay_chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Radioactive Decay Chain: Learning Branching Ratios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/06_battery_degradation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Battery Degradation: Learning SEI Growth and Capacity Fade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/07_chemical_kinetics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chemical Kinetics: Learning Arrhenius Rate from Equilibrium Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cajal-programs-as-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cajal: Programs as Neural Networks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soundness-fixes-to-the-cajal-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soundness Fixes to the Cajal Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learnable-sub-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learnable Sub-Expressions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-coding-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LLM Coding Agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-system-extension-tyrealn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type System Extension: TyReal(n)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-guarantees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Guarantees
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#progressive-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Progressive Complexity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#doe-science-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DOE Science Domains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-to-end-ecosim-decomposition-surrogate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End-to-End: EcoSIM Decomposition Surrogate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-cajal-vs-pinn-vs-black-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison: Cajal vs. PINN vs. Black-Box
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparison: Cajal vs. PINN vs. Black-Box">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpolation-training-temperatures-t-3-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpolation (training temperatures, T ∈ [3, 15])
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extrapolation-unseen-temperatures-t-15-20-180-250" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extrapolation (unseen temperatures, T ∈ {1.5, 2.0, 18.0, 25.0})
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sample efficiency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretability
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discussion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discussion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-pipeline-preserves" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Pipeline Preserves
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-pipeline-cannot-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the Pipeline Cannot Do
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synthetic-data-as-validation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synthetic Data as Validation Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identifiability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identifiability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agent-assisted-prototype-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent-Assisted Prototype Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Work
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a-code-listings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Appendix A: Code Listings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendix A: Code Listings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-the-cajal-program-shared-by-all-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 The Cajal Program (shared by all models)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-ecosim-fortran-source-extracted-by-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 EcoSIM Fortran Source (extracted by the agent)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-cajal-surrogate-generated-by-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 Cajal Surrogate (generated by the agent)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-architectural-constraint-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4 Architectural Constraint Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="trusty-neurocoder-verified-scientific-surrogates-via-neuro-symbolic-compilation-and-llm-agents">Trusty Neurocoder: Verified Scientific Surrogates via Neuro-Symbolic Compilation and LLM Agents<a class="headerlink" href="#trusty-neurocoder-verified-scientific-surrogates-via-neuro-symbolic-compilation-and-llm-agents" title="Permanent link">&para;</a></h1>
+<h2 id="abstract">Abstract<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
+<p>Scientific simulations encode decades of domain knowledge in complex
+codebases, but producing fast, interpretable surrogate models from them
+remains manual and error-prone. We present Trusty Neurocoder, a system
+that combines LLM coding agents with neuro-symbolic abstract machines
+(NSAMs) to construct verified surrogate models directly from scientific
+source code. An LLM agent reads simulation source code (e.g., Fortran),
+extracts the ODE structure, and generates a Cajal program — a typed
+functional language whose programs compile exactly to recurrent neural
+networks. Known physics (mass conservation, reaction stoichiometry,
+kinetic structure) becomes fixed program structure; unknown or uncertain
+process functions become learnable PyTorch sub-expressions. After
+training against simulation output, symbolic regression decompiles the
+learned neural weights back to interpretable mathematical expressions.
+We extend the Cajal type system with real-valued vector types (<code>TyReal(n)</code>),
+fix four soundness bugs in the vendored implementation, and demonstrate
+the full pipeline on eight scientific models spanning soil
+biogeochemistry, nuclear decay, battery degradation, and chemical
+kinetics — including an end-to-end case extracting a decomposition
+kernel from the EcoSIM land model's Fortran source. A controlled
+comparison against physics-informed neural networks (PINNs) and
+black-box MLPs shows the Cajal surrogate achieves 6,700× lower
+interpolation error, exact conservation (10⁻⁸ vs. 10⁻²), 72×
+better sample efficiency, and produces interpretable decompiled
+expressions — while PINNs' soft conservation penalties actually
+degrade extrapolation performance. LLM agent assistance accelerated
+kernel extraction, Cajal programming, and experiment generation,
+providing a concrete demonstration of the agent-assisted workflow.</p>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Surrogate models approximate expensive scientific simulations with
+cheaper alternatives, enabling uncertainty quantification, parameter
+sweeps, and real-time prediction. The dominant approach trains neural
+networks on simulation input-output pairs, treating the simulator as a
+black box. This works, but discards everything scientists know about
+the system: conservation laws, reaction structure, monotonicity
+constraints, dimensional relationships. The resulting surrogates are
+fast but uninterpretable, and violations of physical invariants must
+be caught by post-hoc validation — if they are caught at all.</p>
+<p>A parallel line of work in programming languages has produced
+neuro-symbolic abstract machines (NSAMs): neural networks that are
+structurally equivalent to programming language interpreters. Cajal, a
+typed higher-order linear programming language developed by
+Velez-Ginorio et al., compiles programs exactly to recurrent neural
+network weight matrices. A Cajal program of type <code>τ₁ ⊸ τ₂</code> becomes a
+linear map from the vector space encoding <code>τ₁</code> to that encoding <code>τ₂</code>.
+Iteration compiles to matrix powers — recurrence. The compilation is
+exact, not an approximation: the symbolic evaluator and the neural
+compiler produce identical outputs on every input.</p>
+<p>We connect these two threads. The Cajal compilation pipeline gives us
+neural networks with <em>guaranteed structure</em>. If we fix the known parts
+of a scientific model as Cajal program structure and make the unknown
+parts learnable sub-expressions, we get surrogates that are:</p>
+<ul>
+<li><strong>Structurally correct by construction.</strong> Mass conservation,
+  positivity, and monotonicity follow from the program structure, not
+  from regularization or post-hoc checking.</li>
+<li><strong>Trainable via backpropagation.</strong> The compiled Cajal program is a
+  differentiable PyTorch computation graph. Learnable sub-expressions
+  (MLPs embedded in the program) train via standard gradient descent.</li>
+<li><strong>Decompilable.</strong> After training, symbolic regression extracts
+  interpretable mathematical expressions from the learned neural
+  weights — closing the loop from neural back to symbolic.</li>
+</ul>
+<p>The remaining gap is practical: Cajal programs are small functional
+programs, but real scientific simulations are large Fortran or C++
+codebases with complex data structures, I/O, and build systems. An LLM
+coding agent bridges this gap, reading the source code, identifying the
+computational kernel, extracting the ODE structure, and generating the
+Cajal surrogate.</p>
+<p>We demonstrate this pipeline end-to-end on eight scientific models,
+culminating in a surrogate of the EcoSIM land model's soil organic
+matter decomposition kernel, extracted directly from its Fortran source.</p>
+<h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
+<h3 id="cajal-programs-as-neural-networks">Cajal: Programs as Neural Networks<a class="headerlink" href="#cajal-programs-as-neural-networks" title="Permanent link">&para;</a></h3>
+<p>Cajal(⊸, 𝟚, ℕ) is a typed, higher-order, linear programming language.
+Its types are booleans (𝟚, encoded as one-hot vectors in ℝ²), natural
+numbers (ℕ, one-hot in ℝ¹⁰), and linear maps (τ₁ ⊸ τ₂). The key
+construct is iteration:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>iter{e₁ | y ↪ e₂}(e₃)
+</code></pre></div>
+<p>which applies the step function <code>e₂</code> to initial state <code>e₁</code> a total of
+<code>e₃</code> times. When compiled, this becomes a recurrent neural network:
+the weight matrix (compiled from <code>e₂</code>) is applied <code>e₃</code> times to the
+initial state vector (compiled from <code>e₁</code>).</p>
+<p>The linear type system ensures each variable is used exactly once,
+which maps directly to linear algebra. A Cajal program of type
+<code>𝟚 ⊸ 𝟚</code> compiles to a 2×2 matrix. The NOT function compiles to the
+permutation matrix <code>[[0,1],[1,0]]</code>; iterating NOT <code>n</code> times produces
+<code>NOT^n</code>, which alternates between identity and NOT — exactly as the
+symbolic evaluator predicts.</p>
+<h3 id="soundness-fixes-to-the-cajal-implementation">Soundness Fixes to the Cajal Implementation<a class="headerlink" href="#soundness-fixes-to-the-cajal-implementation" title="Permanent link">&para;</a></h3>
+<p>The vendored Cajal implementation contained four soundness and
+runtime-semantics bugs not covered by the original test suite. We
+identified and fixed all four as part of this work:</p>
+<ol>
+<li>
+<p><strong>Lambda shadowing</strong> (<code>typing.py</code>). The linear type checker allowed
+   a lambda parameter to shadow an outer linear binding, silently
+   discarding it. This is a direct violation of the linear type
+   discipline — a resource disappears without being consumed. Fix:
+   scope the parameter binding, restore any shadowed outer binding
+   after checking the body.</p>
+</li>
+<li>
+<p><strong>Iterator type preservation</strong> (<code>typing.py</code>). <code>TmIter</code> did not
+   check that the base case and recursive step produce the same type,
+   allowing a term to type-check as <code>TyNat()</code> but evaluate to <code>VTrue</code> —
+   a preservation failure. Fix: require <code>ty_base == ty_step</code>.</p>
+</li>
+<li>
+<p><strong>Closure environment mutation</strong> (<code>evaluating.py</code>). Closure
+   application used <code>|=</code> (mutating merge) on the captured environment
+   dict. Reusing an outer closure could retroactively change earlier
+   returned inner closures, breaking referential transparency.
+   Fix: copy environments at closure creation; use <code>|</code> (non-mutating)
+   at application.</p>
+</li>
+<li>
+<p><strong>Matrix equality</strong> (<code>compiling.py</code>). <code>TypedTensor.__eq__</code> called
+   <code>all(self.data == y.data)</code>, which raises <code>RuntimeError</code> for
+   matrix-valued tensors. Fix: use <code>torch.equal()</code> and compare type
+   tags.</p>
+</li>
+</ol>
+<p>These fixes are covered by 10 regression tests. Bugs 1 and 2 affect
+the core claim that Cajal's linear type system guarantees
+structure preservation; they are not merely cosmetic.</p>
+<h3 id="learnable-sub-expressions">Learnable Sub-Expressions<a class="headerlink" href="#learnable-sub-expressions" title="Permanent link">&para;</a></h3>
+<p>The Cajal compiler produces a differentiable PyTorch computation graph.
+We exploit this by injecting learnable PyTorch modules (MLPs, scalar
+parameters) as environment bindings in the compiled program. The Cajal
+iteration structure provides the fixed skeleton; the learnable modules
+fill in the unknown parts. During training, gradients flow through the
+entire compiled program, including the iteration, to update the
+learnable module weights.</p>
+<p>This is distinct from physics-informed neural networks (PINNs), which
+encode physics as soft loss terms. In our approach, the physics is
+<em>hard structure</em>: mass conservation holds because the program's update
+equations are written to conserve mass, and the compiler preserves this
+structure exactly.</p>
+<h3 id="llm-coding-agents">LLM Coding Agents<a class="headerlink" href="#llm-coding-agents" title="Permanent link">&para;</a></h3>
+<p>Large language model coding agents (Claude Code, Cursor, Codex) can
+read, understand, and generate code across languages and frameworks.
+We use the agent as Layer 1 of the pipeline: it reads scientific source
+code, extracts the mathematical model, identifies which parts are
+known physics and which are uncertain or empirical, and generates the
+Cajal surrogate program. The agent also generates training code,
+evaluation scripts, symbolic regression, and verification checks.</p>
+<h2 id="system-design">System Design<a class="headerlink" href="#system-design" title="Permanent link">&para;</a></h2>
+<h3 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h3>
+<p>The Trusty Neurocoder pipeline has three layers:</p>
+<p><strong>Layer 1: LLM Coding Agent.</strong> Reads scientific source code (Fortran,
+C++, Python). Extracts the ODE system, identifies known vs. unknown
+components, annotates physical constraints. Generates the Cajal program,
+learnable modules, training loop, and verification code.</p>
+<p><strong>Layer 2: NSAM Compilation.</strong> The Cajal compiler transforms the
+program into a PyTorch computation graph. Known structure becomes fixed
+tensor operations; unknown functions become learnable <code>nn.Module</code>
+instances. The iteration construct compiles to a recurrent loop with
+matrix-power semantics.</p>
+<p><strong>Layer 3: Verification.</strong> Physical invariants are checked:
+conservation laws (verified by inspecting the program structure),
+range constraints (guaranteed by output activation functions —
+sigmoid for [0,1], softplus for positivity), and monotonicity
+(verified empirically across all training trajectories). After
+training, symbolic regression decompiles learned neural weights
+to interpretable expressions.</p>
+<h3 id="type-system-extension-tyrealn">Type System Extension: TyReal(n)<a class="headerlink" href="#type-system-extension-tyrealn" title="Permanent link">&para;</a></h3>
+<p>The published Cajal type system supports booleans (𝟚, dimension 2)
+and naturals (ℕ, dimension 10). Scientific ODE surrogates require
+real-valued state vectors. We extend the type system with <code>TyReal(n)</code>,
+representing an n-dimensional real vector. This required three changes:</p>
+<ol>
+<li>A new <code>TyReal</code> dataclass in the syntax module with dimension
+   parameter <code>n</code>.</li>
+<li><code>dim(TyReal(n)) = n</code> in the compiler's dimension calculation.</li>
+<li>Standard basis vectors <code>{e₁, ..., eₙ}</code> in the compiler's basis
+   enumeration.</li>
+</ol>
+<p>The extension is lightweight but enables proper typing of scientific
+state vectors: <code>TyReal(1)</code> for scalar ODEs, <code>TyReal(4)</code> for a
+four-isotope decay chain, <code>TyReal(7)</code> for the EcoSIM decomposition
+model. Equality checking (<code>TyReal(4) == TyReal(4)</code>,
+<code>TyReal(4) != TyReal(5)</code>) works via the dataclass default, so the
+existing type checker handles <code>TyReal</code> without modification.</p>
+<h3 id="architectural-guarantees">Architectural Guarantees<a class="headerlink" href="#architectural-guarantees" title="Permanent link">&para;</a></h3>
+<p>Physical constraints are enforced by the architecture of the learnable
+modules, not by loss penalties:</p>
+<table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>Mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Output ∈ [0, 1]</td>
+<td>Sigmoid final activation</td>
+</tr>
+<tr>
+<td>Output &gt; 0</td>
+<td>Softplus final activation</td>
+</tr>
+<tr>
+<td>Mass conservation</td>
+<td>Update equations sum to zero net flux</td>
+</tr>
+<tr>
+<td>Monotone decay</td>
+<td>Rate × concentration structure</td>
+</tr>
+</tbody>
+</table>
+<p>These guarantees hold for <em>any</em> learned weights, not just the trained
+optimum. A freshly initialized, untrained model already satisfies all
+physical invariants.</p>
+<h2 id="experiments">Experiments<a class="headerlink" href="#experiments" title="Permanent link">&para;</a></h2>
+<p>We demonstrate the pipeline on eight scientific models of increasing
+complexity. All use the same Cajal program structure
+(<code>TmIter(TmVar("s0"), "s", TmApp(TmVar("f"), TmVar("s")), TmVar("n"))</code>)
+and the same training pattern (per-trajectory, per-timestep loss,
+Adam optimizer). The models differ in state dimension, number of
+learnable components, and scientific domain.</p>
+<h3 id="progressive-complexity">Progressive Complexity<a class="headerlink" href="#progressive-complexity" title="Permanent link">&para;</a></h3>
+<p><strong>Model 1: Exponential Decay</strong> (TyReal(1), 1 learnable scalar).
+The ODE <code>dC/dt = -kC</code> discretized as <code>C(n+1) = w·C(n)</code>. A single
+learnable weight <code>w</code> recovers <code>k = (1-w)/dt = 0.3000</code> exactly
+(error &lt; 10⁻⁶). Demonstrates the basic pattern: Cajal iteration +
+learnable scalar + decompilation.</p>
+<p><strong>Model 2: Coupled Carbon Pools</strong> (TyReal(2), 1 learnable scalar).
+Two-pool system with unknown transfer coefficient α between fast and
+slow carbon pools. Recovers α = 0.4000 exactly. Verifies mass
+conservation: total carbon is non-increasing (respiration removes
+carbon, nothing creates it).</p>
+<p><strong>Model 3: Unknown Nonlinear Function</strong> (TyReal(2), 1153-parameter MLP).
+The step from scalar to function learning. A 3-layer MLP
+(1→32→32→1, sigmoid output) learns the unknown moisture response
+function inside the Cajal iteration. Trained on 20 trajectories at
+different moisture levels. Symbolic regression on the trained MLP
+correctly identifies the Hill equation <code>m^0.7 / (0.3 + m^0.7)</code> with
+K = 0.300, matching the ground truth exactly.</p>
+<p><strong>Model 4: CENTURY-Lite</strong> (TyReal(5), two 1153-parameter MLPs).
+A three-pool soil carbon model (simplified CENTURY) with two unknown
+environmental response functions — temperature (Q10) and moisture
+(Hill equation) — learned simultaneously from 9 trajectories at
+different (T, M) conditions. Both functional forms correctly
+identified by symbolic regression. Scale offsets between the two
+functions reflect a fundamental identifiability limitation: with a
+separable modifier <code>f(T)·g(M)</code>, the training data determines the
+product uniquely but not the individual factors.</p>
+<h3 id="doe-science-domains">DOE Science Domains<a class="headerlink" href="#doe-science-domains" title="Permanent link">&para;</a></h3>
+<p><strong>Model 5: Radioactive Decay Chain</strong> (TyReal(4), 2 learnable scalars).
+Four-isotope chain A→B→C→D with unknown branching ratios. Both
+recovered exactly: f_branch = 0.7000, g_branch = 0.8500 (error &lt; 10⁻⁶).
+Mass conservation (A+B+C+D = 1.0) holds to machine precision at every
+timestep — a structural guarantee of the update equations.</p>
+<p><strong>Model 6: Battery Capacity Degradation</strong> (TyReal(3), two 321-parameter MLPs).
+Solid-electrolyte interphase (SEI) growth coupled with capacity fade.
+Two unknown functions: SEI growth rate (true: parabolic law
+<code>1/√(0.1+s)</code>) and capacity fade rate (true: <code>Q^0.5</code>). Symbolic
+regression identifies the parabolic growth law. Verification confirms
+Q is monotonically decreasing and SEI is monotonically increasing
+across all trajectories.</p>
+<p><strong>Model 7: Chemical Kinetics</strong> (TyReal(3), 1153-parameter MLP).
+Reversible reaction A⇌B with unknown temperature-dependent forward
+rate. The MLP learns <code>k_fwd(T)</code> from 10 trajectories at different
+temperatures. Symbolic regression recovers the Arrhenius form with
+A = 2.006, E = 4.987 (true: 2.0, 5.0 — errors of 0.3% and 0.3%).
+Mass conservation (A+B = 1.0) verified to machine precision.
+Equilibrium ratios A/B match the theoretical prediction
+k_rev/k_fwd(T) at all temperatures.</p>
+<h3 id="end-to-end-ecosim-decomposition-surrogate">End-to-End: EcoSIM Decomposition Surrogate<a class="headerlink" href="#end-to-end-ecosim-decomposition-surrogate" title="Permanent link">&para;</a></h3>
+<p><strong>Model 8: EcoSIM SOM Decomposition</strong> (TyReal(7), two 1153-parameter MLPs).
+The capstone demonstration. The LLM agent read the EcoSIM land model's
+Fortran source code (<code>MicBGCMod.F90</code>, subroutine
+<code>SolidOMDecomposition</code>, lines 1335–1629; <code>MicrobMathFuncMod.F90</code>,
+subroutine <code>MicrobPhysTempFun</code>, lines 13–30) and extracted the soil
+organic matter decomposition kernel.</p>
+<p>The model has five carbon pools (four solid substrates — protein,
+carbohydrate, cellulose, lignin — plus dissolved organic matter),
+Monod substrate limitation, dissolved organic carbon product
+inhibition, and separable temperature/water-stress environmental
+response. The agent identified the known structure (4-substrate
+decomposition rates, Monod kinetics <code>DFNS = C/(C+Km)</code>, product
+inhibition <code>OQCI = 1/(1+C_DOM/Ki)</code>, mass-conserving transfer of
+decomposed solid C to DOM) and the unknown components (the
+temperature sensitivity function <code>TSensGrowth</code> and water stress
+function <code>WatStressMicb</code>).</p>
+<p>The surrogate trained on 9 trajectories (3 temperatures × 3 water
+potentials) for 400 epochs. Mass conservation across all five carbon
+pools verified to &lt; 10⁻⁵ relative error. All pools remain
+non-negative. The decompiled surrogate cites the original Fortran
+source line numbers.</p>
+<h3 id="comparison-cajal-vs-pinn-vs-black-box">Comparison: Cajal vs. PINN vs. Black-Box<a class="headerlink" href="#comparison-cajal-vs-pinn-vs-black-box" title="Permanent link">&para;</a></h3>
+<p>To quantify the advantage of hard structural constraints, we trained
+three approaches on identical data from the chemical kinetics model
+(reversible reaction A⇌B, 10 trajectories, 500 epochs each):</p>
+<ol>
+<li><strong>Black-box MLP</strong>: 3→64→64→2 network (4,354 parameters). Learns
+   entire dynamics with no physics.</li>
+<li><strong>PINN</strong>: Same architecture, with a soft penalty
+   λ·(A+B−1)² added to the loss (λ=10).</li>
+<li><strong>Cajal surrogate</strong>: Reaction structure fixed; only k_fwd(T) learned
+   as a 1→32→32→1 MLP (1,153 parameters).</li>
+</ol>
+<h4 id="interpolation-training-temperatures-t-3-15">Interpolation (training temperatures, T ∈ [3, 15])<a class="headerlink" href="#interpolation-training-temperatures-t-3-15" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Trajectory MSE</th>
+<th>Max conservation error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Black-box</td>
+<td>6.2 × 10⁻³</td>
+<td>5.4 × 10⁻³</td>
+</tr>
+<tr>
+<td>PINN (λ=10)</td>
+<td>7.7 × 10⁻³</td>
+<td>6.5 × 10⁻³</td>
+</tr>
+<tr>
+<td><strong>Cajal</strong></td>
+<td><strong>9.3 × 10⁻⁷</strong></td>
+<td><strong>1.6 × 10⁻⁷</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The Cajal surrogate achieves 6,700× lower trajectory error and
+conservation error at machine precision. The PINN is slightly <em>worse</em>
+than the black-box because the conservation penalty competes with the
+data-fitting loss.</p>
+<h4 id="extrapolation-unseen-temperatures-t-15-20-180-250">Extrapolation (unseen temperatures, T ∈ {1.5, 2.0, 18.0, 25.0})<a class="headerlink" href="#extrapolation-unseen-temperatures-t-15-20-180-250" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Trajectory MSE</th>
+<th>Max conservation error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Black-box</td>
+<td>3.1 × 10⁻²</td>
+<td>9.8 × 10⁻²</td>
+</tr>
+<tr>
+<td>PINN (λ=10)</td>
+<td>5.0 × 10⁻²</td>
+<td>1.7 × 10⁻¹</td>
+</tr>
+<tr>
+<td><strong>Cajal</strong></td>
+<td><strong>1.3 × 10⁻²</strong></td>
+<td><strong>5.2 × 10⁻⁸</strong></td>
+</tr>
+</tbody>
+</table>
+<p>On extrapolation, the PINN degrades more than the black-box — the
+conservation penalty, calibrated for the training distribution,
+actively harms predictions at new temperatures. The Cajal surrogate
+maintains exact conservation regardless of temperature, and
+extrapolates 2.5× better on trajectory error because it only needs
+to extrapolate the rate function k_fwd(T), not the entire dynamics.</p>
+<h4 id="sample-efficiency">Sample efficiency<a class="headerlink" href="#sample-efficiency" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Training trajectories</th>
+<th>Black-box MSE</th>
+<th>Cajal MSE</th>
+<th>Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>8.6 × 10⁻²</td>
+<td>1.2 × 10⁻³</td>
+<td>72×</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2.2 × 10⁻²</td>
+<td>1.8 × 10⁻³</td>
+<td>12×</td>
+</tr>
+<tr>
+<td>5</td>
+<td>7.7 × 10⁻³</td>
+<td>2.2 × 10⁻⁴</td>
+<td>35×</td>
+</tr>
+<tr>
+<td>10</td>
+<td>6.2 × 10⁻³</td>
+<td>5.8 × 10⁻⁶</td>
+<td>1,070×</td>
+</tr>
+</tbody>
+</table>
+<p>With only 2 training trajectories, the Cajal surrogate already
+achieves lower error than the black-box with 10. The structural
+constraints dramatically reduce the effective hypothesis space,
+making learning data-efficient.</p>
+<h4 id="interpretability">Interpretability<a class="headerlink" href="#interpretability" title="Permanent link">&para;</a></h4>
+<p>The black-box and PINN produce 4,354-parameter networks with no
+scientific interpretation. The Cajal surrogate decompiles to:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>k_fwd(T) = 1.97 · exp(-4.86 / T)
+</code></pre></div>
+<p>matching the ground truth k_fwd(T) = 2.0 · exp(-5.0/T) within 2%.
+This is a publishable scientific finding, not a black-box prediction.</p>
+<h2 id="discussion">Discussion<a class="headerlink" href="#discussion" title="Permanent link">&para;</a></h2>
+<h3 id="what-the-pipeline-preserves">What the Pipeline Preserves<a class="headerlink" href="#what-the-pipeline-preserves" title="Permanent link">&para;</a></h3>
+<p>The Cajal compilation preserves program structure exactly: if the
+source program conserves mass, the compiled neural network conserves
+mass. This is qualitatively different from physics-informed neural
+networks, where conservation is a soft loss term that trades off
+against data fit. In our approach, conservation holds for any
+parameter values — including randomly initialized, untrained weights.</p>
+<h3 id="what-the-pipeline-cannot-do">What the Pipeline Cannot Do<a class="headerlink" href="#what-the-pipeline-cannot-do" title="Permanent link">&para;</a></h3>
+<p>The pipeline requires the user (or agent) to decompose the model into
+known structure and unknown functions. This decomposition is a
+scientific judgment, not an automated step. The agent can suggest
+decompositions based on common patterns (Arrhenius rates, Michaelis-Menten
+kinetics), but the scientist must validate them.</p>
+<p>The current Cajal iteration is serial and operates on individual
+state vectors, not batches. This makes GPU acceleration inefficient
+for the small models demonstrated here. Compiling Cajal iteration
+directly to batched <code>nn.RNN</code> modules would resolve this and is
+planned future work.</p>
+<p>Symbolic regression via grid search over candidate functional forms
+is limited to forms the user anticipates. Integration with libraries
+like PySR would enable open-ended symbolic search.</p>
+<h3 id="synthetic-data-as-validation-strategy">Synthetic Data as Validation Strategy<a class="headerlink" href="#synthetic-data-as-validation-strategy" title="Permanent link">&para;</a></h3>
+<p>All training data in this work is synthetic — generated from known
+ground truth equations, not from running the actual EcoSIM simulation
+or from observational measurements. This is deliberate. For a methods
+paper, synthetic data is the strongest validation: because we know the
+true functional forms, we can measure recovery accuracy and confirm
+that the pipeline works correctly. With real simulation output, we
+could verify trajectory fit but not whether the decompiled expressions
+are scientifically correct.</p>
+<p>The EcoSIM surrogate (Model 8) uses equations extracted from the
+Fortran source and reimplemented in Python, not output from running
+the actual Fortran code. The reimplementation faithfully reproduces
+the mathematical formulas (temperature sensitivity, water stress,
+Monod kinetics, product inhibition) but does not capture numerical
+discretization artifacts, compiler-specific floating-point behavior,
+or interactions with other EcoSIM modules. Training against actual
+EcoSIM simulation output is straightforward future work that would
+validate the surrogate against the full simulation, including effects
+our reimplementation omits.</p>
+<p>A natural next step beyond simulation output is training on
+observational data (e.g., FLUXNET eddy covariance measurements or
+the Soil Respiration Database). In that setting, the decompiled
+expressions would represent empirical response functions inferred
+from field data — a scientifically novel finding rather than recovery
+of a known equation. The Cajal structural constraints (mass
+conservation, positivity) would remain guaranteed regardless of the
+data source.</p>
+<h3 id="identifiability">Identifiability<a class="headerlink" href="#identifiability" title="Permanent link">&para;</a></h3>
+<p>Models 4 and 8 (CENTURY-Lite and EcoSIM) exhibit a fundamental
+identifiability limitation when learning separable environmental
+modifiers <code>f(T)·g(M)</code>. The training data determines the product
+<code>f·g</code> uniquely, but not the individual factors. The learned functions
+have correct <em>shapes</em> (the symbolic forms are correctly identified)
+but offset <em>scales</em>. Additional constraints — such as normalization
+(<code>f(T_ref) = 1</code>) or independent measurements of one factor — would
+resolve this. This is a property of the scientific problem, not a
+limitation of the method.</p>
+<h3 id="agent-assisted-prototype-development">Agent-Assisted Prototype Development<a class="headerlink" href="#agent-assisted-prototype-development" title="Permanent link">&para;</a></h3>
+<p>An LLM coding agent (Claude Code) was used throughout development of
+the prototype — type system extension, eight working models, test
+suite, Jupyter notebooks, documentation site, and CI/CD. This serves
+as a concrete demonstration of the Layer 1 workflow. The agent read
+Fortran source code, identified decomposition kernels, generated
+Cajal programs, debugged runtime errors (tensor shape mismatches,
+device placement issues), and iterated on performance (discovering
+that CPU is ~10× faster than Apple MPS for these small sequential
+workloads).</p>
+<p>This is not a claim that the agent replaces scientific expertise.
+The user guided every major decision: which models to build, which
+DOE domains to target, how to decompose known vs. unknown components.
+The agent handled the mechanical work — reading Fortran, writing
+PyTorch, managing git, deploying documentation — while the scientific
+contribution remains the architecture, experiments, and resulting
+surrogates rather than the speed of implementation.</p>
+<h2 id="related-work">Related Work<a class="headerlink" href="#related-work" title="Permanent link">&para;</a></h2>
+<p><strong>Physics-informed neural networks</strong> (Raissi et al., 2019) encode
+physical laws as soft penalty terms in the loss function. Our approach
+encodes them as hard program structure, providing guarantees rather
+than incentives. Our controlled comparison (Section "Comparison")
+demonstrates a concrete failure mode of the PINN approach: the
+conservation penalty, calibrated for the training distribution,
+actively degrades extrapolation to unseen conditions. This is not a
+tuning issue — it is inherent to soft constraints that trade off
+against data fit.</p>
+<p><strong>Neural ODEs</strong> (Chen et al., 2018) parameterize the entire ODE
+right-hand side as a neural network. We parameterize only the
+<em>unknown</em> parts, fixing known structure. This dramatically reduces
+the hypothesis space and guarantees invariant preservation.</p>
+<p><strong>Symbolic regression</strong> (Cranmer et al., 2020; PySR) discovers
+mathematical expressions from data. We use it as a post-training
+decompilation step, extracting interpretable expressions from trained
+neural sub-expressions within a structured program.</p>
+<p><strong>Neuro-symbolic programming</strong> (Chaudhuri et al., 2021) broadly
+combines neural and symbolic computation. Cajal (Velez-Ginorio et al.,
+2025) is distinctive in providing an <em>exact</em> compilation from programs
+to neural networks, not an approximation.</p>
+<p><strong>AI for scientific simulation</strong> (Kasim et al., 2022; Karniadakis
+et al., 2021) has produced many surrogate modeling approaches.
+Our contribution is the three-layer architecture connecting LLM
+agents, neuro-symbolic compilation, and formal verification into a
+single pipeline.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>Trusty Neurocoder demonstrates that LLM coding agents and
+neuro-symbolic abstract machines can work together to produce
+verified scientific surrogates from real simulation source code.
+The agent handles code comprehension and generation; the NSAM
+provides structural correctness; symbolic regression closes the loop
+back to interpretable science. A controlled comparison against PINNs
+confirms that hard structural constraints outperform soft penalties
+on conservation, extrapolation, sample efficiency, and
+interpretability — and that the gap widens, not narrows, as
+conditions move away from the training distribution.</p>
+<p>Eight working demonstrations across DOE science domains, including
+an end-to-end extraction from the EcoSIM land model's Fortran source,
+show the approach is practical today. Our contributions to the Cajal
+implementation — the <code>TyReal(n)</code> type extension and four soundness
+fixes — strengthen the theoretical foundation on which the pipeline
+rests.</p>
+<p>Code, notebooks, and documentation: https://github.com/cmungall/trusty-neurocoder</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<p>Chen, R. T. Q., Rubanova, Y., Bettencourt, J., &amp; Duvenaud, D. (2018).
+Neural ordinary differential equations. NeurIPS.</p>
+<p>Chaudhuri, S., et al. (2021). Neurosymbolic programming. Foundations
+and Trends in Programming Languages.</p>
+<p>Cranmer, M., et al. (2020). Discovering symbolic models from deep
+learning with inductive biases. NeurIPS.</p>
+<p>Karniadakis, G. E., et al. (2021). Physics-informed machine learning.
+Nature Reviews Physics, 3(6), 422–440.</p>
+<p>Kasim, M. F., et al. (2022). Building high accuracy emulators for
+scientific simulations with deep neural architecture search. Machine
+Learning: Science and Technology.</p>
+<p>Raissi, M., Perdikaris, P., &amp; Karniadakis, G. E. (2019).
+Physics-informed neural networks. Journal of Computational Physics,
+378, 686–707.</p>
+<p>Velez-Ginorio, J., Amin, N., Kording, K., &amp; Zdancewic, S. (2025).
+Compiling to recurrent neurons. arXiv:2511.14953.</p>
+<p>Velez-Ginorio, J., Amin, N., Kording, K., &amp; Zdancewic, S. (2026).
+Compiling to linear neurons. POPL.</p>
+<h2 id="appendix-a-code-listings">Appendix A: Code Listings<a class="headerlink" href="#appendix-a-code-listings" title="Permanent link">&para;</a></h2>
+<h3 id="a1-the-cajal-program-shared-by-all-models">A.1 The Cajal Program (shared by all models)<a class="headerlink" href="#a1-the-cajal-program-shared-by-all-models" title="Permanent link">&para;</a></h3>
+<p>Every model uses the same four-line Cajal program — only the
+environment bindings change:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.syntax</span><span class="w"> </span><span class="kn">import</span> <span class="n">TmIter</span><span class="p">,</span> <span class="n">TmVar</span><span class="p">,</span> <span class="n">TmApp</span><span class="p">,</span> <span class="n">TyNat</span><span class="p">,</span> <span class="n">TyReal</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.compiling</span><span class="w"> </span><span class="kn">import</span> <span class="nb">compile</span><span class="p">,</span> <span class="n">TypedTensor</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">program</span> <span class="o">=</span> <span class="n">TmIter</span><span class="p">(</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">TmVar</span><span class="p">(</span><span class="s2">&quot;s0&quot;</span><span class="p">),</span>                          <span class="c1"># initial state</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="s2">&quot;s&quot;</span><span class="p">,</span>                                  <span class="c1"># iterator variable</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">TmApp</span><span class="p">(</span><span class="n">TmVar</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">),</span> <span class="n">TmVar</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">)),</span>        <span class="c1"># step: apply f to state</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">TmVar</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">),</span>                           <span class="c1"># number of iterations</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">compiled</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">program</span><span class="p">)</span>
+</code></pre></div>
+<p>This compiles to a recurrent neural network: the step function <code>f</code> is
+applied <code>n</code> times to the initial state <code>s0</code>. The step function is
+injected from the environment and can contain learnable PyTorch
+modules.</p>
+<h3 id="a2-ecosim-fortran-source-extracted-by-the-agent">A.2 EcoSIM Fortran Source (extracted by the agent)<a class="headerlink" href="#a2-ecosim-fortran-source-extracted-by-the-agent" title="Permanent link">&para;</a></h3>
+<p>The temperature response function, from <code>MicrobMathFuncMod.F90:13-30</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">subroutine </span><span class="n">MicrobPhysTempFun</span><span class="p">(</span><span class="n">TKSO</span><span class="p">,</span><span class="w"> </span><span class="n">TSensGrowth</span><span class="p">,</span><span class="w"> </span><span class="n">TSensMaintR</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="k">implicit none</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">  </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">TKSO</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="kd">::</span><span class="w"> </span><span class="n">TSensGrowth</span><span class="p">,</span><span class="w"> </span><span class="n">TSensMaintR</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">RTK</span><span class="p">,</span><span class="w"> </span><span class="n">STK</span><span class="p">,</span><span class="w"> </span><span class="n">ACTV</span><span class="p">,</span><span class="w"> </span><span class="n">ACTVM</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="n">RTK</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">RGASC</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TKSO</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="n">STK</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">71</span><span class="mf">0.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TKSO</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="n">ACTV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">EXP</span><span class="p">((</span><span class="mi">197500</span><span class="o">-</span><span class="n">STK</span><span class="p">)</span><span class="o">/</span><span class="n">RTK</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">EXP</span><span class="p">((</span><span class="n">STK</span><span class="o">-</span><span class="mi">222500</span><span class="p">)</span><span class="o">/</span><span class="n">RTK</span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="n">TSensGrowth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">EXP</span><span class="p">(</span><span class="mi">2</span><span class="mf">5.229</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">62500</span><span class="o">/</span><span class="n">RTK</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">ACTV</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">end subroutine</span>
+</code></pre></div>
+<p>The decomposition rate, from <code>MicBGCMod.F90:1470-1471</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">RHydlysSolidOM</span><span class="p">(</span><span class="n">ielmc</span><span class="p">,</span><span class="n">M</span><span class="p">,</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SolidOMAct</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">AZMAX1</span><span class="p">(</span><span class="n">AMIN1</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="n">SPOSC</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ROQC4HeterMicActCmpK</span><span class="p">(</span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DFNS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">OQCI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TSensGrowth</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="o">/</span><span class="w"> </span><span class="n">BulkSOMC</span><span class="p">(</span><span class="n">K</span><span class="p">)))</span>
+</code></pre></div>
+<h3 id="a3-cajal-surrogate-generated-by-the-agent">A.3 Cajal Surrogate (generated by the agent)<a class="headerlink" href="#a3-cajal-surrogate-generated-by-the-agent" title="Permanent link">&para;</a></h3>
+<p>The learnable update module for the EcoSIM surrogate:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">EcoSIMDecompUpdate</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_rates</span><span class="p">,</span> <span class="n">km</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">f_temp_mlp</span><span class="p">,</span> <span class="n">f_water_mlp</span><span class="p">):</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">k_rates</span> <span class="o">=</span> <span class="n">k_rates</span>     <span class="c1"># [k_prot, k_carb, k_cell, k_lign]</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">km</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ki</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="n">km</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">dt</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">f_temp</span> <span class="o">=</span> <span class="n">f_temp_mlp</span>   <span class="c1"># learnable: TSensGrowth(T)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">f_water</span> <span class="o">=</span> <span class="n">f_water_mlp</span> <span class="c1"># learnable: WatStressMicb(PSI)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="n">c_prot</span><span class="p">,</span> <span class="n">c_carb</span><span class="p">,</span> <span class="n">c_cell</span><span class="p">,</span> <span class="n">c_lign</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="n">c_dom</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">PSI</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">state</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">state</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        <span class="c1"># LEARNED: environmental response</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        <span class="n">f_env</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_temp</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_water</span><span class="p">(</span><span class="n">PSI</span><span class="p">)</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>        <span class="c1"># KNOWN: Monod substrate limitation (from EcoSIM)</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        <span class="n">c_total</span> <span class="o">=</span> <span class="n">c_prot</span> <span class="o">+</span> <span class="n">c_carb</span> <span class="o">+</span> <span class="n">c_cell</span> <span class="o">+</span> <span class="n">c_lign</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>        <span class="n">dfns</span> <span class="o">=</span> <span class="n">c_total</span> <span class="o">/</span> <span class="p">(</span><span class="n">c_total</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">km</span><span class="p">)</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        <span class="c1"># KNOWN: DOC product inhibition (from EcoSIM)</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>        <span class="n">oqci</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">c_dom</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ki</span><span class="p">)</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        <span class="c1"># KNOWN: mass-conserving decomposition</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>        <span class="n">rate</span> <span class="o">=</span> <span class="n">f_env</span> <span class="o">*</span> <span class="n">dfns</span> <span class="o">*</span> <span class="n">oqci</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_rates</span> <span class="o">*</span> <span class="n">rate</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>        <span class="n">new_solid</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="n">d</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>        <span class="n">new_dom</span> <span class="o">=</span> <span class="n">c_dom</span> <span class="o">+</span> <span class="n">d</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        <span class="k">return</span> <span class="n">TypedTensor</span><span class="p">(</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>            <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">new_solid</span><span class="p">,</span> <span class="n">new_dom</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>                       <span class="n">T</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">PSI</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)]),</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>            <span class="n">state</span><span class="o">.</span><span class="n">ty</span>
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>        <span class="p">)</span>
+</code></pre></div>
+<p>The environment binding connects the Cajal program to the update module:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">s0</span> <span class="o">=</span> <span class="n">TypedTensor</span><span class="p">(</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">C0_PROT</span><span class="p">,</span> <span class="n">C0_CARB</span><span class="p">,</span> <span class="n">C0_CELL</span><span class="p">,</span> <span class="n">C0_LIGN</span><span class="p">,</span> <span class="n">C0_DOM</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">PSI</span><span class="p">]),</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">TyReal</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">result</span> <span class="o">=</span> <span class="n">compiled</span><span class="p">({</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="s2">&quot;s0&quot;</span><span class="p">:</span> <span class="n">s0</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">update_fn</span><span class="p">(</span><span class="n">s</span><span class="p">),</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="n">TypedTensor</span><span class="p">(</span><span class="n">n_onehot</span><span class="p">,</span> <span class="n">TyNat</span><span class="p">()),</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">})</span>
+</code></pre></div>
+<h3 id="a4-architectural-constraint-example">A.4 Architectural Constraint Example<a class="headerlink" href="#a4-architectural-constraint-example" title="Permanent link">&para;</a></h3>
+<p>The sigmoid and softplus output activations guarantee physical
+constraints for <em>any</em> learned weights:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TempResponseMLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Output is strictly positive for all inputs.&quot;&quot;&quot;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Softplus</span><span class="p">(),</span>  <span class="c1"># guarantees output &gt; 0</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="p">)</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="k">class</span><span class="w"> </span><span class="nc">WaterStressMLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Output is bounded to [0, 1] for all inputs.&quot;&quot;&quot;</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>   <span class="c1"># guarantees 0 ≤ output ≤ 1</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>        <span class="p">)</span>
+</code></pre></div>
+<p>A randomly initialized, untrained model already satisfies all
+physical constraints. Training improves accuracy without ever
+risking constraint violation.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
