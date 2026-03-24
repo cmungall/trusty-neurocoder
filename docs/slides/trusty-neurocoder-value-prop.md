@@ -150,6 +150,33 @@ This repo is currently a proof of concept for that pipeline.
 
 ---
 
+## Architecture: From Simulator to Structured Surrogate
+
+```text
+Large scientific codebase
+    ↓
+Extract one kernel / mini-module
+    ↓
+step(state, params, forcing)
+    ↓
+Represent the known scaffold symbolically
+    ├─ variable roles stay explicit
+    ├─ known physics stays fixed
+    └─ unknown pieces become learnable "holes"
+    ↓
+Compile to NSAM / differentiable module
+    ↓
+Train on simulator traces, observations, or both
+    ↓
+Fast, calibrated, more interpretable local module
+```
+
+This is the intended architecture boundary:
+
+**learn the uncertain part inside a known scientific scaffold**
+
+---
+
 ## What Gets Learned?
 
 Three realistic modes:
@@ -167,6 +194,36 @@ Three realistic modes:
    - replace an expensive local update with a cheaper learned approximation
 
 The key constraint is that learning happens **inside** a known scientific scaffold.
+
+---
+
+## Worked Example: EcoSIM-Style Soil Carbon Kernel
+
+```python
+decay_fast = k_fast * f_theta(moisture) * state.fast
+decay_slow = k_slow * temp_response(temp) * state.slow
+```
+
+Interpretation:
+
+- `state.fast`, `state.slow`, `state.atm` are carbon pools
+- `temp_response(temp)` is known or trusted
+- `f_theta(moisture)` is uncertain and learnable
+- pool-to-pool transfers and mass balance stay fixed
+
+Training options:
+
+- fit `f_theta` from expensive simulator traces
+- fit `f_theta` or `k_fast` from field observations
+- do both: simulator as prior, observations as correction
+
+What is preserved:
+
+- variable meanings
+- conservation structure
+- the module boundary
+
+Today the repo demonstrates the mechanics on toy update loops; this is the kind of real kernel it is aiming at.
 
 ---
 
