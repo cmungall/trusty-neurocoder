@@ -6,8 +6,10 @@
 - **Other Berkeley Lab PI**: TBD
 - **Partner Institution (IHE)**: Harvard University
 - **Partner Institution PI**: Nada Amin
-- **Industry Partner**: TBD
-- **Proposal Title**: Trusty Neurocode: Neuro-Symbolic Agents for Verified Scientific Code Generation
+- **Partner Institution (IHE)**: University of Alabama, Birmingham
+- **Partner Institution PI**: Will Byrd
+- **Industry Partner**: N/A
+- **Proposal Title**: Neuro-Symbolic Autoresearch Agents for Scientific Code Development
 
 ## RFA Focus Area
 
