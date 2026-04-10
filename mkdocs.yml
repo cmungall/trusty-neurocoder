@@ -38,7 +38,6 @@ nav:
   - Paper Draft: paper/draft.md
   - Slides: slides/index.md
   - Agent Workflow: agent-workflow.md
-  - Proposal: proposal.md
   - Notebooks:
     - Foundations:
       - "01 - Cajal: Programs as Neural Networks": notebooks/01_cajal_intro.ipynb
@@ -50,3 +49,5 @@ nav:
       - "05 - Radioactive Decay Chain": notebooks/05_decay_chain.ipynb
       - "06 - Battery Degradation": notebooks/06_battery_degradation.ipynb
       - "07 - Chemical Kinetics": notebooks/07_chemical_kinetics.ipynb
+      - "08 - EcoSIM Kernel Case Study": notebooks/08_ecosim_kernel_case_study.ipynb
+      - "09 - PFLOTRAN Relative Permeability": notebooks/09_pflotran_relative_permeability.ipynb

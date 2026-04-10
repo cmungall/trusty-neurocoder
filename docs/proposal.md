@@ -1,13 +1,6 @@
-## Administrative
+# NSAM4Sci
 
-- **Lead Institution**: Lawrence Berkeley National Laboratory
 - **Focus Area**: 18C: Neuro-Symbolic Agents for Code Development (ASCR)
-- **Lead PI**: Chris Mungall / BSA
-- **Other Berkeley Lab PI**: TBD
-- **Partner Institution (IHE)**: Harvard University
-- **Partner Institution PI**: Nada Amin
-- **Industry Partner**: TBD
-- **Proposal Title**: Trusty Neurocode: Neuro-Symbolic Agents for Verified Scientific Code Generation
 
 ## RFA Focus Area
 
@@ -15,33 +8,206 @@
 > capabilities with symbolic reasoning to improve code generation, algorithm selection, and
 > performance prediction, specifically for scientific and engineering codes.
 
-## Proposal Summary (~200 words)
+## Background (1 page)
 
-Scientific computing relies on large, complex codebases where correctness is
-paramount but development is slow, verification is manual, and surrogate models
-sacrifice interpretability for speed. We propose Trusty Neurocode, a framework
-that combines LLM-based agentic workflows with Neuro-Symbolic Abstract
-Machines (NSAMs) to enable verified scientific code generation, optimization, and
-surrogate construction.
+> Background/Introduction (approximately 1 page): Explain the
+> importance and relevance of the proposed work and clearly articulate
+> which aspect of the chosen challenge will be addressed and
+> solved. Set the proposed research in perspective to other efforts in
+> the field. Highlight novel or unique aspects of the proposed
+> work. Cite relevant literature
 
-NSAMs are neural networks structurally equivalent to programming language
-interpreters, enabling principled compilation of symbolic programs into neural
-architectures and decompilation back to interpretable code. LLM agents bridge
-the gap between real-world scientific codebases and the declarative
-representations NSAMs require, providing code comprehension, translation, and
-orchestration capabilities.
+Scientific AI systems increasingly interact with software through retrieval,
+tool use, and agentic search, but they still treat most scientific code as
+unstructured text or opaque executables. We propose a broader view: scientific
+codes, workflows, and formal specifications should be treated as first-class
+data objects that can be extracted, indexed, reasoned over, and selectively
+compiled into learnable models. Longer term, these artifacts can serve as part
+of the symbolic substrate for future scientific AI systems and world models. In
+Phase I, the project will deliver an agentic pipeline that extracts restricted
+symbolic representations from real scientific software and uses them for
+constrained learning, verification, and code generation.
 
-We will demonstrate three modes of this framework on public DOE-relevant codes:
-(1) verified surrogate model generation from the EcoSIM biogeochemistry
-simulation, where known physics is preserved as fixed structure while uncertain
-process terms become learnable and are decompiled to interpretable expressions;
-(2) algorithm selection and code optimization on ECP proxy applications with
-verified correctness; and (3) specification-driven program synthesis of NAS
-Parallel Benchmark kernels with formal verification against known reference
-outputs. Each use case exercises a distinct capability of the neuro-symbolic
-agent stack across different languages, scientific domains, and problem types,
-demonstrating generalizability. Phase II will scale the framework to full-scale
-DOE simulation codes and integrate with the American Science Cloud.
+The technical core of NSAM4Sci combines three ingredients. First, LLM agents
+read heterogeneous scientific artifacts such as Fortran kernels, workflow
+definitions, and benchmark codes, and translate them into a restricted
+intermediate representation (IR). Second, selected IR fragments are mapped into
+neuro-symbolic backends such as Neuro-Symbolic Abstract Machines (NSAMs),
+allowing fixed symbolic structure to remain explicit while uncertain components
+become learnable. Third, formal methods and semantic grounding layers,
+including typed IRs, ontologies, and proof-oriented systems such as Lean,
+provide a path to machine-checkable constraints, equivalence checks, and
+interpretability. The novelty lies in the explicit treatment of code and
+workflows as structured semantic objects that can support both learning and
+verification.
+
+One concrete technical foundation for this approach is Cajal, a typed
+functional language developed by Amin and collaborators whose programs compile
+exactly to recurrent neural networks. In Phase I, Cajal serves as an initial
+proof point for mapping extracted symbolic structure into differentiable
+representations, while the broader project remains centered on the IR-first
+pipeline rather than on any single backend formalism.
+
+Phase I will demonstrate this framework on three classes of public DOE-relevant
+artifacts: (1) scientific kernels, where known update structure is preserved
+and uncertain components are learned as constrained surrogates; (2) scientific
+workflows, where tasks, dependencies, resources, and retry logic are extracted
+into a common IR for analysis, repair, and policy learning; and (3) program
+logic tasks such as optimization, translation, or synthesis, where extracted
+symbolic structure supports verified rewrites and interpretable decision rules.
+Together, these artifact classes demonstrate a unified neuro-symbolic approach
+to scientific code understanding, constrained learning, and trustworthy code
+transformation under Topic 18C.
+
+## Project Objectives (approximately 0.5 page)
+
+>> Provide a clear and concise statement of the specific objectives of
+>> the proposed project. Address how the objectives align with the
+>> chosen focus topic and lead to an AI advantage
+
+The objectives of NSAM4Sci are to establish a reusable pipeline for treating
+code and workflows as structured scientific data, rather than only as text for
+retrieval or opaque executables for emulation. The AI advantage
+comes from combining agentic extraction with symbolic structure, constrained
+learning, and verification-aware reasoning.
+
+* Develop a restricted intermediate representation (IR) for scientific code, workflows, and related semantic artifacts, sufficient to capture typed interfaces, dependencies, guarded control flow, and selected invariants.
+* Build agentic methods to extract this symbolic core from public DOE-relevant artifacts, and index the resulting representations in AmSC-facing catalogs so that code can be treated as data.
+* Map selected IR fragments into neuro-symbolic backends such as NSAMs, while also supporting formal backends such as Lean for checking contracts, invariants, and equivalence conditions.
+* Demonstrate the framework on multiple artifact types, including a scientific-kernel learning case, a workflow extraction/analysis case, and a verified optimization, synthesis, or translation case.
+* Deliver a Phase II-ready software and evaluation package showing that the same IR-first architecture can support code understanding, constrained learning, and trustworthy code transformation across more than one scientific modality.
+
+
+## Proposed Research and Methods (approximately 1.5 pages)
+
+>> Provide a clear research plan for a 9-month project and describe
+>> the proposed activities and methods. Include enough technical
+>> details to evaluate the impact of the proposed activity. For each
+>> activity, indicate the responsibility of the key investigator(s)
+>> and the associated budget. If the proposed application is building
+>> on an existing, currently funded DOE project, describe how the
+>> submitted application leverages that work and is distinct from the
+>> existing funding
+
+The project is organized around four tightly coupled activities. The unifying
+method is an IR-first pipeline in which agents extract symbolic structure from
+real software artifacts, selected IR fragments are mapped to learning or formal
+backends, and the resulting outputs are evaluated for both task performance and
+constraint preservation.
+
+### Activity 1: Restricted IR design and artifact extraction
+
+We will define a Phase I restricted IR capable of representing the semantic
+core of three artifact classes: scientific kernels, scientific workflows, and
+program-logic tasks such as optimization or translation. The IR will capture
+typed interfaces, dependencies, guarded control flow, selected invariants, and
+annotations suitable for downstream learning or verification. On the ingestion
+side, we will build agentic front ends that read public DOE-relevant artifacts
+and translate them into this IR, using available type information, ontologies,
+and code structure as semantic anchors rather than relying on text-only
+summaries.
+
+This activity is a shared task across the project team, covering IR design,
+corpus selection, extraction engineering, and catalog integration.
+
+### Activity 2: Backend mappings for learning and verification
+
+Once extracted, IR fragments will be routed to the backend most appropriate for
+their structure. Fragments that resemble compact typed programs with learnable
+sub-expressions will be mapped to NSAM-like backends, preserving fixed symbolic
+scaffolding while allowing uncertain components to be learned. Other fragments
+may map more naturally to non-recurrent differentiable architectures, including
+transformer- or graph-oriented models, particularly for workflows, code logic,
+or relational structure that is not naturally expressed as a recurrent state
+update. Fragments that primarily encode contracts, dependencies, or
+transformation rules will be mapped to formal or proof-oriented backends,
+including Lean-oriented proof obligations, type checks, and equivalence checks.
+This separation is important: the project does not assume that every extracted
+artifact should become the same kind of differentiable model. Instead, it
+treats architecture selection, learning, and verification as complementary
+capabilities over a shared semantic representation.
+
+This activity is a shared task across the project team, covering backend
+selection, architecture matching, neuro-symbolic mappings, proof-oriented
+integrations, and end-to-end agentic orchestration.
+
+### Activity 3: Three proof-of-concept demonstrations
+
+The technical claims will be evaluated through three demonstrations drawn from
+different artifact classes.
+
+1. Scientific-kernel case. A public scientific kernel, likely Fortran- or
+   C-based, will be extracted into the IR and mapped to a constrained learning
+   backend. The goal is to preserve known structure while learning only
+   selected uncertain components, and to recover interpretable symbolic forms
+   where possible.
+2. Workflow case. A workflow artifact, such as a CWL, WDL, Nextflow, Parsl, or
+   related pipeline, will be extracted into the IR and used for analysis,
+   repair, or augmentation with a learned policy such as resource prediction,
+   retry prediction, or execution-policy ranking.
+3. Program-logic case. A code-logic task such as verified optimization,
+   specification-driven synthesis, or translation will be represented in the IR
+   and passed through a checkable transformation pipeline, producing either an
+   interpretable optimization rule, a verified rewrite, or a constrained
+   translation into a target language.
+
+Across these demonstrations, the project will test whether one IR-first
+architecture can support multiple forms of scientific software reasoning,
+rather than only one application niche.
+
+This activity is a shared task across the project team, covering demonstration
+integration, artifact selection, backend adaptation, and evaluation.
+
+### Activity 4: Evaluation, packaging, and distinction from existing work
+
+Evaluation will combine shared and task-specific metrics. Shared metrics will
+include extraction fidelity, preservation of declared constraints, degree of
+interpretability, portability across artifact types, and the extent to which a
+common IR supports multiple backend realizations. Task-specific metrics will
+include surrogate fidelity for the kernel case, successful linting or repair
+outcomes for the workflow case, and correctness or equivalence measures for
+optimization, synthesis, or translation. All demonstrations will be built on
+public artifacts with reproducible evaluation pathways.
+
+The central technical question is whether one IR-first architecture can support
+multiple forms of scientific software reasoning without collapsing them into a
+single representation or backend. Phase I will therefore evaluate not only
+whether each demonstration works in isolation, but whether extraction,
+constraint preservation, backend selection, and verification can be shared
+across kernels, workflows, and program-logic tasks.
+
+This activity is a shared task across the project team, covering evaluation,
+packaging, dissemination, and Phase II planning.
+
+## Milestones in the Nine Months (approximately 1 page)
+
+>> Provide a list of clearly defined and measurable milestones of the
+>> project:
+
+Months 0-3: Representation and ingestion
+
+* Define the Phase I restricted IR, including typed interfaces, dependencies, selected invariants, and mappings to at least one learning backend and one verification backend.
+* Implement at least two extraction front ends for public DOE-relevant artifacts, for example one code-oriented front end and one workflow-oriented front end.
+* Populate an initial catalog of extracted artifacts and metadata suitable for AmSC-style indexing, demonstrating the "code as data" concept on a small but real corpus.
+* Identify at least two backend families for Phase I evaluation, including one NSAM-style recurrent backend and one alternative structured backend suited to non-kernel artifacts.
+
+Months 3-6: Proof-of-concept demonstrations
+
+* Demonstrate one scientific-kernel case in which extracted symbolic structure is preserved and only selected uncertain components are learned.
+* Demonstrate one workflow case in which a workflow is extracted into the IR and then analyzed, repaired, or augmented with a learned policy such as resource or retry prediction.
+* Demonstrate one code-logic case, such as verified optimization, synthesis, or translation, in which extracted symbolic structure supports interpretable and checkable transformations.
+* Evaluate whether different artifact classes are better served by different backend architectures under the same IR-level semantic interface.
+
+Months 6-9: Consolidation, evaluation, and Phase II packaging
+
+* Evaluate generalizability across the three artifact classes using common metrics: extraction quality, constraint preservation, interpretability, and task-specific performance.
+* Package the extraction, IR, backend mappings, and example applications into a reusable prototype with documentation and reproducible examples.
+* Produce a Phase II plan for scaling from proof-of-concept artifacts to larger DOE codes, workflows, and catalogs, including tighter integration with AmSC and richer formal backends.
+
+
+---
+
+<OLD TEXT BELOW>
 
 ## Working Prototype
 
@@ -141,6 +307,54 @@ verify.
 **Deliverable**: A surrogate that runs orders of magnitude faster than the
 Fortran original, with interpretable and verified symbolic expressions for the
 learned process terms.
+
+### Use Case 1b: Verified Reactive-Transport Surrogates (PFLOTRAN, Fortran)
+
+**Code**: PFLOTRAN, an open-source massively parallel subsurface flow and
+reactive transport code. We target a public benchmark or process model within
+PFLOTRAN, for example a reactive transport problem involving a known transport
+scaffold with uncertain geochemical closure, sorption, or kinetic terms.
+
+**Mode**: Known transport and stoichiometric structure + extracted local closure
+submodels → constrained learning → decompile → verify.
+
+**Baseline and novelty**: If the closure family is already known a priori
+(for example, a Corey curve with two free parameters), then standard inverse
+modeling or nonlinear least squares is the appropriate baseline. The research
+question here is different: can an agent read a real reactive-transport setup,
+identify the uncertain local sub-expressions, preserve the fixed transport and
+species-balance scaffold, learn those terms from trajectory data, and recover
+an interpretable symbolic law rather than a black-box emulator?
+
+**Workflow**:
+
+1. LLM agent reads the relevant PFLOTRAN input deck, benchmark setup, and
+   process configuration, extracting species, reactions, dependencies, and the
+   local constitutive or kinetic terms that are candidates for learning.
+2. Agent translates the algorithmic core into a declarative representation or
+   restricted IR, preserving the advection-diffusion-reaction scaffold and
+   species-balance structure.
+3. NSAM compilation or a related differentiable backend produces a neural
+   architecture in which the known transport and stoichiometric structure are
+   fixed, while uncertain closure terms such as relative permeability,
+   effective sorption laws, kinetic rate expressions, or surface-complexation
+   submodels become learnable.
+4. Train the learnable terms against PFLOTRAN outputs generated from public
+   benchmark or regression problems, using ordinary calibrated parametric forms
+   as explicit baselines when appropriate.
+5. Decompile the learned sub-expressions back to symbolic form, for example an
+   interpretable effective rate law, sorption isotherm, or constitutive
+   closure.
+6. Verify preservation of species balance, non-negativity, and agreement with
+   benchmark outputs or known constraints.
+
+**Deliverable**: A structured surrogate or learned closure model for a
+PFLOTRAN benchmark problem that preserves known transport and reaction
+structure, is evaluated against standard calibration baselines, and yields
+interpretable symbolic expressions for the learned geochemical components. The
+result is not "AI replaces PFLOTRAN," but a demonstrated path for extracting,
+relearning, and checking uncertain constitutive pieces inside a trusted
+reactive-transport code.
 
 ### Use Case 2: Algorithm Selection & Code Optimization (ECP Proxy App, C++/Fortran)
 
@@ -340,81 +554,224 @@ already sufficient for a broad class of scientific ODE surrogates.
 
 ### Example 1: EcoSIM Soil Decomposition (Use Case 1)
 
-**Source (Fortran, simplified from EcoSIM):**
+This example is closer to the actual scientific role of the kernel than a
+single-pool toy decay law. In EcoSIM-like land biogeochemistry, chemically
+distinct litter and soil pools decompose at different rates, and environmental
+response functions modulate those rates as a function of temperature and water
+availability. Errors in these local update rules propagate upward into soil
+carbon residence time, heterotrophic respiration, and long-term land-atmosphere
+carbon feedbacks.
+
+**Source (Fortran, simplified from an EcoSIM-style decomposition kernel):**
 
 ```fortran
-subroutine soil_decomp(C_pool, temp, moisture, dt, C_pool_new)
+subroutine ecosim_decomp(C_solid, C_dom, temp, psi, dt, C_solid_new, C_dom_new)
   implicit none
-  real, intent(in)  :: C_pool, temp, moisture, dt
-  real, intent(out) :: C_pool_new
-  real :: k_decomp, f_temp, f_moist
+  real, intent(in)  :: C_solid(4), C_dom, temp, psi, dt
+  real, intent(out) :: C_solid_new(4), C_dom_new
+  real :: f_temp, f_water, dfns, oqci, rate_mod, dC(4)
+  integer :: i
 
-  ! Temperature response -- Arrhenius-like (KNOWN STRUCTURE)
-  f_temp = exp(-E_act / (R_gas * temp))
+  ! Environmental response functions (EMPIRICAL / PARTLY UNCERTAIN)
+  f_temp  = tsens_growth(temp)
+  f_water = wat_stress(psi)
 
-  ! Moisture response -- empirical (UNCERTAIN, currently hand-tuned)
-  f_moist = moisture / (K_m + moisture)    ! <-- Michaelis-Menten assumption
+  ! Known substrate limitation and product inhibition structure
+  dfns = sum(C_solid) / (sum(C_solid) + K_m)
+  oqci = 1.0 / (1.0 + C_dom / K_i)
+  rate_mod = f_temp * f_water * dfns * oqci
 
-  ! Decomposition rate
-  k_decomp = k_base * f_temp * f_moist
+  ! Pool-specific turnover rates are known
+  do i = 1, 4
+    dC(i) = k_rates(i) * rate_mod * C_solid(i) * dt
+    C_solid_new(i) = C_solid(i) - dC(i)
+  end do
 
-  ! Mass-conserving update (KNOWN INVARIANT: C cannot be created)
-  C_pool_new = C_pool - k_decomp * C_pool * dt
+  ! Carbon released from solids moves into DOM
+  C_dom_new = C_dom + sum(dC)
 end subroutine
 ```
 
 **Agent extracts and annotates:**
 ```yaml
-kernel: soil_decomp
-variables:
-  C_pool:   {type: state, unit: gC/m2, ontology: ECOSIM:soil_carbon_pool}
-  temp:     {type: input, unit: K,      ontology: ECOSIM:soil_temperature}
-  moisture: {type: input, unit: m3/m3,  ontology: ECOSIM:volumetric_water_content}
+kernel: ecosim_decomp
+state:
+  C_solid:
+    shape: [4]
+    pools: [protein, carbohydrate, cellulose, lignin]
+    unit: gC/m2
+    ontology: ECOSIM:soil_carbon_pool
+  C_dom:
+    unit: gC/m2
+    ontology: ECOSIM:dissolved_organic_matter
+inputs:
+  temp: {unit: K, ontology: ECOSIM:soil_temperature}
+  psi:  {unit: kPa, ontology: ECOSIM:soil_water_potential}
 structure:
   known:
-    - f_temp = exp(-E_act / (R_gas * temp))     # Arrhenius, physics-based
-    - C_new = C - k * C * dt                    # mass-conserving ODE step
+    - dfns = sum(C_solid) / (sum(C_solid) + K_m)
+    - oqci = 1 / (1 + C_dom / K_i)
+    - dC(i) = k_rates(i) * rate_mod * C_solid(i) * dt
+    - C_dom_new = C_dom + sum(dC)
   uncertain:
-    - f_moist = ???(moisture)                    # currently Michaelis-Menten, but could be wrong
+    - f_temp = ???(temp)
+    - f_water = ???(psi)
   invariants:
-    - C_pool_new >= 0                            # carbon cannot go negative
-    - C_pool_new <= C_pool                       # decomposition only removes carbon
+    - C_solid_new[i] >= 0 for all i
+    - C_dom_new >= 0
+    - sum(C_solid_new) + C_dom_new = sum(C_solid) + C_dom
 ```
 
-**Cajal representation (NSAM-compilable):**
+**Restricted IR / Cajal-oriented representation:**
 ```
--- Types encode the domain structure
--- ℝ⁺ represented as ℕ with scaling; linear maps preserve structure
+-- State is a typed real vector:
+-- [C_prot, C_carb, C_cell, C_lign, C_dom, temp, psi]
+State : TyReal(7)
 
--- The known physics is fixed structure:
-f_temp : ℝ ⊸ ℝ                    -- compiled to fixed weight matrix (Arrhenius)
-mass_update : ℝ ⊸ ℝ ⊸ ℝ           -- compiled to fixed linear map (C - k*C*dt)
+f_temp  : ℝ ⊸ ℝ     -- learnable but constrained positive
+f_water : ℝ ⊸ ℝ     -- learnable, typically constrained to [0,1]
 
--- The uncertain part becomes a LEARNABLE linear map:
-f_moist : ℝ ⊸ ℝ                   -- weights initialized randomly, trained against data
+ecosim_step = λ(state).
+  let C_solid = state[0:4]
+  let C_dom   = state[4]
+  let temp    = state[5]
+  let psi     = state[6]
+  let dfns    = sum(C_solid) / (sum(C_solid) + K_m)
+  let oqci    = 1 / (1 + C_dom / K_i)
+  let rate    = (f_temp temp) * (f_water psi) * dfns * oqci
+  let dC      = k_rates ⊙ C_solid ⊙ rate * dt
+  in [C_solid - dC, C_dom + sum(dC), temp, psi]
 
--- The full kernel:
-soil_decomp = λ(C, temp, moist).
-  let k = k_base * (f_temp temp) * (f_moist moist)   -- f_moist is learnable
-  in mass_update C k
+ecosim_rollout = iter{state | s ↪ ecosim_step(s)}(n_steps)
 ```
 
-**After NSAM compilation → training → decompilation:**
+**After compilation → training → decompilation (illustrative output):**
 ```
--- f_moist was learned from EcoSIM simulation data
--- Decompiled symbolic expression:
-f_moist_learned(x) = x^0.73 / (0.34 + x^0.73)    -- Hill equation, not Michaelis-Menten!
+f_temp_learned(T)  ≈ exp(24.1 - 5.9e4 / (R * T))
+f_water_learned(ψ) ≈ exp(0.19 * max(ψ, -480))
 
--- This is a publishable scientific finding: the data suggests
--- the moisture response follows Hill kinetics with coefficient 0.73,
--- not the assumed Michaelis-Menten (exponent = 1.0)
+-- Interpretable scientific reading:
+-- the learned temperature sensitivity remains Arrhenius-like,
+-- while the water-stress term is closer to a capped exponential response
+-- than to a simple Michaelis-Menten assumption.
 ```
 
 **Verification output:**
 ```
-✓ Invariant: C_pool_new >= 0         -- VERIFIED (f_moist_learned(x) ∈ [0,1] for x ≥ 0)
-✓ Invariant: C_pool_new <= C_pool    -- VERIFIED (k_decomp ≥ 0 for all inputs)
-✓ Mass conservation: ΔC_total = 0    -- VERIFIED (carbon lost = carbon respired)
+✓ Non-negativity: all solid pools and DOM remain ≥ 0
+✓ Mass conservation: ΣC_solid + C_dom is invariant under the learned update
+✓ Structural monotonicity: each solid pool can only lose carbon in this kernel
+✓ Agreement: rollout error against held-out EcoSIM trajectories stays within tolerance
+```
+
+### Example 1b: PFLOTRAN Reactive Transport Closure (Use Case 1b)
+
+This example captures a different but equally important DOE modeling pattern:
+local constitutive closures embedded inside large-scale subsurface flow and
+reactive transport simulations. PFLOTRAN is used for groundwater contamination,
+subsurface biogeochemistry, geologic carbon storage, and other porous-media
+problems. In such models, saturation-dependent mobility and sorption laws are
+often the empirically uncertain pieces, even when the advection-diffusion-
+reaction scaffold is known.
+
+If the exact closure family is already known, fitting its parameters is an
+ordinary calibration problem and should be treated as such. The point of this
+example is not that a neural network can rediscover a two-parameter curve. The
+point is that the uncertain constitutive law is first isolated from code,
+learned in the context of the repeated transport update, and then summarized
+back into an interpretable closure.
+
+**Source (Fortran, simplified from a PFLOTRAN-style local update):**
+
+```fortran
+subroutine transport_sorption_step(C_up, C_down, C_sorb, sat, dt, &
+                                   C_up_new, C_down_new, C_sorb_new)
+  implicit none
+  real, intent(in)  :: C_up, C_down, C_sorb, sat, dt
+  real, intent(out) :: C_up_new, C_down_new, C_sorb_new
+  real :: k_rel, adv_flux, sorp_flux
+
+  ! Saturation-dependent relative permeability (UNCERTAIN CLOSURE)
+  k_rel = rel_perm(sat)
+
+  ! Known transport scaffold
+  adv_flux = v_adv * k_rel * C_up * dt
+
+  ! Known sorption-capacity structure
+  sorp_flux = k_ads * (C_down + adv_flux) * (Q_max - C_sorb) * dt
+
+  C_up_new   = C_up - adv_flux
+  C_down_new = C_down + adv_flux - sorp_flux
+  C_sorb_new = C_sorb + sorp_flux
+end subroutine
+```
+
+**Agent extracts and annotates:**
+```yaml
+kernel: transport_sorption_step
+state:
+  C_up:   {unit: mol/m3, role: dissolved_upstream}
+  C_down: {unit: mol/m3, role: dissolved_downstream}
+  C_sorb: {unit: mol/m3_bulk, role: sorbed_inventory}
+  sat:    {unit: 1, role: liquid_saturation}
+structure:
+  known:
+    - adv_flux = v_adv * k_rel(sat) * C_up * dt
+    - sorp_flux = k_ads * (C_down + adv_flux) * (Q_max - C_sorb) * dt
+    - C_up_new + C_down_new + C_sorb_new = C_up + C_down + C_sorb
+  uncertain:
+    - k_rel = ???(sat)         # relative permeability / mobility closure
+  optional_extensions:
+    - k_ads = ???(chemistry, saturation, mineral_state)
+    - surface_complexation = ???(species, mineral_surface)
+  invariants:
+    - C_up_new >= 0
+    - C_down_new >= 0
+    - C_sorb_new >= 0
+    - C_sorb_new <= Q_max
+```
+
+**Restricted IR / Cajal-oriented representation:**
+```
+State : TyReal(4)   -- [C_up, C_down, C_sorb, sat]
+
+k_rel : ℝ ⊸ ℝ       -- learnable closure, constrained to [0,1]
+
+pflotran_step = λ(state).
+  let C_up   = state[0]
+  let C_down = state[1]
+  let C_sorb = state[2]
+  let sat    = state[3]
+  let adv    = v_adv * (k_rel sat) * C_up * dt
+  let sorp   = k_ads * (C_down + adv) * (Q_max - C_sorb) * dt
+  in [C_up - adv,
+      C_down + adv - sorp,
+      C_sorb + sorp,
+      sat]
+
+pflotran_rollout = iter{state | s ↪ pflotran_step(s)}(n_steps)
+```
+
+**After compilation → training → decompilation (illustrative output):**
+```
+S_eff = clamp((sat - S_res) / (1 - S_res), 0, 1)
+k_rel_learned(sat) ≈ 0.83 * S_eff^2.40
+
+-- Interpretable scientific reading:
+-- the learned closure is close to a Corey-style relative permeability curve.
+-- In a case where the known family is already Corey, this becomes a direct
+-- comparison to ordinary parameter calibration. In a less certain case, the
+-- same pipeline can test whether a more flexible learned closure collapses
+-- back to a familiar symbolic law or indicates the need for a different form.
+```
+
+**Verification output:**
+```
+✓ Non-negativity: dissolved and sorbed inventories remain ≥ 0
+✓ Species balance: C_up + C_down + C_sorb is conserved
+✓ Capacity bound: C_sorb never exceeds Q_max
+✓ Baseline comparison: learned closure is compared against hand-fit parametric forms
+✓ Agreement: rollout matches PFLOTRAN benchmark trajectories within tolerance
 ```
 
 ### Example 2: XSBench Algorithm Selection (Use Case 2)

@@ -277,7 +277,7 @@ The point is:
 
 ## The Value Proposition
 
-**Take a small scientific kernel from a simulation.**
+**Take a small scientific kernel from a larger simulation.**
 
 Then:
 
@@ -290,6 +290,21 @@ Then:
 Short version:
 
 > Faster and learnable local scientific modules without throwing away the scientific story.
+
+---
+
+## What Gets Extracted
+
+Not the whole land model.
+
+Usually a scientist-meaningful local update kernel such as:
+
+- decomposition for one timestep
+- temperature or moisture response within a module
+- a reaction-rate law
+- a transfer rule between a few state variables
+
+The agent can help locate and reimplement these kernels, but the decomposition into "known scaffold" and "unknown part" still needs scientist validation.
 
 ---
 
@@ -367,7 +382,7 @@ PINN conservation penalty *hurts* extrapolation (worse than black-box).
 
 DOE science depends on large simulation codes that are expensive to run and difficult to calibrate, while many important submodels are only partially known. Black-box neural surrogates can reduce cost, but they often discard the scientific structure that tells us what variables mean, what should be conserved, and which parts of the model are trusted versus uncertain.
 
-Trusty Neurocoder targets that gap by extracting small scientific kernels, preserving their known symbolic structure, and compiling them into differentiable neural modules. This makes it possible to learn parameters or unknown subfunctions from simulation traces, observations, or both, while keeping more semantics, interpretability, and verifiability than a generic neural surrogate. The current repo is a proof of concept, but the long-term goal is clear: structured, learnable surrogates for scientific kernels.
+Trusty Neurocoder targets that gap by extracting small scientific kernels, preserving their known symbolic structure, and compiling them into differentiable neural modules. This makes it possible to extract, compress, and reinterpret uncertain simulator kernels from legacy code and simulation traces, and to recalibrate them against observations while keeping more semantics, interpretability, and verifiability than a generic neural surrogate. In the current repo, most training data is synthetic or comes from Python reimplementations of extracted equations; training directly on full simulator traces is the next step.
 
 ---
 
@@ -375,10 +390,10 @@ Trusty Neurocoder targets that gap by extracting small scientific kernels, prese
 
 - **Problem:** DOE simulations are expensive, and their uncertain submodels are hard to calibrate.
 - **Risk with black-box surrogates:** they lose scientific meaning and constraints.
-- **Approach:** extract a kernel, keep known structure, compile to differentiable module, learn only uncertain parts.
+- **Approach:** extract a kernel from a larger simulator, keep known structure, compile to differentiable module, learn only uncertain parts.
 - **Results:** 8 working models, 6,700× better than black-box, exact conservation, decompiles to interpretable math.
-- **End-to-end:** agent reads EcoSIM Fortran → builds Cajal surrogate → trains → decompiles → verifies.
-- **Status:** working prototype with PINN comparison; scaling to full EcoSIM output next.
+- **End-to-end:** agent reads EcoSIM Fortran → proposes kernel structure → scientist validates decomposition → builds Cajal surrogate → trains → decompiles → verifies.
+- **Status:** working prototype on synthetic and reimplemented trajectories; training on full EcoSIM traces next.
 
 ---
 
