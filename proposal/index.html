@@ -1,0 +1,2284 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Neuro-Symbolic Agents for Verified Scientific Code Generation">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>NSAM4Sci - Trusty Neurocoder</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nsam4sci" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Trusty Neurocoder" class="md-header__button md-logo" aria-label="Trusty Neurocoder" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Trusty Neurocoder
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NSAM4Sci
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cmungall/trusty-neurocoder" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Trusty Neurocoder" class="md-nav__button md-logo" aria-label="Trusty Neurocoder" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Trusty Neurocoder
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cmungall/trusty-neurocoder" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../paper/draft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paper Draft
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Notebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/01_cajal_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cajal: Programs as Recurrent Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/02_exponential_decay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning a Scalar ODE Parameter via Cajal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Earth & Environment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Earth & Environment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/03_learn_unknown_function/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning an Unknown Nonlinear Function via Neural Sub-expression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/04_century_lite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CENTURY-Lite: Learning Two Unknown Response Functions Simultaneously
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DOE Science Domains
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DOE Science Domains
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/05_decay_chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Radioactive Decay Chain: Learning Branching Ratios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/06_battery_degradation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Battery Degradation: Learning SEI Growth and Capacity Fade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/07_chemical_kinetics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chemical Kinetics: Learning Arrhenius Rate from Equilibrium Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/08_ecosim_kernel_case_study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EcoSIM Kernel Case Study: Structured Surrogate for Soil Decomposition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/09_pflotran_relative_permeability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PFLOTRAN Kernel Case Study: Learning a Relative Permeability Closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rfa-focus-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RFA Focus Area
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background-1-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background (1 page)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-objectives-approximately-05-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Objectives (approximately 0.5 page)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-research-and-methods-approximately-15-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proposed Research and Methods (approximately 1.5 pages)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposed Research and Methods (approximately 1.5 pages)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#activity-1-restricted-ir-design-and-artifact-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity 1: Restricted IR design and artifact extraction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-2-backend-mappings-for-learning-and-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity 2: Backend mappings for learning and verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-3-three-proof-of-concept-demonstrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity 3: Three proof-of-concept demonstrations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-4-evaluation-packaging-and-distinction-from-existing-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activity 4: Evaluation, packaging, and distinction from existing work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestones-in-the-nine-months-approximately-1-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Milestones in the Nine Months (approximately 1 page)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-prototype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Working Prototype
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-1-verified-surrogate-models-ecosim-fortran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Case 1: Verified Surrogate Models (EcoSIM, Fortran)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-1b-verified-reactive-transport-surrogates-pflotran-fortran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Case 1b: Verified Reactive-Transport Surrogates (PFLOTRAN, Fortran)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-2-algorithm-selection-code-optimization-ecp-proxy-app-cfortran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Case 2: Algorithm Selection &amp; Code Optimization (ECP Proxy App, C++/Fortran)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-3-program-synthesis-nas-parallel-benchmarks-fortran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Case 3: Program Synthesis (NAS Parallel Benchmarks, Fortran)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeline-9-month-phase-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timeline (9-month Phase I)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relevance-to-other-focus-areas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relevance to Other Focus Areas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-ii-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase II Vision
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-work-c3po-as-a-neuro-symbolic-code-generation-precedent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prior Work: C3PO as a Neuro-Symbolic Code Generation Precedent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Comments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a-concrete-examples-from-source-code-to-nsam-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Appendix A: Concrete Examples -- From Source Code to NSAM Representation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendix A: Concrete Examples -- From Source Code to NSAM Representation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-cajal-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Cajal Language
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-1-ecosim-soil-decomposition-use-case-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1: EcoSIM Soil Decomposition (Use Case 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-1b-pflotran-reactive-transport-closure-use-case-1b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1b: PFLOTRAN Reactive Transport Closure (Use Case 1b)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-xsbench-algorithm-selection-use-case-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 2: XSBench Algorithm Selection (Use Case 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-nas-cg-kernel-synthesis-use-case-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 3: NAS CG Kernel Synthesis (Use Case 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-4-c3po-chemical-classifier-bonus-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 4: C3PO Chemical Classifier (Bonus Use Case)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-what-the-cajal-representation-buys-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: What the Cajal Representation Buys You
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="nsam4sci">NSAM4Sci<a class="headerlink" href="#nsam4sci" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Focus Area</strong>: 18C: Neuro-Symbolic Agents for Code Development (ASCR)</li>
+</ul>
+<h2 id="rfa-focus-area">RFA Focus Area<a class="headerlink" href="#rfa-focus-area" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Advance the development of neuro-symbolic agents that combine neural network
+capabilities with symbolic reasoning to improve code generation, algorithm selection, and
+performance prediction, specifically for scientific and engineering codes.</p>
+</blockquote>
+<h2 id="background-1-page">Background (1 page)<a class="headerlink" href="#background-1-page" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Background/Introduction (approximately 1 page): Explain the
+importance and relevance of the proposed work and clearly articulate
+which aspect of the chosen challenge will be addressed and
+solved. Set the proposed research in perspective to other efforts in
+the field. Highlight novel or unique aspects of the proposed
+work. Cite relevant literature</p>
+</blockquote>
+<p>Scientific AI systems increasingly interact with software through retrieval,
+tool use, and agentic search, but they still treat most scientific code as
+unstructured text or opaque executables. We propose a broader view: scientific
+codes, workflows, and formal specifications should be treated as first-class
+data objects that can be extracted, indexed, reasoned over, and selectively
+compiled into learnable models. Longer term, these artifacts can serve as part
+of the symbolic substrate for future scientific AI systems and world models. In
+Phase I, the project will deliver an agentic pipeline that extracts restricted
+symbolic representations from real scientific software and uses them for
+constrained learning, verification, and code generation.</p>
+<p>The technical core of NSAM4Sci combines three ingredients. First, LLM agents
+read heterogeneous scientific artifacts such as Fortran kernels, workflow
+definitions, and benchmark codes, and translate them into a restricted
+intermediate representation (IR). Second, selected IR fragments are mapped into
+neuro-symbolic backends such as Neuro-Symbolic Abstract Machines (NSAMs),
+allowing fixed symbolic structure to remain explicit while uncertain components
+become learnable. Third, formal methods and semantic grounding layers,
+including typed IRs, ontologies, and proof-oriented systems such as Lean,
+provide a path to machine-checkable constraints, equivalence checks, and
+interpretability. The novelty lies in the explicit treatment of code and
+workflows as structured semantic objects that can support both learning and
+verification.</p>
+<p>One concrete technical foundation for this approach is Cajal, a typed
+functional language developed by Amin and collaborators whose programs compile
+exactly to recurrent neural networks. In Phase I, Cajal serves as an initial
+proof point for mapping extracted symbolic structure into differentiable
+representations, while the broader project remains centered on the IR-first
+pipeline rather than on any single backend formalism.</p>
+<p>Phase I will demonstrate this framework on three classes of public DOE-relevant
+artifacts: (1) scientific kernels, where known update structure is preserved
+and uncertain components are learned as constrained surrogates; (2) scientific
+workflows, where tasks, dependencies, resources, and retry logic are extracted
+into a common IR for analysis, repair, and policy learning; and (3) program
+logic tasks such as optimization, translation, or synthesis, where extracted
+symbolic structure supports verified rewrites and interpretable decision rules.
+Together, these artifact classes demonstrate a unified neuro-symbolic approach
+to scientific code understanding, constrained learning, and trustworthy code
+transformation under Topic 18C.</p>
+<h2 id="project-objectives-approximately-05-page">Project Objectives (approximately 0.5 page)<a class="headerlink" href="#project-objectives-approximately-05-page" title="Permanent link">&para;</a></h2>
+<blockquote>
+<blockquote>
+<p>Provide a clear and concise statement of the specific objectives of
+the proposed project. Address how the objectives align with the
+chosen focus topic and lead to an AI advantage</p>
+</blockquote>
+</blockquote>
+<p>The objectives of NSAM4Sci are to establish a reusable pipeline for treating
+code and workflows as structured scientific data, rather than only as text for
+retrieval or opaque executables for emulation. The AI advantage
+comes from combining agentic extraction with symbolic structure, constrained
+learning, and verification-aware reasoning.</p>
+<ul>
+<li>Develop a restricted intermediate representation (IR) for scientific code, workflows, and related semantic artifacts, sufficient to capture typed interfaces, dependencies, guarded control flow, and selected invariants.</li>
+<li>Build agentic methods to extract this symbolic core from public DOE-relevant artifacts, and index the resulting representations in AmSC-facing catalogs so that code can be treated as data.</li>
+<li>Map selected IR fragments into neuro-symbolic backends such as NSAMs, while also supporting formal backends such as Lean for checking contracts, invariants, and equivalence conditions.</li>
+<li>Demonstrate the framework on multiple artifact types, including a scientific-kernel learning case, a workflow extraction/analysis case, and a verified optimization, synthesis, or translation case.</li>
+<li>Deliver a Phase II-ready software and evaluation package showing that the same IR-first architecture can support code understanding, constrained learning, and trustworthy code transformation across more than one scientific modality.</li>
+</ul>
+<h2 id="proposed-research-and-methods-approximately-15-pages">Proposed Research and Methods (approximately 1.5 pages)<a class="headerlink" href="#proposed-research-and-methods-approximately-15-pages" title="Permanent link">&para;</a></h2>
+<blockquote>
+<blockquote>
+<p>Provide a clear research plan for a 9-month project and describe
+the proposed activities and methods. Include enough technical
+details to evaluate the impact of the proposed activity. For each
+activity, indicate the responsibility of the key investigator(s)
+and the associated budget. If the proposed application is building
+on an existing, currently funded DOE project, describe how the
+submitted application leverages that work and is distinct from the
+existing funding</p>
+</blockquote>
+</blockquote>
+<p>The project is organized around four tightly coupled activities. The unifying
+method is an IR-first pipeline in which agents extract symbolic structure from
+real software artifacts, selected IR fragments are mapped to learning or formal
+backends, and the resulting outputs are evaluated for both task performance and
+constraint preservation.</p>
+<h3 id="activity-1-restricted-ir-design-and-artifact-extraction">Activity 1: Restricted IR design and artifact extraction<a class="headerlink" href="#activity-1-restricted-ir-design-and-artifact-extraction" title="Permanent link">&para;</a></h3>
+<p>We will define a Phase I restricted IR capable of representing the semantic
+core of three artifact classes: scientific kernels, scientific workflows, and
+program-logic tasks such as optimization or translation. The IR will capture
+typed interfaces, dependencies, guarded control flow, selected invariants, and
+annotations suitable for downstream learning or verification. On the ingestion
+side, we will build agentic front ends that read public DOE-relevant artifacts
+and translate them into this IR, using available type information, ontologies,
+and code structure as semantic anchors rather than relying on text-only
+summaries.</p>
+<p>This activity is a shared task across the project team, covering IR design,
+corpus selection, extraction engineering, and catalog integration.</p>
+<h3 id="activity-2-backend-mappings-for-learning-and-verification">Activity 2: Backend mappings for learning and verification<a class="headerlink" href="#activity-2-backend-mappings-for-learning-and-verification" title="Permanent link">&para;</a></h3>
+<p>Once extracted, IR fragments will be routed to the backend most appropriate for
+their structure. Fragments that resemble compact typed programs with learnable
+sub-expressions will be mapped to NSAM-like backends, preserving fixed symbolic
+scaffolding while allowing uncertain components to be learned. Other fragments
+may map more naturally to non-recurrent differentiable architectures, including
+transformer- or graph-oriented models, particularly for workflows, code logic,
+or relational structure that is not naturally expressed as a recurrent state
+update. Fragments that primarily encode contracts, dependencies, or
+transformation rules will be mapped to formal or proof-oriented backends,
+including Lean-oriented proof obligations, type checks, and equivalence checks.
+This separation is important: the project does not assume that every extracted
+artifact should become the same kind of differentiable model. Instead, it
+treats architecture selection, learning, and verification as complementary
+capabilities over a shared semantic representation.</p>
+<p>This activity is a shared task across the project team, covering backend
+selection, architecture matching, neuro-symbolic mappings, proof-oriented
+integrations, and end-to-end agentic orchestration.</p>
+<h3 id="activity-3-three-proof-of-concept-demonstrations">Activity 3: Three proof-of-concept demonstrations<a class="headerlink" href="#activity-3-three-proof-of-concept-demonstrations" title="Permanent link">&para;</a></h3>
+<p>The technical claims will be evaluated through three demonstrations drawn from
+different artifact classes.</p>
+<ol>
+<li>Scientific-kernel case. A public scientific kernel, likely Fortran- or
+   C-based, will be extracted into the IR and mapped to a constrained learning
+   backend. The goal is to preserve known structure while learning only
+   selected uncertain components, and to recover interpretable symbolic forms
+   where possible.</li>
+<li>Workflow case. A workflow artifact, such as a CWL, WDL, Nextflow, Parsl, or
+   related pipeline, will be extracted into the IR and used for analysis,
+   repair, or augmentation with a learned policy such as resource prediction,
+   retry prediction, or execution-policy ranking.</li>
+<li>Program-logic case. A code-logic task such as verified optimization,
+   specification-driven synthesis, or translation will be represented in the IR
+   and passed through a checkable transformation pipeline, producing either an
+   interpretable optimization rule, a verified rewrite, or a constrained
+   translation into a target language.</li>
+</ol>
+<p>Across these demonstrations, the project will test whether one IR-first
+architecture can support multiple forms of scientific software reasoning,
+rather than only one application niche.</p>
+<p>This activity is a shared task across the project team, covering demonstration
+integration, artifact selection, backend adaptation, and evaluation.</p>
+<h3 id="activity-4-evaluation-packaging-and-distinction-from-existing-work">Activity 4: Evaluation, packaging, and distinction from existing work<a class="headerlink" href="#activity-4-evaluation-packaging-and-distinction-from-existing-work" title="Permanent link">&para;</a></h3>
+<p>Evaluation will combine shared and task-specific metrics. Shared metrics will
+include extraction fidelity, preservation of declared constraints, degree of
+interpretability, portability across artifact types, and the extent to which a
+common IR supports multiple backend realizations. Task-specific metrics will
+include surrogate fidelity for the kernel case, successful linting or repair
+outcomes for the workflow case, and correctness or equivalence measures for
+optimization, synthesis, or translation. All demonstrations will be built on
+public artifacts with reproducible evaluation pathways.</p>
+<p>The central technical question is whether one IR-first architecture can support
+multiple forms of scientific software reasoning without collapsing them into a
+single representation or backend. Phase I will therefore evaluate not only
+whether each demonstration works in isolation, but whether extraction,
+constraint preservation, backend selection, and verification can be shared
+across kernels, workflows, and program-logic tasks.</p>
+<p>This activity is a shared task across the project team, covering evaluation,
+packaging, dissemination, and Phase II planning.</p>
+<h2 id="milestones-in-the-nine-months-approximately-1-page">Milestones in the Nine Months (approximately 1 page)<a class="headerlink" href="#milestones-in-the-nine-months-approximately-1-page" title="Permanent link">&para;</a></h2>
+<blockquote>
+<blockquote>
+<p>Provide a list of clearly defined and measurable milestones of the
+project:</p>
+</blockquote>
+</blockquote>
+<p>Months 0-3: Representation and ingestion</p>
+<ul>
+<li>Define the Phase I restricted IR, including typed interfaces, dependencies, selected invariants, and mappings to at least one learning backend and one verification backend.</li>
+<li>Implement at least two extraction front ends for public DOE-relevant artifacts, for example one code-oriented front end and one workflow-oriented front end.</li>
+<li>Populate an initial catalog of extracted artifacts and metadata suitable for AmSC-style indexing, demonstrating the "code as data" concept on a small but real corpus.</li>
+<li>Identify at least two backend families for Phase I evaluation, including one NSAM-style recurrent backend and one alternative structured backend suited to non-kernel artifacts.</li>
+</ul>
+<p>Months 3-6: Proof-of-concept demonstrations</p>
+<ul>
+<li>Demonstrate one scientific-kernel case in which extracted symbolic structure is preserved and only selected uncertain components are learned.</li>
+<li>Demonstrate one workflow case in which a workflow is extracted into the IR and then analyzed, repaired, or augmented with a learned policy such as resource or retry prediction.</li>
+<li>Demonstrate one code-logic case, such as verified optimization, synthesis, or translation, in which extracted symbolic structure supports interpretable and checkable transformations.</li>
+<li>Evaluate whether different artifact classes are better served by different backend architectures under the same IR-level semantic interface.</li>
+</ul>
+<p>Months 6-9: Consolidation, evaluation, and Phase II packaging</p>
+<ul>
+<li>Evaluate generalizability across the three artifact classes using common metrics: extraction quality, constraint preservation, interpretability, and task-specific performance.</li>
+<li>Package the extraction, IR, backend mappings, and example applications into a reusable prototype with documentation and reproducible examples.</li>
+<li>Produce a Phase II plan for scaling from proof-of-concept artifacts to larger DOE codes, workflows, and catalogs, including tighter integration with AmSC and richer formal backends.</li>
+</ul>
+<hr />
+<p><OLD TEXT BELOW></p>
+<h2 id="working-prototype">Working Prototype<a class="headerlink" href="#working-prototype" title="Permanent link">&para;</a></h2>
+<p>We have built a working prototype that demonstrates the core pipeline
+end-to-end. The prototype, code, notebooks, and documentation are at:</p>
+<ul>
+<li><strong>Repository</strong>: https://github.com/cmungall/trusty-neurocoder</li>
+<li><strong>Documentation</strong>: https://cmungall.github.io/trusty-neurocoder/</li>
+<li><strong>Agent Workflow</strong>: https://cmungall.github.io/trusty-neurocoder/agent-workflow/</li>
+</ul>
+<p>The prototype was built with substantial assistance from an LLM coding
+agent (Claude Code), exercising the Layer 1 agent workflow in a real
+development setting. The agent read the RFA, researched the Cajal
+papers, vendored the Cajal source, and produced seven working examples
+across DOE science domains:</p>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>DOE Domain</th>
+<th>What's Learned</th>
+<th>Key Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exponential Decay</td>
+<td>Foundation</td>
+<td>Scalar rate k</td>
+<td>k=0.3000 recovered exactly</td>
+</tr>
+<tr>
+<td>Coupled Decay</td>
+<td>Earth Science</td>
+<td>Transfer coefficient α</td>
+<td>α=0.4000 recovered exactly</td>
+</tr>
+<tr>
+<td>Unknown Function</td>
+<td>Earth Science</td>
+<td>MLP → Hill equation</td>
+<td>m^0.7/(0.3+m^0.7) recovered</td>
+</tr>
+<tr>
+<td>CENTURY-Lite</td>
+<td>Earth Science</td>
+<td>2 response functions</td>
+<td>Q10 + Hill forms recovered simultaneously</td>
+</tr>
+<tr>
+<td>Decay Chain</td>
+<td>Nuclear Science</td>
+<td>2 branching ratios</td>
+<td>0.70, 0.85 recovered exactly</td>
+</tr>
+<tr>
+<td>Battery Degradation</td>
+<td>Energy Storage</td>
+<td>SEI growth + capacity fade</td>
+<td>Parabolic growth law recovered</td>
+</tr>
+<tr>
+<td>Chemical Kinetics</td>
+<td>Combustion</td>
+<td>Arrhenius rate</td>
+<td>A=2.006, E=4.987 (true: 2.0, 5.0)</td>
+</tr>
+</tbody>
+</table>
+<p>All examples verify physical invariants (mass/energy conservation,
+non-negativity, monotonicity) by architectural design, not post-hoc
+checking.</p>
+<p><strong>Cajal type system extension</strong>: We extended the Cajal type system with
+<code>TyReal(n)</code> for n-dimensional real-valued state vectors, beyond the
+original boolean + natural number types. This enables proper typing of
+scientific ODE state vectors (dimensions 1–5 in current examples).</p>
+<h2 id="technical-approach">Technical Approach<a class="headerlink" href="#technical-approach" title="Permanent link">&para;</a></h2>
+<h3 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h3>
+<p>The Trusty Neurocode framework has three layers:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│  Layer 1: LLM Agent                                 │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│  - Parses real scientific code (Fortran, C++, etc.) │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│  - Extracts algorithmic kernels and intent          │
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│  - Translates to declarative representation         │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│  - Orchestrates the pipeline                        │
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│  - Uses domain ontologies for semantic grounding    │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├─────────────────────────────────────────────────────┤
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│  Layer 2: NSAM Compilation/Decompilation            │
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│  - Compiles declarative programs → neural networks  │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│  - Fixed structure for known physics                │
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│  - Learnable weights for unknown sub-expressions    │
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│  - Decompiles trained networks → symbolic programs  │
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│  - Based on collapsing towers / staged interpreters │
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>├─────────────────────────────────────────────────────┤
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│  Layer 3: Formal Verification                       │
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│  - Checks invariants (conservation, symmetry, etc.) │
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│  - Verifies equivalence pre/post optimization       │
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│  - Validates against reference outputs              │
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│  - Coq/Dafny proof generation via LLM guidance      │
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>└─────────────────────────────────────────────────────┘
+</code></pre></div>
+<p>The key insight is that agents and NSAMs compensate for each other's
+weaknesses: LLM agents handle messy real-world code comprehension that NSAMs
+cannot, while NSAMs provide the formal correctness guarantees that LLM agents
+cannot.</p>
+<h3 id="use-case-1-verified-surrogate-models-ecosim-fortran">Use Case 1: Verified Surrogate Models (EcoSIM, Fortran)<a class="headerlink" href="#use-case-1-verified-surrogate-models-ecosim-fortran" title="Permanent link">&para;</a></h3>
+<p><strong>Code</strong>: EcoSIM soil biogeochemistry model (LBNL BioEPIC SFA, public on
+GitHub). We target a single module, e.g., the soil carbon decomposition kernel.</p>
+<p><strong>Mode</strong>: Known structure + learnable sub-expressions → train → decompile →
+verify.</p>
+<p><strong>Workflow</strong>:</p>
+<ol>
+<li>LLM agent reads the Fortran subroutine, extracts the ODE system and
+   parameter dependencies. An existing parameter ontology provides semantic
+   grounding for variable names and physical units.</li>
+<li>Agent translates the algorithmic core into the declarative representation
+   consumed by NSAMs.</li>
+<li>NSAM compilation produces a neural architecture where known physics
+   (mass balance, stoichiometry) is fixed structure and uncertain process
+   representations (decomposition rate functions, microbial growth terms) are
+   learnable weights.</li>
+<li>Train learnable weights against EcoSIM simulation outputs.</li>
+<li>Decompile: extract learned sub-expressions back to symbolic form (e.g.,
+   "the model learned that decomposition rate follows <em>this</em> function of
+   temperature and moisture").</li>
+<li>Verify that the surrogate preserves mass conservation and other known
+   invariants via formal methods.</li>
+</ol>
+<p><strong>Deliverable</strong>: A surrogate that runs orders of magnitude faster than the
+Fortran original, with interpretable and verified symbolic expressions for the
+learned process terms.</p>
+<h3 id="use-case-1b-verified-reactive-transport-surrogates-pflotran-fortran">Use Case 1b: Verified Reactive-Transport Surrogates (PFLOTRAN, Fortran)<a class="headerlink" href="#use-case-1b-verified-reactive-transport-surrogates-pflotran-fortran" title="Permanent link">&para;</a></h3>
+<p><strong>Code</strong>: PFLOTRAN, an open-source massively parallel subsurface flow and
+reactive transport code. We target a public benchmark or process model within
+PFLOTRAN, for example a reactive transport problem involving a known transport
+scaffold with uncertain geochemical closure, sorption, or kinetic terms.</p>
+<p><strong>Mode</strong>: Known transport and stoichiometric structure + extracted local closure
+submodels → constrained learning → decompile → verify.</p>
+<p><strong>Baseline and novelty</strong>: If the closure family is already known a priori
+(for example, a Corey curve with two free parameters), then standard inverse
+modeling or nonlinear least squares is the appropriate baseline. The research
+question here is different: can an agent read a real reactive-transport setup,
+identify the uncertain local sub-expressions, preserve the fixed transport and
+species-balance scaffold, learn those terms from trajectory data, and recover
+an interpretable symbolic law rather than a black-box emulator?</p>
+<p><strong>Workflow</strong>:</p>
+<ol>
+<li>LLM agent reads the relevant PFLOTRAN input deck, benchmark setup, and
+   process configuration, extracting species, reactions, dependencies, and the
+   local constitutive or kinetic terms that are candidates for learning.</li>
+<li>Agent translates the algorithmic core into a declarative representation or
+   restricted IR, preserving the advection-diffusion-reaction scaffold and
+   species-balance structure.</li>
+<li>NSAM compilation or a related differentiable backend produces a neural
+   architecture in which the known transport and stoichiometric structure are
+   fixed, while uncertain closure terms such as relative permeability,
+   effective sorption laws, kinetic rate expressions, or surface-complexation
+   submodels become learnable.</li>
+<li>Train the learnable terms against PFLOTRAN outputs generated from public
+   benchmark or regression problems, using ordinary calibrated parametric forms
+   as explicit baselines when appropriate.</li>
+<li>Decompile the learned sub-expressions back to symbolic form, for example an
+   interpretable effective rate law, sorption isotherm, or constitutive
+   closure.</li>
+<li>Verify preservation of species balance, non-negativity, and agreement with
+   benchmark outputs or known constraints.</li>
+</ol>
+<p><strong>Deliverable</strong>: A structured surrogate or learned closure model for a
+PFLOTRAN benchmark problem that preserves known transport and reaction
+structure, is evaluated against standard calibration baselines, and yields
+interpretable symbolic expressions for the learned geochemical components. The
+result is not "AI replaces PFLOTRAN," but a demonstrated path for extracting,
+relearning, and checking uncertain constitutive pieces inside a trusted
+reactive-transport code.</p>
+<h3 id="use-case-2-algorithm-selection-code-optimization-ecp-proxy-app-cfortran">Use Case 2: Algorithm Selection &amp; Code Optimization (ECP Proxy App, C++/Fortran)<a class="headerlink" href="#use-case-2-algorithm-selection-code-optimization-ecp-proxy-app-cfortran" title="Permanent link">&para;</a></h3>
+<p><strong>Code</strong>: XSBench (Monte Carlo neutron cross-section lookup, ANL) or CoMD
+(classical molecular dynamics). Both are public ECP proxy apps with built-in
+self-verification and reference outputs.</p>
+<p><strong>Mode</strong>: Agent analyzes code → NSAM compiles dispatch/tuning logic →
+gradient-based optimization → decompile to verified optimized code.</p>
+<p><strong>Workflow</strong>:</p>
+<ol>
+<li>LLM agent analyzes the proxy app, identifies algorithmic variants and
+   tunable parameters (e.g., lookup algorithm choice, data layout, hash
+   parameters).</li>
+<li>Agent translates the dispatch logic into a declarative form.</li>
+<li>NSAM compilation relaxes discrete algorithm choices into continuous
+   parameters, enabling gradient-based optimization over the choice space.</li>
+<li>Optimize against performance metrics on target hardware.</li>
+<li>Decompile back to discrete algorithm selection with an interpretable
+   decision rule.</li>
+<li>Verify correctness against the proxy app's built-in reference outputs.</li>
+</ol>
+<p><strong>Deliverable</strong>: An optimized code variant with a verified, interpretable
+algorithm selection policy -- not a black-box autotuner.</p>
+<h3 id="use-case-3-program-synthesis-nas-parallel-benchmarks-fortran">Use Case 3: Program Synthesis (NAS Parallel Benchmarks, Fortran)<a class="headerlink" href="#use-case-3-program-synthesis-nas-parallel-benchmarks-fortran" title="Permanent link">&para;</a></h3>
+<p><strong>Code</strong>: NAS Parallel Benchmark kernels (CG - Conjugate Gradient, or MG -
+Multigrid). Public, self-verifying, with reference outputs at multiple problem
+sizes.</p>
+<p><strong>Mode</strong>: Specification → NSAM-guided synthesis → formal verification.</p>
+<p><strong>Workflow</strong>:</p>
+<ol>
+<li>LLM agent reads the mathematical specification of the benchmark kernel
+   (e.g., the CG algorithm for solving Ax=b).</li>
+<li>Agent produces a declarative program skeleton with holes for
+   implementation choices.</li>
+<li>NSAM-guided relational search (via staged miniKanren) synthesizes
+   candidate implementations that fill the holes while satisfying structural
+   constraints.</li>
+<li>Neural guidance biases the search toward performant implementations
+   (trained on corpus of known HPC code patterns).</li>
+<li>Formal verification checks synthesized code against NPB reference outputs
+   and mathematical properties (e.g., convergence, residual bounds).</li>
+<li>Agent translates the verified declarative program back to deployable
+   Fortran.</li>
+</ol>
+<p><strong>Deliverable</strong>: A synthesized, verified implementation of an NPB kernel
+produced from a high-level specification, demonstrating that the framework can
+generate correct scientific code -- not just optimize existing code.</p>
+<h2 id="timeline-9-month-phase-i">Timeline (9-month Phase I)<a class="headerlink" href="#timeline-9-month-phase-i" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Months</th>
+<th>Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-2</td>
+<td>Framework integration: connect LLM agent layer to NSAM compilation pipeline. Define declarative intermediate representation.</td>
+</tr>
+<tr>
+<td>2-4</td>
+<td>Use Case 1 (EcoSIM surrogate): agent extracts kernel, NSAM compiles, train, decompile, verify mass conservation.</td>
+</tr>
+<tr>
+<td>4-6</td>
+<td>Use Case 2 (proxy app optimization): agent analyzes code, NSAM-based algorithm selection, verify correctness.</td>
+</tr>
+<tr>
+<td>6-8</td>
+<td>Use Case 3 (NPB synthesis): specification-to-code pipeline, relational search, formal verification.</td>
+</tr>
+<tr>
+<td>8-9</td>
+<td>Evaluation, documentation, Phase II planning. Cross-cutting: measure generalizability of agent+NSAM pipeline across the three use cases.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="evaluation-metrics">Evaluation Metrics<a class="headerlink" href="#evaluation-metrics" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Surrogate speedup</strong>: wall-clock time ratio vs. original Fortran (target: 100x+)</li>
+<li><strong>Surrogate fidelity</strong>: error relative to original simulation outputs</li>
+<li><strong>Interpretability</strong>: are decompiled expressions scientifically meaningful and publishable?</li>
+<li><strong>Verification coverage</strong>: fraction of known invariants formally checked</li>
+<li><strong>Synthesis correctness</strong>: match to NPB reference outputs at all problem sizes</li>
+<li><strong>Generalizability</strong>: can the same agent+NSAM pipeline handle all three use cases with minimal domain-specific modification?</li>
+</ul>
+<h2 id="relevance-to-other-focus-areas">Relevance to Other Focus Areas<a class="headerlink" href="#relevance-to-other-focus-areas" title="Permanent link">&para;</a></h2>
+<p>While the primary focus is 18C (Neuro-Symbolic Agents), the framework also
+addresses:</p>
+<ul>
+<li><strong>18E (Trustworthy AI for Scientific Software)</strong>: formal verification of
+  generated code, provenance tracking, correctness guarantees</li>
+<li><strong>18B (Automated Scientific Problem-to-Code Generation)</strong>: Use Case 3
+  (specification-to-code synthesis)</li>
+<li><strong>18D (Performance Prediction and Feedback Loops)</strong>: Use Case 2 (performance
+  optimization with learned models)</li>
+</ul>
+<h2 id="phase-ii-vision">Phase II Vision<a class="headerlink" href="#phase-ii-vision" title="Permanent link">&para;</a></h2>
+<p>Scale the framework from proof-of-concept kernels to full-scale DOE
+simulation codes (E3SM, PFLOTRAN, LAMMPS). Integrate with the American Science
+Cloud for shared model/code artifact hosting. Develop a reusable agent toolkit
+that DOE computational scientists can apply to their own codebases.</p>
+<h2 id="key-references">Key References<a class="headerlink" href="#key-references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Amin &amp; Rompf, "Collapsing Towers of Interpreters" (POPL 2018)</li>
+<li>Velez-Ginorio, Amin, Kording, Zdancewic, "Compiling to Linear Neurons" (POPL 2026)</li>
+<li>Velez-Ginorio et al., "Compiling to Recurrent Neurons" (arXiv 2511.14953, 2025)</li>
+<li>Ballantyne, Sanna, Hemann, Byrd, Amin, "Multi-stage Relational Programming" (PLDI 2025)</li>
+<li>Prasad &amp; Amin, "Guided Proof Search Using LLMs and Lemma Extraction in Coq" (ICLR VerifAI 2025)</li>
+<li>EcoSIM: https://github.com/jinyun1tang/EcoSIM</li>
+<li>ECP Proxy Apps: https://proxyapps.exascaleproject.org/</li>
+<li>NAS Parallel Benchmarks: https://www.nas.nasa.gov/software/npb.html</li>
+</ul>
+<h2 id="prior-work-c3po-as-a-neuro-symbolic-code-generation-precedent">Prior Work: C3PO as a Neuro-Symbolic Code Generation Precedent<a class="headerlink" href="#prior-work-c3po-as-a-neuro-symbolic-code-generation-precedent" title="Permanent link">&para;</a></h2>
+<p>The PI has published work that directly demonstrates the core neuro-symbolic
+code generation pattern motivating this proposal. C3PO (CHEBI Classification
+Programs Ontology) uses LLMs to synthesize deterministic, verifiable
+classifier programs for chemical ontology classes (Mungall et al., J.
+Cheminformatics, 2025; https://github.com/chemkg/c3p).</p>
+<p><strong>How C3PO works:</strong>
+1. An LLM reads an ontology class definition (symbolic specification)
+2. It generates a Python/RDKit program that classifies molecules (code synthesis)
+3. The program is tested against known ChEBI classifications (verification)
+4. An iterative LEIA loop (Learn-Execute-Iterate-Adapt) refines the program</p>
+<p><strong>Why this matters for Trusty Neurocode:</strong> C3PO already demonstrates:
+- Neural → symbolic code generation (LLM produces deterministic programs)
+- Ontology-grounded semantics (class definitions guide synthesis)
+- Verification against ground truth (known ChEBI classifications)
+- Iterative refinement (generate → test → refine loop)
+- Explainability (programs provide natural language justification)</p>
+<p>The key difference is that C3PO uses the LLM as a black box -- it generates
+code but there are no formal guarantees. Trusty Neurocode extends this pattern
+by adding the NSAM layer: instead of hoping the LLM generates correct code, we
+compile the specification into a neural architecture where correctness can be
+<em>proven</em>, and decompile the result back to verified symbolic code.</p>
+<p>C3PO can serve as a concrete benchmark: can the Trusty Neurocode pipeline
+produce ChEBI classifiers with equivalent accuracy but with formal
+verification of logical consistency (e.g., that a classifier for "alcohol"
+correctly subsumes "primary alcohol")?</p>
+<h2 id="additional-comments">Additional Comments<a class="headerlink" href="#additional-comments" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The EcoSIM parameter ontology (https://github.com/bioepic-data/ecosim-ontology)
+  provides a unique advantage: the agent has <em>semantic</em> understanding of what
+  Fortran variables mean, not just syntactic parsing. This is something generic
+  AI coding tools completely lack and demonstrates the value of domain ontologies
+  in neuro-symbolic workflows.</li>
+<li>The RFA requires partners from 2 of 3 categories (national lab, industry, IHE).
+  LBNL (lab) + Harvard (IHE) covers two. An industry partner for AI coding
+  tools or scientific computing would strengthen the application.</li>
+<li>All three demonstration codes are publicly available with reference outputs,
+  enabling fully reproducible evaluation without external data agreements.</li>
+</ul>
+<hr />
+<h2 id="appendix-a-concrete-examples-from-source-code-to-nsam-representation">Appendix A: Concrete Examples -- From Source Code to NSAM Representation<a class="headerlink" href="#appendix-a-concrete-examples-from-source-code-to-nsam-representation" title="Permanent link">&para;</a></h2>
+<p>This appendix illustrates the Trusty Neurocode pipeline with concrete code
+snippets, showing source code in the original language, the agent-extracted
+declarative representation, and the NSAM (Cajal) compiled form.</p>
+<h3 id="the-cajal-language">The Cajal Language<a class="headerlink" href="#the-cajal-language" title="Permanent link">&para;</a></h3>
+<p>Cajal(⊸, 2, N) is a minimal, typed, higher-order, linear programming
+language (Velez-Ginorio et al., 2025). Its syntax:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Expressions:
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  e ::= x               -- variable
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>      | tt | ff          -- booleans
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>      | 0                -- zero
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>      | succ(e)          -- successor (natural number)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>      | iter{e₁ | y ↪ e₂}(e₃)  -- iterator
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>      | λx.e             -- linear map
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>      | e₁ e₂            -- application
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Types:
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  τ ::= 𝟚               -- boolean
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>      | ℕ               -- natural number
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>      | τ₁ ⊸ τ₂          -- linear map
+</code></pre></div>
+<p><strong>Key property:</strong> Cajal programs compile to linear (recurrent) neurons.
+The linear type system ensures each variable is used exactly once, which
+maps directly to linear algebra: a Cajal program of type <code>τ₁ ⊸ τ₂</code>
+compiles to a matrix (linear map) from ⟦τ₁⟧ to ⟦τ₂⟧ in ℝ-vector spaces.</p>
+<p>Programs with iteration compile to linear recurrent neural networks.
+When unfolded to a finite timestep, these become ordinary differentiable
+linear maps -- enabling gradient-based learning.</p>
+<p><strong>NOTE ON CAJAL FIDELITY:</strong> The published Cajal(⊸, 2, N) supports
+booleans (𝟚), natural numbers (ℕ), and linear maps (⊸). Our prototype
+extends this with <code>TyReal(n)</code> for real-valued state vectors, enabling
+the scientific ODE examples. The Appendix examples below additionally
+use aspirational types like <code>MolFeatures</code> and <code>GridParams</code> for clarity;
+extending Cajal to these richer domain-specific types while preserving
+compilation-to-neurons guarantees is a core research task for the
+Harvard team. The seven working prototype examples (see Working
+Prototype above) demonstrate that the <code>TyReal(n)</code> extension is
+already sufficient for a broad class of scientific ODE surrogates.</p>
+<h3 id="example-1-ecosim-soil-decomposition-use-case-1">Example 1: EcoSIM Soil Decomposition (Use Case 1)<a class="headerlink" href="#example-1-ecosim-soil-decomposition-use-case-1" title="Permanent link">&para;</a></h3>
+<p>This example is closer to the actual scientific role of the kernel than a
+single-pool toy decay law. In EcoSIM-like land biogeochemistry, chemically
+distinct litter and soil pools decompose at different rates, and environmental
+response functions modulate those rates as a function of temperature and water
+availability. Errors in these local update rules propagate upward into soil
+carbon residence time, heterotrophic respiration, and long-term land-atmosphere
+carbon feedbacks.</p>
+<p><strong>Source (Fortran, simplified from an EcoSIM-style decomposition kernel):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">subroutine </span><span class="n">ecosim_decomp</span><span class="p">(</span><span class="n">C_solid</span><span class="p">,</span><span class="w"> </span><span class="n">C_dom</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">psi</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">C_solid_new</span><span class="p">,</span><span class="w"> </span><span class="n">C_dom_new</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">implicit none</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">  </span><span class="kt">real</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">C_solid</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="n">C_dom</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">psi</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="kt">real</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">C_solid_new</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="n">C_dom_new</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">f_temp</span><span class="p">,</span><span class="w"> </span><span class="n">f_water</span><span class="p">,</span><span class="w"> </span><span class="n">dfns</span><span class="p">,</span><span class="w"> </span><span class="n">oqci</span><span class="p">,</span><span class="w"> </span><span class="n">rate_mod</span><span class="p">,</span><span class="w"> </span><span class="n">dC</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="c">! Environmental response functions (EMPIRICAL / PARTLY UNCERTAIN)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="n">f_temp</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">tsens_growth</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="n">f_water</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wat_stress</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="c">! Known substrate limitation and product inhibition structure</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">  </span><span class="n">dfns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">C_solid</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">C_solid</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">K_m</span><span class="p">)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span><span class="n">oqci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">C_dom</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">K_i</span><span class="p">)</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">  </span><span class="n">rate_mod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f_temp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f_water</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dfns</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">oqci</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">  </span><span class="c">! Pool-specific turnover rates are known</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="n">dC</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k_rates</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rate_mod</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">C_solid</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="n">C_solid_new</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C_solid</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dC</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">  </span><span class="k">end do</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">  </span><span class="c">! Carbon released from solids moves into DOM</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">  </span><span class="n">C_dom_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C_dom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">dC</span><span class="p">)</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="k">end subroutine</span>
+</code></pre></div>
+<p><strong>Agent extracts and annotates:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">kernel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ecosim_decomp</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">state</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">C_solid</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">shape</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">4</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">pools</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">protein</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">carbohydrate</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">cellulose</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">lignin</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gC/m2</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">ontology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ECOSIM:soil_carbon_pool</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">C_dom</span><span class="p">:</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gC/m2</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">ontology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ECOSIM:dissolved_organic_matter</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="nt">inputs</span><span class="p">:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">temp</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="nv">K</span><span class="p p-Indicator">,</span><span class="nt"> ontology</span><span class="p">:</span><span class="w"> </span><span class="nv">ECOSIM</span><span class="p p-Indicator">:</span><span class="nv">soil_temperature</span><span class="p p-Indicator">}</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="nt">psi</span><span class="p">:</span><span class="w">  </span><span class="p p-Indicator">{</span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="nv">kPa</span><span class="p p-Indicator">,</span><span class="nt"> ontology</span><span class="p">:</span><span class="w"> </span><span class="nv">ECOSIM</span><span class="p p-Indicator">:</span><span class="nv">soil_water_potential</span><span class="p p-Indicator">}</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="nt">structure</span><span class="p">:</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">  </span><span class="nt">known</span><span class="p">:</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dfns = sum(C_solid) / (sum(C_solid) + K_m)</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oqci = 1 / (1 + C_dom / K_i)</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dC(i) = k_rates(i) * rate_mod * C_solid(i) * dt</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C_dom_new = C_dom + sum(dC)</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">  </span><span class="nt">uncertain</span><span class="p">:</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">f_temp = ???(temp)</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">f_water = ???(psi)</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">  </span><span class="nt">invariants</span><span class="p">:</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C_solid_new[i] &gt;= 0 for all i</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C_dom_new &gt;= 0</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sum(C_solid_new) + C_dom_new = sum(C_solid) + C_dom</span>
+</code></pre></div></p>
+<p><strong>Restricted IR / Cajal-oriented representation:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>-- State is a typed real vector:
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>-- [C_prot, C_carb, C_cell, C_lign, C_dom, temp, psi]
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>State : TyReal(7)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>f_temp  : ℝ ⊸ ℝ     -- learnable but constrained positive
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>f_water : ℝ ⊸ ℝ     -- learnable, typically constrained to [0,1]
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>ecosim_step = λ(state).
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  let C_solid = state[0:4]
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>  let C_dom   = state[4]
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>  let temp    = state[5]
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>  let psi     = state[6]
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>  let dfns    = sum(C_solid) / (sum(C_solid) + K_m)
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>  let oqci    = 1 / (1 + C_dom / K_i)
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>  let rate    = (f_temp temp) * (f_water psi) * dfns * oqci
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>  let dC      = k_rates ⊙ C_solid ⊙ rate * dt
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>  in [C_solid - dC, C_dom + sum(dC), temp, psi]
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>ecosim_rollout = iter{state | s ↪ ecosim_step(s)}(n_steps)
+</code></pre></div></p>
+<p><strong>After compilation → training → decompilation (illustrative output):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>f_temp_learned(T)  ≈ exp(24.1 - 5.9e4 / (R * T))
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>f_water_learned(ψ) ≈ exp(0.19 * max(ψ, -480))
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>-- Interpretable scientific reading:
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>-- the learned temperature sensitivity remains Arrhenius-like,
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>-- while the water-stress term is closer to a capped exponential response
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>-- than to a simple Michaelis-Menten assumption.
+</code></pre></div></p>
+<p><strong>Verification output:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>✓ Non-negativity: all solid pools and DOM remain ≥ 0
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>✓ Mass conservation: ΣC_solid + C_dom is invariant under the learned update
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>✓ Structural monotonicity: each solid pool can only lose carbon in this kernel
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>✓ Agreement: rollout error against held-out EcoSIM trajectories stays within tolerance
+</code></pre></div></p>
+<h3 id="example-1b-pflotran-reactive-transport-closure-use-case-1b">Example 1b: PFLOTRAN Reactive Transport Closure (Use Case 1b)<a class="headerlink" href="#example-1b-pflotran-reactive-transport-closure-use-case-1b" title="Permanent link">&para;</a></h3>
+<p>This example captures a different but equally important DOE modeling pattern:
+local constitutive closures embedded inside large-scale subsurface flow and
+reactive transport simulations. PFLOTRAN is used for groundwater contamination,
+subsurface biogeochemistry, geologic carbon storage, and other porous-media
+problems. In such models, saturation-dependent mobility and sorption laws are
+often the empirically uncertain pieces, even when the advection-diffusion-
+reaction scaffold is known.</p>
+<p>If the exact closure family is already known, fitting its parameters is an
+ordinary calibration problem and should be treated as such. The point of this
+example is not that a neural network can rediscover a two-parameter curve. The
+point is that the uncertain constitutive law is first isolated from code,
+learned in the context of the repeated transport update, and then summarized
+back into an interpretable closure.</p>
+<p><strong>Source (Fortran, simplified from a PFLOTRAN-style local update):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">subroutine </span><span class="n">transport_sorption_step</span><span class="p">(</span><span class="n">C_up</span><span class="p">,</span><span class="w"> </span><span class="n">C_down</span><span class="p">,</span><span class="w"> </span><span class="n">C_sorb</span><span class="p">,</span><span class="w"> </span><span class="n">sat</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">                                   </span><span class="n">C_up_new</span><span class="p">,</span><span class="w"> </span><span class="n">C_down_new</span><span class="p">,</span><span class="w"> </span><span class="n">C_sorb_new</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="k">implicit none</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">  </span><span class="kt">real</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">C_up</span><span class="p">,</span><span class="w"> </span><span class="n">C_down</span><span class="p">,</span><span class="w"> </span><span class="n">C_sorb</span><span class="p">,</span><span class="w"> </span><span class="n">sat</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="kt">real</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">C_up_new</span><span class="p">,</span><span class="w"> </span><span class="n">C_down_new</span><span class="p">,</span><span class="w"> </span><span class="n">C_sorb_new</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">k_rel</span><span class="p">,</span><span class="w"> </span><span class="n">adv_flux</span><span class="p">,</span><span class="w"> </span><span class="n">sorp_flux</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="c">! Saturation-dependent relative permeability (UNCERTAIN CLOSURE)</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span><span class="n">k_rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel_perm</span><span class="p">(</span><span class="n">sat</span><span class="p">)</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">  </span><span class="c">! Known transport scaffold</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">  </span><span class="n">adv_flux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v_adv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k_rel</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">C_up</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">  </span><span class="c">! Known sorption-capacity structure</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">  </span><span class="n">sorp_flux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k_ads</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">C_down</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">adv_flux</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">Q_max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">C_sorb</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">  </span><span class="n">C_up_new</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">C_up</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">adv_flux</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">  </span><span class="n">C_down_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C_down</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">adv_flux</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sorp_flux</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">  </span><span class="n">C_sorb_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C_sorb</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sorp_flux</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="k">end subroutine</span>
+</code></pre></div>
+<p><strong>Agent extracts and annotates:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">kernel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">transport_sorption_step</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">state</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">C_up</span><span class="p">:</span><span class="w">   </span><span class="p p-Indicator">{</span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="nv">mol/m3</span><span class="p p-Indicator">,</span><span class="nt"> role</span><span class="p">:</span><span class="w"> </span><span class="nv">dissolved_upstream</span><span class="p p-Indicator">}</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">C_down</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="nv">mol/m3</span><span class="p p-Indicator">,</span><span class="nt"> role</span><span class="p">:</span><span class="w"> </span><span class="nv">dissolved_downstream</span><span class="p p-Indicator">}</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">C_sorb</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="nv">mol/m3_bulk</span><span class="p p-Indicator">,</span><span class="nt"> role</span><span class="p">:</span><span class="w"> </span><span class="nv">sorbed_inventory</span><span class="p p-Indicator">}</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nt">sat</span><span class="p">:</span><span class="w">    </span><span class="p p-Indicator">{</span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="nt"> role</span><span class="p">:</span><span class="w"> </span><span class="nv">liquid_saturation</span><span class="p p-Indicator">}</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nt">structure</span><span class="p">:</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="nt">known</span><span class="p">:</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adv_flux = v_adv * k_rel(sat) * C_up * dt</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sorp_flux = k_ads * (C_down + adv_flux) * (Q_max - C_sorb) * dt</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C_up_new + C_down_new + C_sorb_new = C_up + C_down + C_sorb</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">  </span><span class="nt">uncertain</span><span class="p">:</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k_rel = ???(sat)</span><span class="w">         </span><span class="c1"># relative permeability / mobility closure</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">  </span><span class="nt">optional_extensions</span><span class="p">:</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k_ads = ???(chemistry, saturation, mineral_state)</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">surface_complexation = ???(species, mineral_surface)</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">  </span><span class="nt">invariants</span><span class="p">:</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C_up_new &gt;= 0</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C_down_new &gt;= 0</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C_sorb_new &gt;= 0</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C_sorb_new &lt;= Q_max</span>
+</code></pre></div></p>
+<p><strong>Restricted IR / Cajal-oriented representation:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>State : TyReal(4)   -- [C_up, C_down, C_sorb, sat]
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>k_rel : ℝ ⊸ ℝ       -- learnable closure, constrained to [0,1]
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>pflotran_step = λ(state).
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  let C_up   = state[0]
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  let C_down = state[1]
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  let C_sorb = state[2]
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  let sat    = state[3]
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  let adv    = v_adv * (k_rel sat) * C_up * dt
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>  let sorp   = k_ads * (C_down + adv) * (Q_max - C_sorb) * dt
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>  in [C_up - adv,
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>      C_down + adv - sorp,
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>      C_sorb + sorp,
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>      sat]
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>pflotran_rollout = iter{state | s ↪ pflotran_step(s)}(n_steps)
+</code></pre></div></p>
+<p><strong>After compilation → training → decompilation (illustrative output):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>S_eff = clamp((sat - S_res) / (1 - S_res), 0, 1)
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>k_rel_learned(sat) ≈ 0.83 * S_eff^2.40
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>-- Interpretable scientific reading:
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>-- the learned closure is close to a Corey-style relative permeability curve.
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>-- In a case where the known family is already Corey, this becomes a direct
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>-- comparison to ordinary parameter calibration. In a less certain case, the
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>-- same pipeline can test whether a more flexible learned closure collapses
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>-- back to a familiar symbolic law or indicates the need for a different form.
+</code></pre></div></p>
+<p><strong>Verification output:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>✓ Non-negativity: dissolved and sorbed inventories remain ≥ 0
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>✓ Species balance: C_up + C_down + C_sorb is conserved
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>✓ Capacity bound: C_sorb never exceeds Q_max
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>✓ Baseline comparison: learned closure is compared against hand-fit parametric forms
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>✓ Agreement: rollout matches PFLOTRAN benchmark trajectories within tolerance
+</code></pre></div></p>
+<h3 id="example-2-xsbench-algorithm-selection-use-case-2">Example 2: XSBench Algorithm Selection (Use Case 2)<a class="headerlink" href="#example-2-xsbench-algorithm-selection-use-case-2" title="Permanent link">&para;</a></h3>
+<p><strong>Source (C, from XSBench):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// XSBench offers three lookup algorithms; selection is currently a compile-time flag</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="cp">#ifdef UNIONIZED</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="c1">// Unionized energy grid: fast but memory-heavy (O(n_isotopes * n_gridpoints))</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid_search_unionized</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">n_gridpoints</span><span class="p">);</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n_isotopes</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="n">grid</span><span class="o">-&gt;</span><span class="n">nuclide</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">idx</span><span class="p">);</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="cp">#elif HASH</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span><span class="c1">// Hash-based: near-unionized speed, fraction of memory</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">  </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash_lookup</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span><span class="w"> </span><span class="n">hash_grid</span><span class="p">,</span><span class="w"> </span><span class="n">n_bins</span><span class="p">);</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n_isotopes</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interpolate_from_hash</span><span class="p">(</span><span class="n">grid</span><span class="o">-&gt;</span><span class="n">nuclide</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">idx</span><span class="p">);</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="cp">#else</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">  </span><span class="c1">// Nuclide-only: low memory, but binary search per isotope</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n_isotopes</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">    </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binary_search</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="o">-&gt;</span><span class="n">nuclide</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">n_points</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">    </span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="n">grid</span><span class="o">-&gt;</span><span class="n">nuclide</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">idx</span><span class="p">);</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="cp">#endif</span>
+</code></pre></div></p>
+<p><strong>Agent extracts dispatch logic:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">kernel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xs_lookup</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">algorithms</span><span class="p">:</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unionized</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nt">complexity</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="nv">O(log(N) + I)</span><span class="p p-Indicator">,</span><span class="nt"> memory</span><span class="p">:</span><span class="w"> </span><span class="nv">O(N*I)</span><span class="p p-Indicator">}</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">n_gridpoints</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hash</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="nt">complexity</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="nv">O(log(N/B) + I)</span><span class="p p-Indicator">,</span><span class="nt"> memory</span><span class="p">:</span><span class="w"> </span><span class="nv">O(N + B*I)</span><span class="p p-Indicator">}</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">n_bins</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nuclide</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">    </span><span class="nt">complexity</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">time</span><span class="p">:</span><span class="w"> </span><span class="nv">O(I * log(N))</span><span class="p p-Indicator">,</span><span class="nt"> memory</span><span class="p">:</span><span class="w"> </span><span class="nv">O(N)</span><span class="p p-Indicator">}</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="nt">parameters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="nt">dispatch_inputs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">n_isotopes</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">n_gridpoints</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">available_memory</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">energy_distribution</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="nt">correctness</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all three must produce identical xs[] values (within tolerance)</span>
+</code></pre></div></p>
+<p><strong>Cajal representation -- algorithm selection as a learnable linear map:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>-- Each algorithm is a fixed function (known, verified)
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>unionized : GridParams ⊸ Energy ⊸ XSResult
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>hash      : GridParams ⊸ Energy ⊸ XSResult
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>nuclide   : GridParams ⊸ Energy ⊸ XSResult
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>-- Selection is a learnable soft dispatch over the three:
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>-- In Cajal, this compiles to a learnable weight vector w ∈ ℝ³
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>-- that blends the three algorithms&#39; outputs during training
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>select : ProblemParams ⊸ (ℝ³)     -- learnable: maps problem features → weights
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>dispatch = λ(params, energy).
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>  let w = select params                           -- w is learnable
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>  in w₀ * (unionized params energy)
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>   + w₁ * (hash params energy)
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>   + w₂ * (nuclide params energy)
+</code></pre></div></p>
+<p><strong>After training → decompilation:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>-- Learned selection rule (decompiled to interpretable decision):
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>select(n_isotopes, n_gridpoints, mem) =
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  if mem &gt; 8 * n_isotopes * n_gridpoints then
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    [1.0, 0.0, 0.0]    -- use unionized (sufficient memory)
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>  else if n_gridpoints &gt; 1000 then
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    [0.0, 1.0, 0.0]    -- use hash (large grid, limited memory)
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>  else
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    [0.0, 0.0, 1.0]    -- use nuclide (small problem)
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>-- This is an interpretable, verified algorithm selection policy
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>-- that can be compiled back to a C preprocessor directive or runtime switch
+</code></pre></div></p>
+<p><strong>Verification:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>✓ Correctness: all three algorithms produce identical xs[] (within 1e-12)
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>✓ Selection is total: w sums to 1.0 for all inputs
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>✓ Decompiled policy matches training performance within 2%
+</code></pre></div></p>
+<h3 id="example-3-nas-cg-kernel-synthesis-use-case-3">Example 3: NAS CG Kernel Synthesis (Use Case 3)<a class="headerlink" href="#example-3-nas-cg-kernel-synthesis-use-case-3" title="Permanent link">&para;</a></h3>
+<p><strong>Specification (from NPB documentation):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Solve Ax = b using the Conjugate Gradient method where:
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>  - A is a sparse, symmetric, positive-definite matrix
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>  - Convergence criterion: ||r||₂ / ||r₀||₂ &lt; ε
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>  - Reference output (Class S): ζ = 8.5971775078648 (after 15 iterations)
+</code></pre></div></p>
+<p><strong>Agent produces a Cajal skeleton with holes:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>-- CG algorithm structure is known; implementation details are holes
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>cg_solve : Matrix ⊸ Vector ⊸ ℕ ⊸ Vector
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>cg_solve A b max_iter =
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>  let x₀ = zeros
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>      r₀ = b - A * x₀
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>      p₀ = r₀
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>  in iter{(x₀, r₀, p₀) |
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>          (x, r, p) ↪
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>            let α  = ⟨r, r⟩ / ⟨p, A * p⟩
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>                x&#39; = x + α * p
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>                r&#39; = r - α * (A * p)
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>                β  = ⟨r&#39;, r&#39;⟩ / ⟨r, r⟩
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>                p&#39; = r&#39; + β * p
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>            in (x&#39;, r&#39;, p&#39;)
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>         }(max_iter)
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>-- Holes for synthesis:
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>-- (1) sparse matrix-vector product implementation: ???
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>-- (2) dot product implementation: ???
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>-- (3) vector update implementation: ???
+</code></pre></div></p>
+<p><strong>NSAM-guided synthesis fills the holes</strong> using relational search
+(staged miniKanren) with neural guidance biasing toward performant
+implementations. The synthesis explores:
+- Loop orderings for SpMV (CSR vs. CSC vs. ELL format)
+- Blocking strategies for dot products
+- Fused vs. separate vector updates</p>
+<p><strong>Synthesized output (decompiled to Fortran):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">subroutine </span><span class="n">cg_solve</span><span class="p">(</span><span class="n">A_val</span><span class="p">,</span><span class="w"> </span><span class="n">A_col</span><span class="p">,</span><span class="w"> </span><span class="n">A_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">max_iter</span><span class="p">)</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="k">implicit none</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="k">  </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">max_iter</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="kt">real</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">A_val</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">  </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">A_col</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="n">A_ptr</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">  </span><span class="kt">real</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">  </span><span class="kt">real</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">Ap</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">rr</span><span class="p">,</span><span class="w"> </span><span class="n">rr_new</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">  </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">iter</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0d0</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">  </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">  </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="w">  </span><span class="n">rr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">dot_product</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">)</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="w">  </span><span class="k">do </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">max_iter</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="w">    </span><span class="c">! Sparse matrix-vector product (CSR) -- SYNTHESIZED</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="w">    </span><span class="n">Ap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0d0</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="w">    </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="w">      </span><span class="k">do </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A_ptr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">A_ptr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="w">        </span><span class="n">Ap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Ap</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">A_val</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">(</span><span class="n">A_col</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="w">      </span><span class="k">end do</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="k">    end do</span>
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a>
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="k">    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rr</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">dot_product</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">Ap</span><span class="p">)</span>
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span>
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Ap</span>
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="w">    </span><span class="n">rr_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">dot_product</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">)</span>
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="w">    </span><span class="n">beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rr_new</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">rr</span>
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a><span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span>
+<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a><span class="w">    </span><span class="n">rr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rr_new</span>
+<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a><span class="w">  </span><span class="k">end do</span>
+<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a><span class="k">end subroutine</span>
+</code></pre></div></p>
+<p><strong>Verification:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>✓ NPB Class S reference output: ζ = 8.5971775078648 -- MATCHES
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>✓ NPB Class W reference output: ζ = 10.362595087124 -- MATCHES
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>✓ Convergence: ||r||/||r₀|| &lt; ε after 15 iterations -- VERIFIED
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>✓ Symmetry preservation: x^T A x &gt; 0 for all x      -- VERIFIED (via Coq proof)
+</code></pre></div></p>
+<h3 id="example-4-c3po-chemical-classifier-bonus-use-case">Example 4: C3PO Chemical Classifier (Bonus Use Case)<a class="headerlink" href="#example-4-c3po-chemical-classifier-bonus-use-case" title="Permanent link">&para;</a></h3>
+<p><strong>Source specification (ChEBI ontology definition):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">primary alcohol (CHEBI:15734)</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nt">definition</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;A</span><span class="nv"> </span><span class="s">primary</span><span class="nv"> </span><span class="s">alcohol</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">compound</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">hydroxy</span><span class="nv"> </span><span class="s">group,</span><span class="nv"> </span><span class="s">-OH,</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">             </span><span class="s">is</span><span class="nv"> </span><span class="s">attached</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">saturated</span><span class="nv"> </span><span class="s">carbon</span><span class="nv"> </span><span class="s">atom</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">either</span><span class="nv"> </span><span class="s">three</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">             </span><span class="s">hydrogen</span><span class="nv"> </span><span class="s">substituents</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">bonded</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">carbon</span><span class="nv"> </span><span class="s">atom</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">             </span><span class="s">and</span><span class="nv"> </span><span class="s">two</span><span class="nv"> </span><span class="s">hydrogens.&quot;</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="nt">parent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alcohol (CHEBI:30879)</span>
+</code></pre></div></p>
+<p><strong>Current C3PO output (LLM-generated, unverified):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">is_primary_alcohol</span><span class="p">(</span><span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Classifies a molecule as a primary alcohol.&quot;&quot;&quot;</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Invalid SMILES&quot;</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    <span class="c1"># Look for -CH2OH or -CH2-OH pattern</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>    <span class="n">pattern</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s2">&quot;[CH2][OH]&quot;</span><span class="p">)</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Contains primary alcohol group (-CH2OH)&quot;</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;No primary alcohol group found&quot;</span>
+</code></pre></div></p>
+<p><strong>Trusty Neurocode version -- Cajal representation:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>-- Classification as a linear map from molecular features to boolean
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>-- The ontology hierarchy provides structural constraints
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>is_primary_alcohol : MolFeatures ⊸ 𝟚
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>is_primary_alcohol = λfeats.
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>  let has_oh    = substructure_match feats &quot;[OH]&quot;        -- fixed (SMARTS match)
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>      has_ch2oh = substructure_match feats &quot;[CH2][OH]&quot;   -- fixed (SMARTS match)
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>      is_saturated = ???(feats)                          -- learnable: saturation check
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>  in if has_ch2oh then
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>       if is_saturated then tt else ff
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>     else ff
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>-- Ontology constraint (compiled as a structural invariant):
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>-- is_primary_alcohol(x) = tt  ⟹  is_alcohol(x) = tt
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>-- This is enforced by the NSAM architecture, not checked post-hoc
+</code></pre></div></p>
+<p><strong>Verification (beyond what C3PO currently does):</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>✓ Subsumption: is_primary_alcohol ⊆ is_alcohol         -- VERIFIED structurally
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>✓ Disjointness: is_primary_alcohol ∩ is_tertiary_alcohol = ∅  -- VERIFIED
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>✓ Accuracy on ChEBI test set: 94.2% (vs. C3PO baseline: 91.7%)
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>✓ All true positives satisfy parent class constraints   -- VERIFIED
+</code></pre></div></p>
+<h3 id="summary-what-the-cajal-representation-buys-you">Summary: What the Cajal Representation Buys You<a class="headerlink" href="#summary-what-the-cajal-representation-buys-you" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Raw LLM (C3PO-style)</th>
+<th>NSAM/Cajal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generates code</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Code is interpretable</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Correctness guaranteed</td>
+<td>✗ (tested, not proven)</td>
+<td>✓ (compiled correctly by construction)</td>
+</tr>
+<tr>
+<td>Invariants enforced</td>
+<td>✗ (checked post-hoc)</td>
+<td>✓ (structural, by architecture)</td>
+</tr>
+<tr>
+<td>Learnable components</td>
+<td>✗ (whole program is fixed)</td>
+<td>✓ (unknown parts are trainable)</td>
+</tr>
+<tr>
+<td>Decompilation</td>
+<td>N/A</td>
+<td>✓ (neural → symbolic round-trip)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

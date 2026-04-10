@@ -1,0 +1,1604 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Neuro-Symbolic Agents for Verified Scientific Code Generation">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Issue: Cajal Soundness and Runtime Semantics Bugs - Trusty Neurocoder</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#issue-cajal-soundness-and-runtime-semantics-bugs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Trusty Neurocoder" class="md-header__button md-logo" aria-label="Trusty Neurocoder" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Trusty Neurocoder
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Issue: Cajal Soundness and Runtime Semantics Bugs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cmungall/trusty-neurocoder" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Trusty Neurocoder" class="md-nav__button md-logo" aria-label="Trusty Neurocoder" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Trusty Neurocoder
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cmungall/trusty-neurocoder" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../paper/draft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Paper Draft
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agent-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notebooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Notebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/01_cajal_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cajal: Programs as Recurrent Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/02_exponential_decay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning a Scalar ODE Parameter via Cajal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Earth & Environment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Earth & Environment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/03_learn_unknown_function/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning an Unknown Nonlinear Function via Neural Sub-expression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/04_century_lite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CENTURY-Lite: Learning Two Unknown Response Functions Simultaneously
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DOE Science Domains
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DOE Science Domains
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/05_decay_chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Radioactive Decay Chain: Learning Branching Ratios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/06_battery_degradation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Battery Degradation: Learning SEI Growth and Capacity Fade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/07_chemical_kinetics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chemical Kinetics: Learning Arrhenius Rate from Equilibrium Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/08_ecosim_kernel_case_study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EcoSIM Kernel Case Study: Structured Surrogate for Soil Decomposition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/09_pflotran_relative_permeability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PFLOTRAN Kernel Case Study: Learning a Relative Permeability Closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#affected-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Affected Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bug-1-lambda-shadowing-breaks-linearity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug 1: Lambda Shadowing Breaks Linearity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bug 1: Lambda Shadowing Breaks Linearity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actual-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actual Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-is-serious" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Is Serious
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bug-2-tmiter-is-type-unsafe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug 2: TmIter Is Type-Unsafe
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bug 2: TmIter Is Type-Unsafe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-reference_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproduction_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actual-behavior_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actual Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behavior_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-is-serious_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Is Serious
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bug-3-closure-application-mutates-captured-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug 3: Closure Application Mutates Captured Environments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bug 3: Closure Application Mutates Captured Environments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-reference_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproduction_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actual-behavior_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actual Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behavior_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-is-serious_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Is Serious
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bug-4-equality-for-compiled-function-values-crashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bug 4: Equality for Compiled Function Values Crashes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bug 4: Equality for Compiled Function Values Crashes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-reference_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproduction_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actual-behavior_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actual Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behavior_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proposed Fixes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposed Fixes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typingpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        typing.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluatingpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        evaluating.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilingpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compiling.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regression-tests-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regression Tests Needed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acceptance-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceptance Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="issue-cajal-soundness-and-runtime-semantics-bugs">Issue: Cajal Soundness and Runtime Semantics Bugs<a class="headerlink" href="#issue-cajal-soundness-and-runtime-semantics-bugs" title="Permanent link">&para;</a></h1>
+<p>Status: Open<br />
+Reported: 2026-03-21<br />
+Severity: High<br />
+Area: <code>src/cajal/</code></p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>The current Cajal core has multiple soundness and runtime-semantics bugs that are not covered by the test suite:</p>
+<ol>
+<li>Lambda shadowing can silently discard an outer linear binding.</li>
+<li><code>TmIter</code> does not enforce that the base case and recursive step produce the same type.</li>
+<li>The evaluator mutates closure environments in place, so reusing a higher-order closure can retroactively change earlier results.</li>
+<li><code>TypedTensor.__eq__</code> crashes on matrix-valued tensors, which breaks equality for compiled higher-order values.</li>
+</ol>
+<p>These defects matter because the project’s main claim is that Cajal programs are linearly typed and semantics-preserving when compiled to tensors. At least two of the bugs violate that directly.</p>
+<h2 id="affected-files">Affected Files<a class="headerlink" href="#affected-files" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>src/cajal/typing.py</code></li>
+<li><code>src/cajal/evaluating.py</code></li>
+<li><code>src/cajal/compiling.py</code></li>
+</ul>
+<h2 id="verification-context">Verification Context<a class="headerlink" href="#verification-context" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>pytest -q</code> under the system interpreter is misleading in this repo because the package requires Python 3.12 and <code>torch</code>, while the system shell in this environment did not provide that.</li>
+<li>Verified test status with the project environment:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.venv/bin/python<span class="w"> </span>--version
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># Python 3.12.9</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>.venv/bin/python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>-q
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># 9 passed</span>
+</code></pre></div>
+<p>The shipped tests pass, but they do not cover <code>cajal.evaluating</code> or the type-checker edge cases below.</p>
+<h2 id="bug-1-lambda-shadowing-breaks-linearity">Bug 1: Lambda Shadowing Breaks Linearity<a class="headerlink" href="#bug-1-lambda-shadowing-breaks-linearity" title="Permanent link">&para;</a></h2>
+<h3 id="code-reference">Code Reference<a class="headerlink" href="#code-reference" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>src/cajal/typing.py</code>, <code>TmFun</code> branch</li>
+</ul>
+<p>The checker currently extends the context with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ctx_extend</span> <span class="o">=</span> <span class="n">ctx</span> <span class="o">|</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">ty1</span><span class="p">}</span>
+</code></pre></div>
+<p>and returns the body's remaining context directly.</p>
+<h3 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">&para;</a></h3>
+<p>If a lambda parameter shadows an existing linear binding in the outer context, the old binding is overwritten and never restored. That allows an outer linear resource to disappear without being consumed.</p>
+<h3 id="reproduction">Reproduction<a class="headerlink" href="#reproduction" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.syntax</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">check</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">term</span> <span class="o">=</span> <span class="n">TmFun</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">TyBool</span><span class="p">(),</span> <span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">TyNat</span><span class="p">()}))</span>
+</code></pre></div>
+<h3 id="actual-behavior">Actual Behavior<a class="headerlink" href="#actual-behavior" title="Permanent link">&para;</a></h3>
+<p>This succeeds and returns:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">TyFun</span><span class="p">(</span><span class="n">ty1</span><span class="o">=</span><span class="n">TyBool</span><span class="p">(),</span> <span class="n">ty2</span><span class="o">=</span><span class="n">TyBool</span><span class="p">())</span>
+</code></pre></div>
+<h3 id="expected-behavior">Expected Behavior<a class="headerlink" href="#expected-behavior" title="Permanent link">&para;</a></h3>
+<p>This should fail, because the outer <code>x: TyNat()</code> remains unused after checking the lambda body.</p>
+<h3 id="why-this-is-serious">Why This Is Serious<a class="headerlink" href="#why-this-is-serious" title="Permanent link">&para;</a></h3>
+<p>The linear type checker is supposed to enforce exact resource usage. Silent loss of a binding is a direct soundness violation.</p>
+<h2 id="bug-2-tmiter-is-type-unsafe">Bug 2: <code>TmIter</code> Is Type-Unsafe<a class="headerlink" href="#bug-2-tmiter-is-type-unsafe" title="Permanent link">&para;</a></h2>
+<h3 id="code-reference_1">Code Reference<a class="headerlink" href="#code-reference_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>src/cajal/typing.py</code>, <code>TmIter</code> branch</li>
+</ul>
+<p>The checker computes:</p>
+<ul>
+<li><code>ty1</code> for the base case <code>tm1</code></li>
+<li><code>ty2</code> for the recursive step <code>tm2</code></li>
+</ul>
+<p>but never checks <code>ty1 == ty2</code>.</p>
+<h3 id="problem_1">Problem<a class="headerlink" href="#problem_1" title="Permanent link">&para;</a></h3>
+<p><code>TmIter</code> can type-check even when the zero case and successor case produce different types. That lets the term claim one type statically and produce another at runtime.</p>
+<h3 id="reproduction_1">Reproduction<a class="headerlink" href="#reproduction_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.syntax</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">check</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.evaluating</span><span class="w"> </span><span class="kn">import</span> <span class="n">evaluate</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">bad</span> <span class="o">=</span> <span class="n">TmIter</span><span class="p">(</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">TmTrue</span><span class="p">(),</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">TmIf</span><span class="p">(</span><span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">),</span> <span class="n">TmZero</span><span class="p">(),</span> <span class="n">TmSucc</span><span class="p">(</span><span class="n">TmZero</span><span class="p">())),</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">TmZero</span><span class="p">(),</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">bad</span><span class="p">,</span> <span class="p">{}))</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">evaluate</span><span class="p">(</span><span class="n">bad</span><span class="p">,</span> <span class="p">{}))</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="actual-behavior_1">Actual Behavior<a class="headerlink" href="#actual-behavior_1" title="Permanent link">&para;</a></h3>
+<p>The term type-checks as:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">TyNat</span><span class="p">()</span>
+</code></pre></div>
+<p>but evaluates to:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">VTrue</span>
+</code></pre></div>
+<h3 id="expected-behavior_1">Expected Behavior<a class="headerlink" href="#expected-behavior_1" title="Permanent link">&para;</a></h3>
+<p>The checker should reject this term because the base case is <code>TyBool()</code> while the recursive step returns <code>TyNat()</code>.</p>
+<h3 id="why-this-is-serious_1">Why This Is Serious<a class="headerlink" href="#why-this-is-serious_1" title="Permanent link">&para;</a></h3>
+<p>This is a direct preservation failure: the static type and runtime value disagree.</p>
+<h2 id="bug-3-closure-application-mutates-captured-environments">Bug 3: Closure Application Mutates Captured Environments<a class="headerlink" href="#bug-3-closure-application-mutates-captured-environments" title="Permanent link">&para;</a></h2>
+<h3 id="code-reference_2">Code Reference<a class="headerlink" href="#code-reference_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>src/cajal/evaluating.py</code></li>
+<li><code>TmFun</code> returns <code>VClosure(x, ty, tm, env)</code></li>
+<li><code>TmApp</code> applies closures via <code>c_env |= {x: v2}</code></li>
+</ul>
+<h3 id="problem_2">Problem<a class="headerlink" href="#problem_2" title="Permanent link">&para;</a></h3>
+<p>The evaluator stores the original environment object inside closures and then mutates it during application. Reusing an outer closure can therefore mutate previously returned closures that share the same captured dict.</p>
+<h3 id="reproduction_2">Reproduction<a class="headerlink" href="#reproduction_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.syntax</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">check</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.evaluating</span><span class="w"> </span><span class="kn">import</span> <span class="n">evaluate</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">outer_tm</span> <span class="o">=</span> <span class="n">TmFun</span><span class="p">(</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">TyBool</span><span class="p">(),</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">TmFun</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">TyNat</span><span class="p">(),</span> <span class="n">TmIter</span><span class="p">(</span><span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">),</span> <span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)))</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">)</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">check</span><span class="p">(</span><span class="n">outer_tm</span><span class="p">,</span> <span class="p">{})</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">outer_v</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">outer_tm</span><span class="p">,</span> <span class="p">{})</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="n">nat1</span> <span class="o">=</span> <span class="n">TmSucc</span><span class="p">(</span><span class="n">TmZero</span><span class="p">())</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="n">c_true</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">TmApp</span><span class="p">(</span><span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">),</span> <span class="n">TmTrue</span><span class="p">()),</span> <span class="p">{</span><span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="n">outer_v</span><span class="p">})</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="n">res1_before</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">TmApp</span><span class="p">(</span><span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">),</span> <span class="n">nat1</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;g&#39;</span><span class="p">:</span> <span class="n">c_true</span><span class="p">})</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="n">c_false</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">TmApp</span><span class="p">(</span><span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">),</span> <span class="n">TmFalse</span><span class="p">()),</span> <span class="p">{</span><span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="n">outer_v</span><span class="p">})</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="n">res1_after</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">TmApp</span><span class="p">(</span><span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">),</span> <span class="n">nat1</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;g&#39;</span><span class="p">:</span> <span class="n">c_true</span><span class="p">})</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="n">res2</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">TmApp</span><span class="p">(</span><span class="n">TmVar</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">),</span> <span class="n">nat1</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;g&#39;</span><span class="p">:</span> <span class="n">c_false</span><span class="p">})</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">res1_before</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">res1_after</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">res2</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="nb">print</span><span class="p">(</span><span class="n">c_true</span><span class="o">.</span><span class="n">env</span><span class="p">)</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="nb">print</span><span class="p">(</span><span class="n">c_false</span><span class="o">.</span><span class="n">env</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="actual-behavior_2">Actual Behavior<a class="headerlink" href="#actual-behavior_2" title="Permanent link">&para;</a></h3>
+<p>Observed result:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">VTrue</span> <span class="n">VFalse</span> <span class="n">VFalse</span>
+</code></pre></div>
+<p>and both returned closures end up sharing the mutated environment, effectively capturing the latest application rather than the original one.</p>
+<h3 id="expected-behavior_2">Expected Behavior<a class="headerlink" href="#expected-behavior_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Applying the outer closure to <code>true</code> should produce a stable inner closure that keeps <code>x = true</code>.</li>
+<li>A later application of the same outer closure to <code>false</code> must not mutate the first returned closure.</li>
+</ul>
+<h3 id="why-this-is-serious_2">Why This Is Serious<a class="headerlink" href="#why-this-is-serious_2" title="Permanent link">&para;</a></h3>
+<p>This breaks referential transparency for higher-order evaluation and makes runtime behavior dependent on evaluation history.</p>
+<h2 id="bug-4-equality-for-compiled-function-values-crashes">Bug 4: Equality for Compiled Function Values Crashes<a class="headerlink" href="#bug-4-equality-for-compiled-function-values-crashes" title="Permanent link">&para;</a></h2>
+<h3 id="code-reference_3">Code Reference<a class="headerlink" href="#code-reference_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>src/cajal/compiling.py</code>, <code>TypedTensor.__eq__</code></li>
+</ul>
+<p>Current implementation:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="problem_3">Problem<a class="headerlink" href="#problem_3" title="Permanent link">&para;</a></h3>
+<p>For matrix-valued tensors, <code>all(self.data == y.data)</code> attempts to convert tensor rows into Python booleans and raises an exception.</p>
+<h3 id="reproduction_3">Reproduction<a class="headerlink" href="#reproduction_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.compiling</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedTensor</span><span class="p">,</span> <span class="n">device</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">cajal.syntax</span><span class="w"> </span><span class="kn">import</span> <span class="n">TyFun</span><span class="p">,</span> <span class="n">TyBool</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">m1</span> <span class="o">=</span> <span class="n">TypedTensor</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">),</span> <span class="n">TyFun</span><span class="p">(</span><span class="n">TyBool</span><span class="p">(),</span> <span class="n">TyBool</span><span class="p">()))</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">m2</span> <span class="o">=</span> <span class="n">TypedTensor</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">),</span> <span class="n">TyFun</span><span class="p">(</span><span class="n">TyBool</span><span class="p">(),</span> <span class="n">TyBool</span><span class="p">()))</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">m1</span> <span class="o">==</span> <span class="n">m2</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="actual-behavior_3">Actual Behavior<a class="headerlink" href="#actual-behavior_3" title="Permanent link">&para;</a></h3>
+<p>Raises:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">Boolean</span> <span class="n">value</span> <span class="n">of</span> <span class="n">Tensor</span> <span class="k">with</span> <span class="n">more</span> <span class="n">than</span> <span class="n">one</span> <span class="n">value</span> <span class="ow">is</span> <span class="n">ambiguous</span>
+</code></pre></div>
+<h3 id="expected-behavior_3">Expected Behavior<a class="headerlink" href="#expected-behavior_3" title="Permanent link">&para;</a></h3>
+<p>Equality should return a boolean result for equal tensors and should also account for the stored type tag.</p>
+<h3 id="why-this-matters">Why This Matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h3>
+<p>Compiled higher-order values are represented as matrices. Basic equality on those values should not crash.</p>
+<h2 id="impact">Impact<a class="headerlink" href="#impact" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The linear type system is not currently sound under shadowing.</li>
+<li>The iterator typing rule does not preserve runtime type safety.</li>
+<li>Higher-order evaluation is stateful in a way that user code would not expect.</li>
+<li>Some basic operations on compiled values are unreliable.</li>
+</ul>
+<p>Together, these defects weaken the repo's core claim that the symbolic and tensor semantics line up cleanly.</p>
+<h2 id="proposed-fixes">Proposed Fixes<a class="headerlink" href="#proposed-fixes" title="Permanent link">&para;</a></h2>
+<h3 id="typingpy"><code>typing.py</code><a class="headerlink" href="#typingpy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>In <code>TmFun</code>, treat the bound variable as scoped:</li>
+<li>save any outer binding for the same name</li>
+<li>check the body with the parameter binding</li>
+<li>remove the parameter from the remaining context</li>
+<li>restore the outer binding if one existed</li>
+<li>In <code>TmIter</code>, require <code>ty1 == ty2</code> before accepting the term.</li>
+</ul>
+<h3 id="evaluatingpy"><code>evaluating.py</code><a class="headerlink" href="#evaluatingpy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Make closure capture immutable from the evaluator's point of view:</li>
+<li>either copy <code>env</code> when building <code>VClosure</code></li>
+<li>or build a fresh environment at application time instead of mutating the captured one</li>
+</ul>
+<h3 id="compilingpy"><code>compiling.py</code><a class="headerlink" href="#compilingpy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Replace <code>TypedTensor.__eq__</code> with a tensor-safe comparison such as <code>torch.equal(...)</code></li>
+<li>Compare both <code>data</code> and <code>ty</code></li>
+</ul>
+<h2 id="regression-tests-needed">Regression Tests Needed<a class="headerlink" href="#regression-tests-needed" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Shadowing test:</li>
+<li>a lambda whose parameter shadows an outer linear binding must be rejected if the outer binding is not otherwise consumed</li>
+<li>Iterator preservation test:</li>
+<li>an iterator with mismatched base and step result types must fail type-checking</li>
+<li>Closure stability test:</li>
+<li>reusing an outer closure must not mutate an earlier returned inner closure</li>
+<li>Matrix equality test:</li>
+<li>equality on <code>TypedTensor</code> matrices should return <code>True</code> or <code>False</code>, not raise</li>
+</ul>
+<h2 id="acceptance-criteria">Acceptance Criteria<a class="headerlink" href="#acceptance-criteria" title="Permanent link">&para;</a></h2>
+<ul>
+<li>All four repro cases above behave as expected.</li>
+<li>New regression tests are added and pass in <code>.venv/bin/python -m pytest -q</code>.</li>
+<li>The fixes preserve current passing example-smoke and <code>TyReal</code> tests.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
